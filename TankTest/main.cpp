@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     MyRect* player = new MyRect();
 
     //by default l and w of rect is 0 need to change
-    player->setRect(0, 0, 100,100);
+    player->setRect(0, 0, 30,25);
     //add item to scene
     scene->addItem(player);
 

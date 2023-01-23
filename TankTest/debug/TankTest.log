@@ -1,0 +1,7 @@
+﻿  Generate moc_predefs.h
+  Bullet.cpp
+  MyRect.cpp
+  main.cpp
+  qrc_res.cpp
+  moc_Bullet.cpp
+  TankTest.vcxproj -> C:\GIT\CS4488TeamTank\TankTest\debug\TankTest.exe
