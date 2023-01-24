@@ -2,27 +2,32 @@
 #include <QKeyEvent>
 #include "Bullet.h"
 #include <QGraphicsScene>
+int distance = 5;
 
 void MyRect::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_W) {
-        if (pos().y() >= 0) {
-            setPos(x(), y() - 10);
+        if (pos().y() > 0) {
+
+            setPos(x(), y() - distance);
         }
     }
     else if (event->key() == Qt::Key_A) {
-        if (pos().x() >= 10) {
-            setPos(x() - 10, y());
+        if (pos().x() > 0) {
+
+            setPos(x() - distance, y());
         }
     }
     else if (event->key() == Qt::Key_S) {
-        if (pos().y() <= 670) {
-            setPos(x(), y() + 10);
+        if (pos().y() + distance < scene()->height() - rect().height()) {
+
+            setPos(x(), y() + distance);
         }
     }
     else if (event->key() == Qt::Key_D) {
-        if (pos().x() <= 790) {
-            setPos(x() + 10, y());
+        if (pos().x() + distance < scene()->width() - rect().width()) {
+
+            setPos(x() + distance, y());
         }
     }
     else if (event->key() == Qt::Key_Space) {
@@ -32,10 +37,7 @@ void MyRect::keyPressEvent(QKeyEvent* event)
         bullet->moveBy(this->boundingRect().width() / 2-7, 0);
         scene()->addItem(bullet);
 
-        if (bullet->pos().y() < 500) {
-            scene()->removeItem(this);
-            delete this;
-        }
+        
        
     }
 

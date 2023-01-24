@@ -1,7 +1,2 @@
-﻿  Moc'ing Bullet.h...
-  Bullet.cpp
-  MyRect.cpp
-  main.cpp
-main.cpp(28,30): warning C4305: 'argument': truncation from 'double' to 'float'
-  moc_Bullet.cpp
+﻿  MyRect.cpp
   TankTest.vcxproj -> C:\GIT\CS4488TeamTank\TankTest\debug\TankTest.exe
