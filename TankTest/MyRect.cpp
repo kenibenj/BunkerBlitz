@@ -34,7 +34,7 @@ void MyRect::keyPressEvent(QKeyEvent* event)
         //Create Bullet
         Bullet* bullet = new Bullet();
         bullet->setPos(x(), y());
-        bullet->moveBy(this->boundingRect().width() / 2-7, 0);
+        bullet->moveBy(this->boundingRect().width() / 2 - bullet->rect().width() / 2, 0);
         scene()->addItem(bullet);
 
         
