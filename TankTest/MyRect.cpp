@@ -16,7 +16,7 @@ void MyRect::keyPressEvent(QKeyEvent* event)
         }
     }
     else if (event->key() == Qt::Key_S) {
-        if (pos().y() <= 590) {
+        if (pos().y() <= 670) {
             setPos(x(), y() + 10);
         }
     }
@@ -29,6 +29,14 @@ void MyRect::keyPressEvent(QKeyEvent* event)
         //Create Bullet
         Bullet* bullet = new Bullet();
         bullet->setPos(x(), y());
+        bullet->moveBy(this->boundingRect().width() / 2-7, 0);
         scene()->addItem(bullet);
+
+        if (bullet->pos().y() < 500) {
+            scene()->removeItem(this);
+            delete this;
+        }
+       
     }
+
 }

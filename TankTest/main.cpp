@@ -1,9 +1,4 @@
-#include <QApplication>
-#include <QGraphicsScene>
-#include "MyRect.h"
-#include <QGraphicsView>
-#include <QMediaPlayer>
-#include <QAudioOutput>
+#include "MainHeader.h"
 
 
 int main(int argc, char *argv[])
@@ -16,7 +11,7 @@ int main(int argc, char *argv[])
     MyRect* player = new MyRect();
 
     //by default l and w of rect is 0 need to change
-    player->setRect(0, 0, 30,25);
+    player->setRect(0, 0, 70,40);
     //add item to scene
     scene->addItem(player);
 
@@ -30,14 +25,15 @@ int main(int argc, char *argv[])
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
-    audioPlayer.setVolume(.25);
+    audioPlayer.setVolume(.05);
     music.setAudioOutput(&audioPlayer);
     music.setSource(QUrl("qrc:/sounds/backgroundMusic.mp3"));
     music.play();
 
     view->show();
-    view->setFixedSize(900, 700);
-    scene->setSceneRect(0, 0, 900, 700);
+    view->setFixedSize(1200, 900);
+    scene->setSceneRect(0, 0, 1200, 900);
+    
     player->setPos(view->width() / 2 -50, view->height() - player->rect().height());
 
     return a.exec();
