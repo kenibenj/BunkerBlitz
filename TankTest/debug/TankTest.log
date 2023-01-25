@@ -1,2 +1,6 @@
-﻿  MyRect.cpp
+﻿  Moc'ing Enemy.h...
+  Bullet.cpp
+  Enemy.cpp
+  MyRect.cpp
+  moc_Enemy.cpp
   TankTest.vcxproj -> C:\GIT\CS4488TeamTank\TankTest\debug\TankTest.exe

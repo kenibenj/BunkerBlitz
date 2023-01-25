@@ -199,14 +199,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="MyRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
     </QtMoc>
+    <QtMoc Include="Enemy.h" />
     <ClInclude Include="MainHeader.h" />
-    <ClInclude Include="MyRect.h" />
+    <QtMoc Include="MyRect.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">

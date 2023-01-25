@@ -5,3 +5,4 @@
 #include <QGraphicsView>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QTimer>

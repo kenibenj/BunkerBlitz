@@ -1,8 +1,9 @@
 #pragma once
-#include <QgraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QGraphicsRectItem>
 
 class Bullet : public QObject, public QGraphicsRectItem {
     QTimer* timer = new QTimer();

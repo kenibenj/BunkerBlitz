@@ -2,6 +2,7 @@
 #include <QKeyEvent>
 #include "Bullet.h"
 #include <QGraphicsScene>
+#include <Enemy.h>
 int distance = 5;
 
 void MyRect::keyPressEvent(QKeyEvent* event)
@@ -34,11 +35,17 @@ void MyRect::keyPressEvent(QKeyEvent* event)
         //Create Bullet
         Bullet* bullet = new Bullet();
         bullet->setPos(x(), y());
-        bullet->moveBy(this->boundingRect().width() / 2-7, 0);
+        //7 is 1/2 width of bullet
+        bullet->moveBy(this->boundingRect().width() / 2 - 7, 0);
         scene()->addItem(bullet);
 
-        
-       
+    }
+}
+    void MyRect::spawn() {
+        // create an enemy
+        Enemy* enemy = new Enemy();
+        enemy->setRect(0, 0, 70, 40);
+        scene()->addItem(enemy);
     }
 
-}
+    
