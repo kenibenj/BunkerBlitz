@@ -2,4 +2,8 @@
     <qresource prefix="/sounds">
         <file>backgroundMusic.mp3</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>tank1.png</file>
+        <file>bg.jpg</file>
+    </qresource>
 </RCC>
