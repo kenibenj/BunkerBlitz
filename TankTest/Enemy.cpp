@@ -17,13 +17,13 @@ Enemy::Enemy() : QObject(), QGraphicsRectItem() {
     QTimer* enemytimer = new QTimer(this);
     connect(enemytimer, SIGNAL(timeout()), this, SLOT(move()));
 
-    enemytimer->start(14);
+    enemytimer->start(7);
 }
 
 
 void Enemy::move() {
     // move enemy down
-    setPos(x(), y() + 1);
+    setPos(x(), y() + 5);
     if (pos().y() + rect().height() < 0) {
         scene()->removeItem(this);
         delete this;

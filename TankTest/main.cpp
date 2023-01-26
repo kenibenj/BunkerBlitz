@@ -1,5 +1,6 @@
 #include "MainHeader.h"
-
+#include "Tank.h"
+#include <QGraphicsPixmapItem>
 
 int main(int argc, char *argv[])
 {
@@ -8,20 +9,24 @@ int main(int argc, char *argv[])
     QGraphicsScene* scene = new QGraphicsScene();
 
     //Create rectangle for scene
-    MyRect* player = new MyRect();
+    //MyRect* player = new MyRect();
+    Tank *tank = new Tank();
 
     //by default l and w of rect is 0 need to change
-    player->setRect(0, 0, 70,40);
+    tank->setPixmap(QPixmap("tank1.png"));
+    tank->setPos(70, 40);
+
+    //(0, 0, 70,40);
     //add item to scene
-    scene->addItem(player);
+    scene->addItem(tank);
 
     //add a view, this is what displays the graphics
     QGraphicsView* view = new QGraphicsView(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     //makes focuable
-    player-> setFlag(QGraphicsItem::ItemIsFocusable);
-    player->setFocus();
+    tank-> setFlag(QGraphicsItem::ItemIsFocusable);
+    tank->setFocus();
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
@@ -34,10 +39,10 @@ int main(int argc, char *argv[])
     view->setFixedSize(1200, 900);
     scene->setSceneRect(0, 0, 1200, 900);
     
-    player->setPos(view->width() / 2 -50, view->height() - player->rect().height());
+    tank->setPos(view->width() / 2 -50, view->height() - 50);
     // spawn enemies
     QTimer* timer = new QTimer();
-    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(2000);
 
     return a.exec();
