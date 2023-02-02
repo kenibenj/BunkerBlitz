@@ -202,13 +202,15 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="MyRect.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
     </QtMoc>
-    <QtMoc Include="Enemy.h" />
-    <ClInclude Include="MainHeader.h" />
-    <QtMoc Include="MyRect.h" />
+    <QtMoc Include="Enemy.h">
+    </QtMoc>
+    <QtMoc Include="MyRect.h">
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -230,8 +232,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="backgroundMusic.mp3" />
+    <None Include="bg.jpg" />
     <QtRcc Include="res.qrc">
     </QtRcc>
+    <None Include="tank1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Tank.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -5,14 +5,14 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 
-class Bullet : public QObject, public QGraphicsRectItem {
+class Bullet : public QObject, public QGraphicsPixmapItem {
     QTimer* timer = new QTimer();
     //connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     //timer->start(7);
     Q_OBJECT;
 public:
-    Bullet();
+    Bullet(QGraphicsItem* parent = 0);
 public slots:
     void move();
 

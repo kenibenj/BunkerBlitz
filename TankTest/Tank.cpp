@@ -6,9 +6,11 @@
 #include <Enemy.h>
 int Distance = 20;
 
-Tank::Tank()
+Tank::Tank(QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
     qDebug() << "Pixmap called";
+    setPixmap(QPixmap(":/images/tank1.png"));
+
 }
 
 void Tank::keyPressEvent(QKeyEvent* event)
@@ -40,9 +42,9 @@ void Tank::keyPressEvent(QKeyEvent* event)
     else if (event->key() == Qt::Key_Space) {
         //Create Bullet
         Bullet* bullet = new Bullet();
-        bullet->setPos(x(), y());
+        bullet->setPos(x()+30, y());
         //7 is 1/2 width of bullet
-        bullet->moveBy(this->boundingRect().width() / 2 - 7, 0);
+        //bullet->moveBy(this->boundingRect().width() / 2 - 7, 0);
         scene()->addItem(bullet);
 
     }
@@ -50,7 +52,7 @@ void Tank::keyPressEvent(QKeyEvent* event)
 void Tank::spawn() {
     // create an enemy
     Enemy* enemy = new Enemy();
-    enemy->setRect(0, 0, 70, 40);
+    //enemy->setRect(0, 0, 70, 40);
     scene()->addItem(enemy);
 }
 

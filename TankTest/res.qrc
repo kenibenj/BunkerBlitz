@@ -5,5 +5,7 @@
     <qresource prefix="/images">
         <file>tank1.png</file>
         <file>bg.jpg</file>
+        <file>bullet1.png</file>
+        <file>bullettest.jpg</file>
     </qresource>
 </RCC>

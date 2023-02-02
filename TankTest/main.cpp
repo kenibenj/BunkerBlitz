@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     Tank *tank = new Tank();
 
     //by default l and w of rect is 0 need to change
-    tank->setPixmap(QPixmap("tank1.png"));
-    tank->setPos(70, 40);
+   // tank->setPixmap(QPixmap("tank1.png"));
+   // tank->setPos(70, 40);
 
     //(0, 0, 70,40);
     //add item to scene
@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
     QGraphicsView* view = new QGraphicsView(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setBackgroundBrush(QBrush(Qt::black));
     //makes focuable
     tank-> setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();

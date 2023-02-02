@@ -40,13 +40,16 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="MyRect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Tank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,6 +61,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MyRect.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Tank.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -73,13 +79,19 @@
     <None Include="backgroundMusic.mp3">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="bg.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
     <QtRcc Include="res.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+    <None Include="tank1.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MainHeader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

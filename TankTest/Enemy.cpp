@@ -5,27 +5,33 @@
 #include <stdlib.h> // rand() -> really large int
 
 #include <QDebug>
-Enemy::Enemy() : QObject(), QGraphicsRectItem() {
+Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //set random position
     int random_number = rand() % 700;
     setPos(random_number, 0);
 
     // drew the rect
-    setRect(0, 0, 100, 100);
+   // setRect(0, 0, 100, 100);
+    setPixmap(QPixmap(":/images/tank1.png"));
+    setTransformOriginPoint(50, 50);
+    setRotation(180);
 
     // connect
-    QTimer* enemytimer = new QTimer(this);
-    connect(enemytimer, SIGNAL(timeout()), this, SLOT(move()));
+   // QTimer* enemytimer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    enemytimer->start(7);
+    timer->start(14);
 }
 
 
 void Enemy::move() {
     // move enemy down
-    setPos(x(), y() + 5);
-    if (pos().y() + rect().height() < 0) {
+    setPos(x(), y() + 3);
+    //need to change below to window dimensions + rect().height() 
+    if (pos().y()  < 0) {
         scene()->removeItem(this);
+        delete timer;
         delete this;
+
     }
 }

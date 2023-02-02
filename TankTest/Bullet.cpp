@@ -5,13 +5,12 @@
 
 
 
-Bullet::Bullet()
-{
+Bullet::Bullet(QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
-    //setPixmap(QPixmap("qrc:/images/bullet1.png"));
+    setPixmap(QPixmap(":/images/bullettest.jpg"));
 
 
-    setRect(0, 0, 14, 28);
+    //setRect(0, 0, 14, 28);
 
     //connect
     //QTimer* timer = new QTimer();
@@ -31,6 +30,7 @@ void Bullet::move() {
             scene()->removeItem(this);
             //Delete objects
             delete(colliding_items[i]);
+            delete(timer);
             delete(this);
             return;
         }

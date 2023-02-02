@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Rowan\AppData\Local\Temp\1fzdl1gk.5s1;C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\include\QtWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtMultimedia;C:\Qt\6.5.0\msvc2019_64\include\QtGui;C:\Qt\6.5.0\msvc2019_64\include\QtNetwork;C:\Qt\6.5.0\msvc2019_64\include\QtCore;C:\Users\Rowan\AppData\Local\Temp\1fzdl1gk.5s1;/include;C:\Qt\6.5.0\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Rowan\AppData\Local\Temp\ksgtdilv.rc0;C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\include\QtWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtMultimedia;C:\Qt\6.5.0\msvc2019_64\include\QtGui;C:\Qt\6.5.0\msvc2019_64\include\QtNetwork;C:\Qt\6.5.0\msvc2019_64\include\QtCore;C:\Users\Rowan\AppData\Local\Temp\ksgtdilv.rc0;/include;C:\Qt\6.5.0\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>.\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>

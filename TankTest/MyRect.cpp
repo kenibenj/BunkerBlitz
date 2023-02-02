@@ -12,6 +12,7 @@ void MyRect::keyPressEvent(QKeyEvent* event)
 
             setPos(x(), y() - distance);
         }
+
     }
     else if (event->key() == Qt::Key_A) {
         if (pos().x() > 0) {
@@ -44,7 +45,7 @@ void MyRect::keyPressEvent(QKeyEvent* event)
     void MyRect::spawn() {
         // create an enemy
         Enemy* enemy = new Enemy();
-        enemy->setRect(0, 0, 70, 40);
+        //enemy->setRect(0, 0, 70, 40);
         scene()->addItem(enemy);
     }
 
