@@ -11,7 +11,8 @@ int main(int argc, char *argv[])
 
 
     MapCreator map_creator;
-    map_creator.setFile(":/sounds/my_map.txt");
+    //map_creator.setFile(":/sounds/my_map.txt"); NOT SURE why this doesn't work
+    map_creator.setFile("C:\\Users\\pawan\\OneDrive\\Documents\\GitHub\\CS4488TeamTank\\TankTest\\my_map.txt");
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
 
@@ -32,6 +33,10 @@ int main(int argc, char *argv[])
 
     //add a view, this is what displays the graphics
     QGraphicsView* view = new QGraphicsView(scene);
+
+    //Create map using map_creator
+    map_creator.CreateMap(scene);
+
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     //view->setBackgroundBrush(QBrush(Qt::black));
