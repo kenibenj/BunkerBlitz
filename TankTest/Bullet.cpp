@@ -1,24 +1,79 @@
 #include "Bullet.h"
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QDebug>
 #include "Enemy.h"
 #include "wall.h"
 
 
 
-Bullet::Bullet(QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
+Bullet::Bullet(char direction, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
+    direct = direction;
     setPixmap(QPixmap(":/images/Bullet.jpg"));
+    setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
+}
 
-    //setRect(0, 0, 14, 28);
+// Four-directional shooting that uses the direction the tank is facing
+void Bullet::fireDirectional () {
+
+    // Set speed of bullet
+    speed = 6;
+
+    // Calculate x and y velocity
+    switch (direct) {
+    case 'w':
+        dx = 0;
+        dy = speed * -1;
+        setRotation(0);
+        break;
+    case 'a':
+        dx = speed * -1;
+        dy = 0;
+        setRotation(270);
+        break;
+    case 's':
+        dx = 0;
+        dy = speed;
+        setRotation(180);
+        break;
+    case 'd':
+        dx = speed;
+        dy = 0;
+        setRotation(90);
+        break;
+    }
 
     //connect
-    //QTimer* timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-     
-
     timer->start(7);
+}
+
+// Swivel shooting that uses the mouse cursor
+void Bullet::fireSwivel() {
+
+    // Get cursor position when bullet is created
+    QPoint cursorPos = QCursor::pos();
+    QPointF cursorScenePos = scene()->views().first()->mapFromGlobal(cursorPos);
+    float angle = atan2(cursorScenePos.y() - y(), cursorScenePos.x() - x());
+    float angleDegrees = angle * (180 / M_PI);
+
+    // Set speed of bullet
+    speed = 6;
+
+    // Calculate x and y velocity
+    dx = speed * cos(angle);
+    dy = speed * sin(angle);
+
+    // Trig shenanigans. Not sure why angleDegrees by itself doesn't work; I dislike just tacking on 90 degrees but it's fine for now.
+    setRotation(angleDegrees + 90);
+
+    //connect
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    timer->start(7);
+
 }
 
 void Bullet::move() {
@@ -44,10 +99,13 @@ void Bullet::move() {
             delete(this);
             return;
         }
+
     }
-    //move bullet up
-    setPos(x(), y() - 5);
-    if (pos().y() < 0) {
+    // Move bullet towards the direction of the cursor when it was fired
+    setPos(x() + dx, y() + dy);
+
+    // Remove bullet if it goes out of bounds
+    if ((pos().y() + boundingRect().height() < 0) || (pos().y() > scene()->height()) || (pos().x() + boundingRect().width() < 0) || (pos().x() > scene()->width())) {
         scene()->removeItem(this);
         delete timer;
         delete this;

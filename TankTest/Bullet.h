@@ -7,13 +7,19 @@
 
 class Bullet : public QObject, public QGraphicsPixmapItem {
     QTimer* timer = new QTimer();
-    //connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    //timer->start(7);
     Q_OBJECT;
+
 public:
-    Bullet(QGraphicsItem* parent = 0);
+    Bullet(char direction, QGraphicsItem* parent = 0);
+    void fireDirectional();
+    void fireSwivel();
+
 public slots:
     void move();
 
+private:
+    float dx, dy;
+    char direct;
+    int speed;
 };
