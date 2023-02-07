@@ -19,7 +19,7 @@ QRectF Wall::boundingRect() const
 void Wall::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 
-    QImage texture_image("C:\\Users\\pawan\\OneDrive\\Documents\\Github\\TankTest\\brick.png");
+    QImage texture_image("C:\\Users\\pawan\\OneDrive\\Documents\\GitHub\\CS4488TeamTank\\TankTest\\brick.png");
     qDebug() << "C++ Style Debug Message" << texture_image.bits();
 
 

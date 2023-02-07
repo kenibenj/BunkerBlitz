@@ -13,8 +13,8 @@ void MapCreator::CreateMap(QGraphicsScene* scene) {
     std::ifstream file(file_name);
 
 
-    int w = QGuiApplication::screens().at(0)->availableGeometry().width() / 2;
-    int h = QGuiApplication::screens().at(0)->availableGeometry().height() / 2;
+    int w = QGuiApplication::screens().at(0)->availableGeometry().width()/3;
+    int h = QGuiApplication::screens().at(0)->availableGeometry().height()/3 ;
 
     qreal wall_size = 51;
 
@@ -40,6 +40,7 @@ void MapCreator::CreateMap(QGraphicsScene* scene) {
                 Wall* wall = new Wall(scene);
                 scene->addItem(wall);
                 wall->setPos((col - 1) * wall_size - w, row * wall_size - h + 75 + 1);
+               
             }
 
         }
