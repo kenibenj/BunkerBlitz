@@ -1,12 +1,22 @@
 #include "MainHeader.h"
 #include "Tank.h"
 #include <QGraphicsPixmapItem>
+#include "map_creator.h"
+#include <QScreen>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QScreen* primaryScreen = QApplication::primaryScreen();
+
+
+    MapCreator map_creator;
+    map_creator.setFile(":/sounds/my_map.txt");
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
+
+    int w = primaryScreen->geometry().width() / 2;
+    int h = primaryScreen->geometry().height() / 2;
 
     //Create rectangle for scene
     //MyRect* player = new MyRect();
@@ -24,7 +34,24 @@ int main(int argc, char *argv[])
     QGraphicsView* view = new QGraphicsView(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setBackgroundBrush(QBrush(Qt::black));
+    //view->setBackgroundBrush(QBrush(Qt::black));
+    view->setAlignment(Qt::AlignCenter);
+    view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    view->setRenderHint(QPainter::Antialiasing);
+    //view->resize(w * 2 - 40, h * 2 - 100);
+
+
+    QBrush back_brush(QColor(255, 243, 240)); //bricks & box
+   //QBrush back_brush(QColor(224, 255, 224)); //forest
+
+    scene->setBackgroundBrush(back_brush);
+
+  //  scene->addLine(-w, -h + 75, w, -h + 75, QPen(Qt::black));//upper bound
+    //scene->addLine(-w, h, w, h, QPen(Qt::black));//lower bound
+    //scene->addLine(-w, -h + 75, -w, h, QPen(Qt::black));//left bound
+    //scene->addLine(w, -h + 75, w, h, QPen(Qt::black));//right bo
+
+
     //makes focuable
     tank-> setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();

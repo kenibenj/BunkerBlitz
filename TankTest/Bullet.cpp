@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include "Enemy.h"
+#include "wall.h"
 
 
 
@@ -31,6 +32,15 @@ void Bullet::move() {
             //Delete objects
             delete(colliding_items[i]);
             delete(timer);
+            delete(this);
+            return;
+        }
+        if (typeid(*(colliding_items[i])) == typeid(Wall)) {
+            //delete bullet and enemy
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+            //Delete objects
+            delete(colliding_items[i]);
             delete(this);
             return;
         }

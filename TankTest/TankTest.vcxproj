@@ -200,9 +200,11 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="MyRect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -242,6 +244,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="map_creator.h" />
+    <ClInclude Include="wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="my_map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

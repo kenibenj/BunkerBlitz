@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/sounds">
         <file>backgroundMusic.mp3</file>
+        <file>my_map.txt</file>
     </qresource>
     <qresource prefix="/images">
         <file>tank1.png</file>
@@ -13,5 +14,6 @@
         <file>enemy.png</file>
         <file>MainTain.png</file>
         <file>FriendTank.png</file>
+        <file>brick.png</file>
     </qresource>
 </RCC>

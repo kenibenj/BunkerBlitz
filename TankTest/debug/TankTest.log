@@ -1,1 +1,6 @@
-﻿  TankTest.vcxproj -> C:\GIT\CS4488TeamTank\TankTest\debug\TankTest.exe
+﻿  Wall.cpp
+  main.cpp
+main.cpp(61,30): warning C4305: 'argument': truncation from 'double' to 'float'
+main.cpp(19,9): warning C4189: 'h': local variable is initialized but not referenced
+main.cpp(18,9): warning C4189: 'w': local variable is initialized but not referenced
+  TankTest.vcxproj -> C:\GIT\CS4488TeamTank\TankTest\debug\TankTest.exe
