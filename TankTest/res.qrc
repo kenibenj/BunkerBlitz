@@ -7,5 +7,11 @@
         <file>bg.jpg</file>
         <file>bullet1.png</file>
         <file>bullettest.jpg</file>
+        <file>tankconcept.jpg</file>
+        <file>tnk.jpg</file>
+        <file>Bullet.jpg</file>
+        <file>enemy.png</file>
+        <file>MainTain.png</file>
+        <file>FriendTank.png</file>
     </qresource>
 </RCC>

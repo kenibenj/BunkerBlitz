@@ -12,7 +12,7 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     // drew the rect
    // setRect(0, 0, 100, 100);
-    setPixmap(QPixmap(":/images/tank1.png"));
+    setPixmap(QPixmap(":/images/enemy.png"));
     setTransformOriginPoint(50, 50);
     setRotation(180);
 

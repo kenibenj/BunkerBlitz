@@ -9,7 +9,7 @@ int Distance = 20;
 Tank::Tank(QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
     qDebug() << "Pixmap called";
-    setPixmap(QPixmap(":/images/tank1.png"));
+    setPixmap(QPixmap(":/images/MainTain.png"));
 
 }
 

@@ -7,7 +7,7 @@
 
 Bullet::Bullet(QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
-    setPixmap(QPixmap(":/images/bullettest.jpg"));
+    setPixmap(QPixmap(":/images/Bullet.jpg"));
 
 
     //setRect(0, 0, 14, 28);
@@ -36,7 +36,7 @@ void Bullet::move() {
         }
     }
     //move bullet up
-    setPos(x(), y() - 10);
+    setPos(x(), y() - 5);
     if (pos().y() < 0) {
         scene()->removeItem(this);
         delete timer;
