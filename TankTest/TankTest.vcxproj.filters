@@ -58,6 +58,9 @@
     <ClCompile Include="MapCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -70,6 +73,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Tank.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="StartMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
