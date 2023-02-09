@@ -1,0 +1,4 @@
+# ignore all files except .h and .cpp files
+*
+!.h
+!.cpp
