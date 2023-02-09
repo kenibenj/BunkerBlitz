@@ -54,7 +54,7 @@ void StartMenu::gameRunner()
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //view->setBackgroundBrush(QBrush(Qt::black));
+    view->setBackgroundBrush(QBrush(Qt::black));
     view->setAlignment(Qt::AlignCenter);
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
