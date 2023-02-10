@@ -57,14 +57,10 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
 void Tank::keyPressEvent(QKeyEvent* event)
 {
     keys[event->key()] = true;
-    qDebug() << event->key();
-    qDebug() << "Pressed";
 }
 
 void Tank::keyReleaseEvent(QKeyEvent* event) {
     keys[event->key()] = false;
-    qDebug() << event->key();
-    qDebug() << "Released";
 }
 
 void Tank::focusOutEvent(QFocusEvent* event)
@@ -73,8 +69,11 @@ void Tank::focusOutEvent(QFocusEvent* event)
 }
 
 void Tank::move() {
-    v->centerOn(this);
 
+    //Makes view camera follow the tank
+    //v->centerOn(this);
+
+    // Checking to see how the moving sound should be handled
     if ((isMoving() == true) && (movingHandler->playbackState() != QMediaPlayer::PlayingState)) {
         movingHandler->setPosition(0);
         movingHandler->play();
@@ -84,6 +83,7 @@ void Tank::move() {
         movingHandler->stop();
     }
 
+    //Movement
     if (keys[Qt::Key_W]) {
         if (pos().y() > 0) {
             setPos(x(), y() - distance);

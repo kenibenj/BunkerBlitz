@@ -11,7 +11,7 @@ class Bullet : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT;
 
 public:
-    Bullet(char direction, QGraphicsItem* parent = 0);
+    Bullet(char direction, QPointF cursorScenePos, QGraphicsItem* parent = 0);
     void fireDirectional();
     void fireSwivel();
 
