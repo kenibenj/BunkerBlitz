@@ -8,7 +8,7 @@
 
 
 
-Bullet::Bullet(char direction, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
+Bullet::Bullet(char direction, QPointF cursorScenePos, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
     direct = direction;
     setPixmap(QPixmap(":/images/Bullet.jpg"));
@@ -48,7 +48,7 @@ void Bullet::fireDirectional () {
 
     //connect
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(7);
+    timer->start(17);
 }
 
 // Swivel shooting that uses the mouse cursor
@@ -61,7 +61,7 @@ void Bullet::fireSwivel() {
     float angleDegrees = angle * (180 / M_PI);
 
     // Set speed of bullet
-    speed = 6;
+    speed = 20;
 
     // Calculate x and y velocity
     dx = speed * cos(angle);
@@ -72,7 +72,7 @@ void Bullet::fireSwivel() {
 
     //connect
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(7);
+    timer->start(17);
 
 }
 

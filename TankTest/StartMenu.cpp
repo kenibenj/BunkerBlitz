@@ -34,27 +34,22 @@ void StartMenu::gameRunner()
     int w = primaryScreen->geometry().width() / 2;
     int h = primaryScreen->geometry().height() / 2;
 
-    //Create rectangle for scene
-    //MyRect* player = new MyRect();
-    Tank* tank = new Tank();
-
-    //by default l and w of rect is 0 need to change
-   // tank->setPixmap(QPixmap("tank1.png"));
-   // tank->setPos(70, 40);
-
-    //(0, 0, 70,40);
-    //add item to scene
-    scene->addItem(tank);
-    scene->setSceneRect(0, 0, 1200, 900);
     //add a view, this is what displays the graphics
     QGraphicsView* view = new QGraphicsView(scene);
+
+    //Create rectangle for scene
+    //MyRect* player = new MyRect();
+    Tank* tank = new Tank(view);
+
+    scene->addItem(tank);
+    scene->setSceneRect(0, 0, 1200, 900);
 
     //Create map using map_creator
     map_creator.CreateMap(scene);
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //view->setBackgroundBrush(QBrush(Qt::black));
+    view->setBackgroundBrush(QBrush(Qt::black));
     view->setAlignment(Qt::AlignCenter);
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
@@ -92,5 +87,5 @@ void StartMenu::gameRunner()
     // spawn enemies
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
-    timer->start(2000);
+    timer->start(10000);
 }

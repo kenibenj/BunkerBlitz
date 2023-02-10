@@ -12,4 +12,6 @@ public:
     Enemy(QGraphicsItem* parent = 0);
 public slots:
     void move();
+private:
+    int distance;
 };
