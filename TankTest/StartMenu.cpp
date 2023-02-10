@@ -34,22 +34,27 @@ void StartMenu::gameRunner()
     int w = primaryScreen->geometry().width() / 2;
     int h = primaryScreen->geometry().height() / 2;
 
+    //Create rectangle for scene
+    //MyRect* player = new MyRect();
+    Tank* tank = new Tank();
 
-    //add a view, this is what displays the graphics
-    QGraphicsView* view = new QGraphicsView(scene);
+    //by default l and w of rect is 0 need to change
+   // tank->setPixmap(QPixmap("tank1.png"));
+   // tank->setPos(70, 40);
 
-    // Creates player's tank
-    Tank* tank = new Tank(view);
+    //(0, 0, 70,40);
     //add item to scene
     scene->addItem(tank);
     scene->setSceneRect(0, 0, 1200, 900);
+    //add a view, this is what displays the graphics
+    QGraphicsView* view = new QGraphicsView(scene);
 
     //Create map using map_creator
     map_creator.CreateMap(scene);
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //view->setbackgroundbrush(qbrush(qt::black));
+    view->setBackgroundBrush(QBrush(Qt::black));
     view->setAlignment(Qt::AlignCenter);
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
@@ -60,7 +65,7 @@ void StartMenu::gameRunner()
     QBrush back_brush(QColor(255, 243, 240)); //bricks & box
     //QBrush back_brush(QColor(224, 255, 224)); //forest
 
-    scene->setBackgroundBrush(QColor(50,50,50));
+    scene->setBackgroundBrush(back_brush);
 
     //  scene->addLine(-w, -h + 75, w, -h + 75, QPen(Qt::black));//upper bound
       //scene->addLine(-w, h, w, h, QPen(Qt::black));//lower bound
@@ -68,7 +73,7 @@ void StartMenu::gameRunner()
       //scene->addLine(w, -h + 75, w, h, QPen(Qt::black));//right bo
 
 
-    //makes focusable
+      //makes focuable
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
     //Play music
@@ -81,12 +86,11 @@ void StartMenu::gameRunner()
 
     view->show();
     view->setFixedSize(1200, 900);
-    view->centerOn(tank);
     scene->setSceneRect(0, 0, 1200, 900);
 
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
     // spawn enemies
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
-    timer->start(10000);
+    timer->start(2000);
 }
