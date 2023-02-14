@@ -3,6 +3,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QDebug>
+#include <QMovie>
+#include <QLabel>
+#include <Explosion.h>
 #include "Enemy.h"
 #include "wall.h"
 
@@ -81,19 +84,33 @@ void Bullet::move() {
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; i++) {
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
-            //delete bullet and enemy
+            //delete enemy
             scene()->removeItem(colliding_items[i]);
+
+            //Create explosion on collision
+            Explosion* explosion = new Explosion(colliding_items[i]->pos());
+            scene()->addItem(explosion);
+
+            //delete bullet
             scene()->removeItem(this);
-            //Delete objects
+            delete this;
+
+            //Delete enemy
             delete(colliding_items[i]);
-            delete(timer);
-            delete(this);
             return;
+
         }
+        // You could also incorporate the explosion effect into the wall
         if (typeid(*(colliding_items[i])) == typeid(Wall)) {
-            //delete bullet and enemy
+
+            //disconnect signal from timer
+            disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
+            timer->stop();
+
+            //delete bullet and wall
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
+
             //Delete objects
             delete(colliding_items[i]);
             delete(this);
@@ -101,6 +118,7 @@ void Bullet::move() {
         }
 
     }
+
     // Move bullet towards the direction of the cursor when it was fired
     setPos(x() + dx, y() + dy);
 

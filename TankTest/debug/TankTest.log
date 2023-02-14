@@ -1,25 +1,2 @@
-﻿  Reading Qt configuration (C:/Qt/6.5.0/msvc2019_64/bin/qmake)
-  Bullet.cpp
-  Enemy.cpp
-  MapCreator.cpp
-  MyRect.cpp
-  main.cpp
-  Explosion.cpp
-  StartMenu.cpp
-  Tank.cpp
-  Wall.cpp
-Enemy.cpp(8,29): warning C4100: 'parent': unreferenced formal parameter
-MyRect.cpp(8,39): warning C4100: 'event': unreferenced formal parameter
-Tank.cpp(66,39): warning C4100: 'event': unreferenced formal parameter
-Bullet.cpp(14,40): warning C4100: 'cursorScenePos': unreferenced formal parameter
-StartMenu.cpp(77,30): warning C4305: 'argument': truncation from 'double' to 'float'
-StartMenu.cpp(35,9): warning C4189: 'h': local variable is initialized but not referenced
-StartMenu.cpp(34,9): warning C4189: 'w': local variable is initialized but not referenced
-  qrc_res.cpp
-  moc_Bullet.cpp
-  moc_Enemy.cpp
-  moc_MyRect.cpp
-  moc_Tank.cpp
-  moc_Explosion.cpp
-  moc_StartMenu.cpp
+﻿  Explosion.cpp
   TankTest.vcxproj -> C:\Users\carri\source\repos\CS4488TeamTank\TankTest\debug\TankTest.exe
