@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\braxt\AppData\Local\Temp\cisuagu2.jzj;C:\QT\6.5.0\msvc2019_64\include;C:\QT\6.5.0\msvc2019_64\include\QtWidgets;C:\QT\6.5.0\msvc2019_64\include\QtMultimedia;C:\QT\6.5.0\msvc2019_64\include\QtGui;C:\QT\6.5.0\msvc2019_64\include\QtNetwork;C:\QT\6.5.0\msvc2019_64\include\QtCore;C:\Users\braxt\AppData\Local\Temp\cisuagu2.jzj;/include;C:\QT\6.5.0\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\carri\AppData\Local\Temp\jbztax2f.g5s;C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\include\QtWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtMultimedia;C:\Qt\6.5.0\msvc2019_64\include\QtGui;C:\Qt\6.5.0\msvc2019_64\include\QtNetwork;C:\Qt\6.5.0\msvc2019_64\include\QtCore;C:\Users\carri\AppData\Local\Temp\jbztax2f.g5s;/include;C:\Qt\6.5.0\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>.\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -51,7 +51,7 @@
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\QT\6.5.0\msvc2019_64\lib\Qt6Widgetsd.lib;C:\QT\6.5.0\msvc2019_64\lib\Qt6Multimediad.lib;C:\QT\6.5.0\msvc2019_64\lib\Qt6Guid.lib;C:\QT\6.5.0\msvc2019_64\lib\Qt6Networkd.lib;C:\QT\6.5.0\msvc2019_64\lib\Qt6Cored.lib;C:\QT\6.5.0\msvc2019_64\lib\Qt6EntryPointd.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Qt\6.5.0\msvc2019_64\lib\Qt6Widgetsd.lib;C:\Qt\6.5.0\msvc2019_64\lib\Qt6Multimediad.lib;C:\Qt\6.5.0\msvc2019_64\lib\Qt6Guid.lib;C:\Qt\6.5.0\msvc2019_64\lib\Qt6Networkd.lib;C:\Qt\6.5.0\msvc2019_64\lib\Qt6Cored.lib;C:\Qt\6.5.0\msvc2019_64\lib\Qt6EntryPointd.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/DEBUG &quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -73,8 +73,8 @@
   <ItemGroup>
     <CustomBuild Include="moc_predefs.h.cbt">
       <FileType>Document</FileType>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\QT\6.5.0\msvc2019_64\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">cl -BxC:\QT\6.5.0\msvc2019_64\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W0 -E C:\QT\6.5.0\msvc2019_64\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;moc_predefs.h</Command>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.5.0\msvc2019_64\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">cl -BxC:\Qt\6.5.0\msvc2019_64\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W0 -E C:\Qt\6.5.0\msvc2019_64\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;moc_predefs.h</Command>
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">Generate moc_predefs.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">moc_predefs.h;%(Outputs)</Outputs>
     </CustomBuild>
