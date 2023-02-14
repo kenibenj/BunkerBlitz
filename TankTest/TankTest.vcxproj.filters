@@ -64,6 +64,9 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameRunner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -82,6 +85,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Explosion.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GameRunner.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

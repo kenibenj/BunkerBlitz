@@ -201,6 +201,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="GameRunner.cpp" />
     <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="MyRect.cpp" />
     <ClCompile Include="main.cpp" />
@@ -250,6 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Explosion.h" />
+    <QtMoc Include="GameRunner.h" />
     <ClInclude Include="map_creator.h" />
     <QtMoc Include="StartMenu.h" />
     <ClInclude Include="wall.h" />
