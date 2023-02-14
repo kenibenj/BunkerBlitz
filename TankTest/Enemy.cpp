@@ -5,6 +5,8 @@
 #include <stdlib.h> // rand() -> really large int
 
 #include <QDebug>
+
+extern QTimer *enemyTimer;
 Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //set random position
     int random_number = rand() % 700;
@@ -19,9 +21,8 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     setRotation(180);
 
     // connect
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(17);
 }
 
 
