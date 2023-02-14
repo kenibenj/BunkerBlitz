@@ -61,9 +61,6 @@
     <ClCompile Include="StartMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Explosion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -79,9 +76,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="StartMenu.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Explosion.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -109,9 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Downloads\explosion.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

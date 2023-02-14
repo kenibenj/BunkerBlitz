@@ -19,7 +19,7 @@
         <file>MainTain.png</file>
         <file>FriendTank.png</file>
         <file>brick.png</file>
-        <file alias="explosion.gif">giphy-2508825090.gif</file>
+        <file>giphy-2508825090.gif</file>
         <file>mainTankNew.png</file>
     </qresource>
 </RCC>
