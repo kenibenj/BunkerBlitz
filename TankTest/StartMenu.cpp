@@ -6,7 +6,7 @@
 StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 {
 	setFixedSize(1200, 900);
-	setWindowTitle("Tank");
+	setWindowTitle("Start Menu");
 	QPushButton *startButton = new QPushButton("Start", this);
 	QPushButton *quitButton = new QPushButton("Quit", this);
 	startButton->setGeometry(width() / 2 -50, height() / 2 - 30, 100, 60);

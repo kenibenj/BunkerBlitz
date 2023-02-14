@@ -3,6 +3,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QDebug>
+#include <QMovie>
+#include <QLabel>
+#include <Explosion.h>
 #include "Enemy.h"
 #include "wall.h"
 
@@ -13,7 +16,6 @@ Bullet::Bullet(char direction, QPointF cursorScenePos, QGraphicsItem* parent) : 
     direct = direction;
     setPixmap(QPixmap(":/images/Bullet.jpg"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
-
 }
 
 // Four-directional shooting that uses the direction the tank is facing
@@ -81,33 +83,51 @@ void Bullet::move() {
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; i++) {
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
-            //delete bullet and enemy
+            
+            //delete enemy
             scene()->removeItem(colliding_items[i]);
-            scene()->removeItem(this);
-            //Delete objects
-            delete(colliding_items[i]);
-            delete(timer);
-            delete(this);
-            return;
-        }
-        if (typeid(*(colliding_items[i])) == typeid(Wall)) {
-            //delete bullet and enemy
-            scene()->removeItem(colliding_items[i]);
-            scene()->removeItem(this);
-            //Delete objects
-            delete(colliding_items[i]);
-            delete(this);
-            return;
-        }
 
+            //Create explosion on collision
+            Explosion* explosion = new Explosion(colliding_items[i]->pos());
+            scene()->addItem(explosion);
+
+            //delete bullet
+            scene()->removeItem(this);
+            delete this;
+
+            //Delete enemy
+            delete(colliding_items[i]);
+            return;
+
+            // Delete Explosion, I do not know if this code is needed. - Michael
+            scene()->removeItem(explosion);
+            delete explosion;
+
+        }
+        // You could also incorporate the explosion effect into the wall
+        if (typeid(*(colliding_items[i])) == typeid(Wall)) {
+
+            //disconnect signal from timer
+            disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
+            timer->stop();
+
+            //delete bullet and wall
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+
+            //Delete objects
+            delete(colliding_items[i]);
+            delete(this);
+            return;
+        }
     }
+
     // Move bullet towards the direction of the cursor when it was fired
     setPos(x() + dx, y() + dy);
 
     // Remove bullet if it goes out of bounds
     if ((pos().y() + boundingRect().height() < 0) || (pos().y() > scene()->height()) || (pos().x() + boundingRect().width() < 0) || (pos().x() > scene()->width())) {
         scene()->removeItem(this);
-        delete timer;
         delete this;
     }
 }
