@@ -11,16 +11,18 @@
 
 
 
-Bullet::Bullet(char direction, QPointF cursorScenePos, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
+Bullet::Bullet(char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
     direct = direction;
-    setPixmap(QPixmap(":/images/Bullet.jpg"));
+    this->angle = angle;
+
+    setPixmap(QPixmap(":/images/bulletGreen.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
 }
 
 // Four-directional shooting that uses the direction the tank is facing
-void Bullet::fireDirectional () {
+void Bullet::fireDirectional() {
 
     // Set speed of bullet
     speed = 6;
@@ -57,10 +59,6 @@ void Bullet::fireDirectional () {
 // Swivel shooting that uses the mouse cursor
 void Bullet::fireSwivel() {
 
-    // Get cursor position when bullet is created
-    QPoint cursorPos = QCursor::pos();
-    QPointF cursorScenePos = scene()->views().first()->mapFromGlobal(cursorPos);
-    float angle = atan2(cursorScenePos.y() - y(), cursorScenePos.x() - x());
     float angleDegrees = angle * (180 / M_PI);
 
     // Set speed of bullet

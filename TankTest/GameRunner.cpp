@@ -39,6 +39,8 @@ GameRunner::GameRunner() {
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
     view->setGeometry(400, 50, 1200, 900);
+    QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
+    view->setCursor(cursor);
     //view->resize(w * 2 - 40, h * 2 - 100);
 
 
@@ -56,6 +58,8 @@ GameRunner::GameRunner() {
       //makes focuable
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
+    tank->setPos(view->width() / 2 - 50, view->height() - 50);
+    tank->createTurret();
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
@@ -66,9 +70,9 @@ GameRunner::GameRunner() {
 
     view->show();
     view->setFixedSize(1200, 900);
-    scene->setSceneRect(0, 0, 1200, 900);
 
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
+
     // spawn enemies
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));

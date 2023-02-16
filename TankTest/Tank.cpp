@@ -9,6 +9,8 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
 {
     v = view;
 
+    turret = new QGraphicsPixmapItem();
+
     //Sets up Key Map
     keys.insert(Qt::Key_W, false);
     keys.insert(Qt::Key_A, false);
@@ -16,11 +18,14 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     keys.insert(Qt::Key_D, false);
     keys.insert(Qt::Key_Space, false);
 
-    setPixmap(QPixmap(":/images/mainTankNew.png"));
+    setPixmap(QPixmap(":/images/greenChasis.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
-    distance = 5;
+    distance = 2;
     direction = 'w';
+    counter = 0;
+    changeTreads = false;
+
     bulletHandler = new QMediaPlayer();
     movingHandler = new QMediaPlayer();
     idleHandler = new QMediaPlayer();
@@ -50,8 +55,18 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     idleHandler->setLoops(QMediaPlayer::Infinite);
     idleHandler->play();
 
-    connect(keyTimer, SIGNAL(timeout()), this, SLOT(move()));
-    keyTimer->start(17);
+    connect(keyTimer, SIGNAL(timeout()), this, SLOT(frame()));
+    keyTimer->start(7);
+}
+
+
+// Creates turret and sets its point of rotation.
+void Tank::createTurret() {
+    int rotationPoint = 7; // 7 pixels down the turret is where the hatch on the turret is which is where the rotation point needs to be.
+    turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 10);
+    turret->setPixmap(QPixmap(":/images/greenTurret.png"));
+    turret->setTransformOriginPoint(turret->boundingRect().width() / 2, turret->boundingRect().height() / 2 + rotationPoint);
+    scene()->addItem(turret);
 }
 
 void Tank::keyPressEvent(QKeyEvent* event)
@@ -68,7 +83,18 @@ void Tank::focusOutEvent(QFocusEvent* event)
     this->setFocus();
 }
 
-void Tank::move() {
+void Tank::frame() {
+
+    // this code is what lets the tank follow the cursor. Every time the frame() function is called (about 144 times per second). 
+    // The function declared variables below will be deleted when the function exits so I do not believe they will cause memory issues
+    turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
+    QPoint cursorPos = QCursor::pos();
+    QPointF cursorScenePos = scene()->views().first()->mapFromGlobal(cursorPos);
+
+    float angle = (atan2(cursorScenePos.y() - (y() + (this->boundingRect().height() / 2)), cursorScenePos.x() - (x() + (this->boundingRect().width()) / 2)));
+    float angleDegrees = angle * (180 / M_PI);
+
+    turret->setRotation(angleDegrees + 90);
 
     //Makes view camera follow the tank
     //v->centerOn(this);
@@ -81,6 +107,21 @@ void Tank::move() {
     else if ((isMoving() == false) && (movingHandler->playbackState() == QMediaPlayer::PlayingState)) {
         movingHandler->setPosition(0);
         movingHandler->stop();
+    }
+
+    // Code that handles the animation for the tank treads. Everytime 20 times the move() function is called while the tank is actually moving,
+    if ((isMoving() == true)) {
+        counter++;
+        if (counter % 20 == 0) {
+            if (changeTreads == true) {
+                setPixmap(QPixmap(":/images/greenChasis2.png"));
+                changeTreads = false;
+            }
+            else {
+                setPixmap(QPixmap(":/images/greenChasis.png"));
+                changeTreads = true;
+            }
+        }
     }
 
     //Movement
@@ -118,15 +159,10 @@ void Tank::move() {
 
     // Shooting (Spacebar)
     if (keys[Qt::Key_Space]) {
-        qDebug() << "Shooting";
         if (!fireRateTimer->isActive()) {
 
-            // Get cursor position when bullet is created
-            QPoint cursorPos = QCursor::pos();
-            QPointF cursorScenePos = v->mapFromGlobal(cursorPos);
-
             //Create Bullet and gives it the direction the tank is facing(for directional firing) and cursor position (for swivel firing)
-            Bullet* bullet = new Bullet(direction, cursorScenePos);
+            Bullet* bullet = new Bullet(direction, angle);
             bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - bullet->boundingRect().height() / 2);
             scene()->addItem(bullet);
 
@@ -141,6 +177,34 @@ void Tank::move() {
             fireRateTimer->start();
         }
     }
+    if (fireRateTimer->isActive()) {
+        if (fireRateTimer->remainingTime() / (float)fireRateTimer->interval() > .8) {
+            QCursor cursor = QCursor(QPixmap(":/images/greenCrosshairGearZero.png"));
+            v->setCursor(cursor);
+        }
+        else if (fireRateTimer->remainingTime() / (float)fireRateTimer->interval() > .6) {
+            QCursor cursor = QCursor(QPixmap(":/images/greenCrosshairGearOne.png"));
+            v->setCursor(cursor);
+        }
+        else if (fireRateTimer->remainingTime() / (float)fireRateTimer->interval() > .4) {
+            QCursor cursor = QCursor(QPixmap(":/images/greenCrosshairGearTwo.png"));
+            v->setCursor(cursor);
+        }
+        else if (fireRateTimer->remainingTime() / (float)fireRateTimer->interval() > .2) {
+            QCursor cursor = QCursor(QPixmap(":/images/greenCrosshairGearThree.png"));
+            v->setCursor(cursor);
+        }
+        else {
+            QCursor cursor = QCursor(QPixmap(":/images/greenCrosshairGearFour.png"));
+            v->setCursor(cursor);
+        }
+
+    }
+    else {
+        QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
+        v->setCursor(cursor);
+    }
+    //
 }
 
 bool Tank::isMoving() {

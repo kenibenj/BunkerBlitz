@@ -22,5 +22,16 @@
         <file alias="explosion.gif">giphy-2508825090.gif</file>
         <file>mainTankNew.png</file>
         <file>explosion.png</file>
+        <file>bulletGreen.png</file>
+        <file>greenChasis2.png</file>
+        <file>greenChasis.png</file>
+        <file>greenTurret.png</file>
+        <file>enemyTankNew.png</file>
+        <file>crosshair.png</file>
+        <file>greenCrosshairGearZero.png</file>
+        <file>greenCrosshairGearOne.png</file>
+        <file>greenCrosshairGearTwo.png</file>
+        <file>greenCrosshairGearThree.png</file>
+        <file>greenCrosshairGearFour.png</file>
     </qresource>
 </RCC>
