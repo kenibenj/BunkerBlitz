@@ -4,7 +4,8 @@
 #include "Bullet.h"
 #include <QGraphicsScene>
 #include <Enemy.h>
-
+#include "GameRunner.h"
+extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
     v = view;
@@ -140,6 +141,17 @@ void Tank::move() {
             // Start the fireRateTimer
             fireRateTimer->start();
         }
+    }
+
+    if (keys[Qt::Key_Escape]) {
+        qDebug() << "Pausing";
+        if (enemyTimer->isActive()) {
+            GameRunner::pauseTimer();
+        }
+        else if (!enemyTimer->isActive()) {
+            GameRunner::startTimer();
+        }
+
     }
 }
 

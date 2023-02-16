@@ -6,9 +6,8 @@
 
 QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
-    enemyTimer->start(17);
+    startTimer();
     QScreen* primaryScreen = QApplication::primaryScreen();
-
 
     MapCreator map_creator;
     //map_creator.setFile(":/sounds/my_map.txt"); NOT SURE why this doesn't work
@@ -73,4 +72,12 @@ GameRunner::GameRunner() {
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);
+}
+// Used when esc key is clicked to pause timers
+void GameRunner::pauseTimer() {
+    enemyTimer->stop();
+}
+// Used to start timers
+void GameRunner::startTimer() {
+    enemyTimer->start(17);
 }

@@ -7,5 +7,9 @@ class GameRunner : public QObject
 public:
 	GameRunner();
 
+	static void pauseTimer();
+
+	static void startTimer();
+
 
 };
