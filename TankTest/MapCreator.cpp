@@ -13,10 +13,10 @@ void MapCreator::CreateMap(QGraphicsScene* scene) {
     std::ifstream file(file_name);
 
 
-    int w = QGuiApplication::screens().at(0)->availableGeometry().width() / 3;
-    int h = QGuiApplication::screens().at(0)->availableGeometry().height() / 3;
+    int w = QGuiApplication::screens().at(0)->availableGeometry().width() / 1000;
+    int h = QGuiApplication::screens().at(0)->availableGeometry().height() / 1000;
 
-    qreal wall_size = 51;
+    qreal wall_size = 92;
 
     if (file.is_open())
     {

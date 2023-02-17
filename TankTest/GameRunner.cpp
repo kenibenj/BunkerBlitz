@@ -9,10 +9,11 @@ GameRunner::GameRunner() {
     enemyTimer->start(17);
     QScreen* primaryScreen = QApplication::primaryScreen();
 
-
+    //creates an instance of the MapCreator class and sets the file path for the map file. 
     MapCreator map_creator;
-    //map_creator.setFile(":/sounds/my_map.txt"); NOT SURE why this doesn't work
-    map_creator.setFile("C:\\Users\\pawan\\OneDrive\\Documents\\GitHub\\CS4488TeamTank\\TankTest\\my_map.txt");
+    map_creator.setFile("my_map.txt"); //change the file path if it doesn't work
+    //Not sure why qrc path doesn't work
+
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
 
@@ -41,18 +42,12 @@ GameRunner::GameRunner() {
     view->setGeometry(400, 50, 1200, 900);
     QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
     view->setCursor(cursor);
-    //view->resize(w * 2 - 40, h * 2 - 100);
 
 
     QBrush back_brush(QColor(255, 243, 240)); //bricks & box
     //QBrush back_brush(QColor(224, 255, 224)); //forest
 
     scene->setBackgroundBrush(back_brush);
-
-    //  scene->addLine(-w, -h + 75, w, -h + 75, QPen(Qt::black));//upper bound
-      //scene->addLine(-w, h, w, h, QPen(Qt::black));//lower bound
-      //scene->addLine(-w, -h + 75, -w, h, QPen(Qt::black));//left bound
-      //scene->addLine(w, -h + 75, w, h, QPen(Qt::black));//right bo
 
 
       //makes focuable

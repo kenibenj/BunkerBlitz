@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C54ACA75-1EBF-3ECC-BAA4-6A8F2D519E6A}</ProjectGuid>
+    <ProjectGuid>{9E11302D-857F-3890-BC98-5ABB7E6F2D20}</ProjectGuid>
     <RootNamespace>TankTest</RootNamespace>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -66,7 +66,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>6.5.0_msvc2019_64</QtInstall>
+    <QtInstall>6.5.0</QtInstall>
     <QtModules>core;gui;network;widgets;multimedia</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

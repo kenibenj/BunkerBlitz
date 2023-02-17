@@ -13,18 +13,17 @@ Wall::~Wall()
 
 QRectF Wall::boundingRect() const
 {
-    return QRectF(0, 0, 51, 51);
+    return QRectF(0, 0, 100, 100);
 }
 
 void Wall::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 
     QImage texture_image(":/images/brick.png");
-    qDebug() << "C++ Style Debug Message" << texture_image.bits();
 
 
 
-    painter->drawImage(QRectF(0, 0, 51, 51), texture_image);
+    painter->drawImage(QRectF(0, 0, 100, 90), texture_image);
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }
