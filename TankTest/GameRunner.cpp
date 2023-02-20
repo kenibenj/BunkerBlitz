@@ -73,3 +73,11 @@ GameRunner::GameRunner() {
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);
 }
+// Used when esc key is clicked to pause timers
+void GameRunner::pauseTimer() {
+    enemyTimer->stop();
+}
+// Used to start timers
+void GameRunner::startTimer() {
+    enemyTimer->start(17);
+}

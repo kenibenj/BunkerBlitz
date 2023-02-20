@@ -3,8 +3,9 @@
 #include <QKeyEvent>
 #include "Bullet.h"
 #include <QGraphicsScene>
-#include <Enemy.h>
-
+#include "Enemy.h"
+#include "GameRunner.h"
+extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
     v = view;
@@ -204,7 +205,16 @@ void Tank::frame() {
         QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
         v->setCursor(cursor);
     }
-    //
+    if (keys[Qt::Key_Escape]) {
+        qDebug() << "Pausing";
+        if (enemyTimer->isActive()) {
+            GameRunner::pauseTimer();
+        }
+        else if (!enemyTimer->isActive()) {
+            GameRunner::startTimer();
+        }
+
+    }
 }
 
 bool Tank::isMoving() {
