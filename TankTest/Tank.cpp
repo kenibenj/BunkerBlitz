@@ -5,11 +5,14 @@
 #include <QGraphicsScene>
 #include "Enemy.h"
 #include "GameRunner.h"
+#include "PauseMenu.h"
+#include <stdlib.h>
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
+    isPauseActive = false;
     v = view;
-
+    this->setFocus();
     turret = new QGraphicsPixmapItem();
 
     //Sets up Key Map
@@ -18,6 +21,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     keys.insert(Qt::Key_S, false);
     keys.insert(Qt::Key_D, false);
     keys.insert(Qt::Key_Space, false);
+    keys.insert(Qt::Key_Escape, false);
 
     setPixmap(QPixmap(":/images/greenChasis.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
@@ -73,19 +77,30 @@ void Tank::createTurret() {
 void Tank::keyPressEvent(QKeyEvent* event)
 {
     keys[event->key()] = true;
+    //Pause menu implementation
+    if (event->key() == Qt::Key_Escape) {
+        qDebug() << "Pausing";
+        if (pause.isHidden()) {
+            GameRunner::pauseTimer();
+            pause.show();
+        }
+    }
 }
 
 void Tank::keyReleaseEvent(QKeyEvent* event) {
     keys[event->key()] = false;
+    qDebug() << keys[Qt::Key_Escape];
 }
 
 void Tank::focusOutEvent(QFocusEvent* event)
 {
-    this->setFocus();
+    if (!keys[Qt::Key_Escape]) {
+        this->setFocus();
+    }
 }
 
 void Tank::frame() {
-
+    
     // this code is what lets the tank follow the cursor. Every time the frame() function is called (about 144 times per second). 
     // The function declared variables below will be deleted when the function exits so I do not believe they will cause memory issues
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
@@ -128,6 +143,7 @@ void Tank::frame() {
     //Movement
     if (keys[Qt::Key_W]) {
         if (pos().y() > 0) {
+            
             setPos(x(), y() - distance);
             setRotation(0); // facing upwards
             direction = 'w';
@@ -205,18 +221,13 @@ void Tank::frame() {
         QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
         v->setCursor(cursor);
     }
-    if (keys[Qt::Key_Escape]) {
-        qDebug() << "Pausing";
-        if (enemyTimer->isActive()) {
-            GameRunner::pauseTimer();
-        }
-        else if (!enemyTimer->isActive()) {
-            GameRunner::startTimer();
-        }
-
-    }
+    
+    
 }
 
+/*void Tank::setPauseActive(bool x) {
+    isPauseActive = x;
+}*/
 bool Tank::isMoving() {
     if (keys[Qt::Key_W] || keys[Qt::Key_A] || keys[Qt::Key_S] || keys[Qt::Key_D]) {
         return true;

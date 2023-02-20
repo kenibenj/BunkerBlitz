@@ -24,5 +24,4 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 
 void StartMenu::startButtonClicked() {
     GameRunner gameRunner;
-
 }

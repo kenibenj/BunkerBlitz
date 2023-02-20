@@ -67,6 +67,9 @@
     <ClCompile Include="GameRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -89,6 +92,9 @@
     </QtMoc>
     <QtMoc Include="GameRunner.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PauseMenu.h">
+      <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

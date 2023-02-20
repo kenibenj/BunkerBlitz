@@ -205,6 +205,7 @@
     <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="MyRect.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -254,6 +255,7 @@
     <QtMoc Include="GameRunner.h" />
     <ClInclude Include="map_creator.h" />
     <QtMoc Include="StartMenu.h" />
+    <QtMoc Include="PauseMenu.h" />
     <ClInclude Include="wall.h" />
   </ItemGroup>
   <ItemGroup>
