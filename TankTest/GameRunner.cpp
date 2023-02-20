@@ -9,9 +9,11 @@ GameRunner::GameRunner() {
     startTimer();
     QScreen* primaryScreen = QApplication::primaryScreen();
 
+    //creates an instance of the MapCreator class and sets the file path for the map file. 
     MapCreator map_creator;
-    //map_creator.setFile(":/sounds/my_map.txt"); NOT SURE why this doesn't work
-    map_creator.setFile("C:\\Users\\pawan\\OneDrive\\Documents\\GitHub\\CS4488TeamTank\\TankTest\\my_map.txt");
+    map_creator.setFile("my_map.txt"); //change the file path if it doesn't work
+    //Not sure why qrc path doesn't work
+
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
 
@@ -38,7 +40,8 @@ GameRunner::GameRunner() {
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
     view->setGeometry(400, 50, 1200, 900);
-    //view->resize(w * 2 - 40, h * 2 - 100);
+    QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
+    view->setCursor(cursor);
 
 
     QBrush back_brush(QColor(255, 243, 240)); //bricks & box
@@ -46,15 +49,12 @@ GameRunner::GameRunner() {
 
     scene->setBackgroundBrush(back_brush);
 
-    //  scene->addLine(-w, -h + 75, w, -h + 75, QPen(Qt::black));//upper bound
-      //scene->addLine(-w, h, w, h, QPen(Qt::black));//lower bound
-      //scene->addLine(-w, -h + 75, -w, h, QPen(Qt::black));//left bound
-      //scene->addLine(w, -h + 75, w, h, QPen(Qt::black));//right bo
-
 
       //makes focuable
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
+    tank->setPos(view->width() / 2 - 50, view->height() - 50);
+    tank->createTurret();
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
@@ -65,9 +65,9 @@ GameRunner::GameRunner() {
 
     view->show();
     view->setFixedSize(1200, 900);
-    scene->setSceneRect(0, 0, 1200, 900);
 
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
+
     // spawn enemies
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));

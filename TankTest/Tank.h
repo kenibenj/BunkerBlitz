@@ -15,10 +15,11 @@ public:
     void keyReleaseEvent(QKeyEvent* event);
     void focusOutEvent(QFocusEvent* event);
     bool isMoving();
+    void createTurret();
 
 public slots:
     void spawn();
-    void move();
+    void frame();
 
 private:
     QMediaPlayer* bulletHandler;
@@ -31,12 +32,16 @@ private:
 
     int distance;
     char direction;
+    long counter;
+    bool changeTreads;
 
     QTimer* fireRateTimer;
     QTimer* keyTimer;
     QGraphicsView* v;
 
     QMap<int, bool> keys;
+
+    QGraphicsPixmapItem* turret;
 };
 
 
