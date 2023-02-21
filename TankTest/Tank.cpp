@@ -94,9 +94,9 @@ void Tank::keyReleaseEvent(QKeyEvent* event) {
 
 void Tank::focusOutEvent(QFocusEvent* event)
 {
-    if (!keys[Qt::Key_Escape]) {
-        this->setFocus();
-    }
+    
+    this->setFocus();
+    
 }
 
 void Tank::frame() {

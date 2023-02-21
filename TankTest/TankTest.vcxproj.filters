@@ -94,7 +94,7 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="PauseMenu.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
