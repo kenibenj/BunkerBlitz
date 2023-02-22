@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C54ACA75-1EBF-3ECC-BAA4-6A8F2D519E6A}</ProjectGuid>
+    <ProjectGuid>{9E11302D-857F-3890-BC98-5ABB7E6F2D20}</ProjectGuid>
     <RootNamespace>TankTest</RootNamespace>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
@@ -202,13 +202,11 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="GameRunner.cpp" />
-    <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="MyRect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tank.cpp" />
-    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -253,10 +251,8 @@
   <ItemGroup>
     <QtMoc Include="Explosion.h" />
     <QtMoc Include="GameRunner.h" />
-    <ClInclude Include="map_creator.h" />
     <QtMoc Include="StartMenu.h" />
     <QtMoc Include="PauseMenu.h" />
-    <ClInclude Include="wall.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="my_map.txt" />

@@ -1,7 +1,6 @@
 #include "StartMenu.h"
 #include "MainHeader.h"
 #include "Tank.h"
-#include "map_creator.h"
 #include "GameRunner.h"
 
 StartMenu::StartMenu(QWidget* parent) : QWidget{parent}

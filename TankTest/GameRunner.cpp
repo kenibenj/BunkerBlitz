@@ -2,23 +2,15 @@
 #include "StartMenu.h"
 #include "MainHeader.h"
 #include "Tank.h"
-#include "map_creator.h"
+
 
 QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
     startTimer();
     QScreen* primaryScreen = QApplication::primaryScreen();
 
-    //creates an instance of the MapCreator class and sets the file path for the map file. 
-    MapCreator map_creator;
-    map_creator.setFile("my_map.txt"); //change the file path if it doesn't work
-    //Not sure why qrc path doesn't work
-
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
-
-    int w = primaryScreen->geometry().width() / 2;
-    int h = primaryScreen->geometry().height() / 2;
 
     //add a view, this is what displays the graphics
     QGraphicsView* view = new QGraphicsView(scene);
@@ -29,9 +21,6 @@ GameRunner::GameRunner() {
 
     scene->addItem(tank);
     scene->setSceneRect(0, 0, 1200, 900);
-
-    //Create map using map_creator
-    map_creator.CreateMap(scene);
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
