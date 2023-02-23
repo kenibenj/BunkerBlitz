@@ -8,12 +8,17 @@ QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
     startTimer();
     QScreen* primaryScreen = QApplication::primaryScreen();
-
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
 
+    //Set the icon to the GameRunner Window as well
+    QGuiApplication::setWindowIcon(QIcon::fromTheme("myicon", QIcon("myicon.png")));
+
     //add a view, this is what displays the graphics
     QGraphicsView* view = new QGraphicsView(scene);
+
+    //Add title to the view
+    view->setWindowTitle("Bunker Blitz");
 
     //Create rectangle for scene
     //MyRect* player = new MyRect();

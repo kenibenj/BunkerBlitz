@@ -2,11 +2,18 @@
 #include "MainHeader.h"
 #include "Tank.h"
 #include "GameRunner.h"
+#include <QWindow>
 
 StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 {
     setFixedSize(1200, 900);
-    setWindowTitle("Tank");
+
+    //Title for the window
+    setWindowTitle("Bunker Blitz");
+
+    //Set the icon to the window
+    setWindowIcon(QIcon::fromTheme("myicon", QIcon("myicon.png")));
+
     QPushButton* startButton = new QPushButton("Start", this);
     QPushButton* quitButton = new QPushButton("Quit", this);
     startButton->setGeometry(width() / 2 - 50, height() / 2 - 30, 100, 60);

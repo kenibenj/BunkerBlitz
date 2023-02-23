@@ -247,6 +247,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\explosion.png" />
     <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
+    <Image Include="myicon.png" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Explosion.h" />
