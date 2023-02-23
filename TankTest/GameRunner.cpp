@@ -68,5 +68,5 @@ void GameRunner::pauseTimer() {
 }
 // Used to start timers
 void GameRunner::startTimer() {
-    enemyTimer->start(17);
+    enemyTimer->start(7);
 }

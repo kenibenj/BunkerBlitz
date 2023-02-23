@@ -10,7 +10,7 @@
 #include "wall.h"
 
 
-
+extern QTimer* enemyTimer;
 Bullet::Bullet(char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
     direct = direction;
@@ -52,8 +52,8 @@ void Bullet::fireDirectional() {
     }
 
     //connect
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(17);
+    connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
+    enemyTimer->start(7);
 }
 
 // Swivel shooting that uses the mouse cursor
@@ -72,8 +72,8 @@ void Bullet::fireSwivel() {
     setRotation(angleDegrees + 90);
 
     //connect
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(17);
+    connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
+    enemyTimer->start(17);
 
 }
 
@@ -102,8 +102,8 @@ void Bullet::move() {
         if (typeid(*(colliding_items[i])) == typeid(Wall)) {
 
             //disconnect signal from timer
-            disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
-            timer->stop();
+            disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
+            enemyTimer->stop();
 
             //delete bullet and wall
             scene()->removeItem(colliding_items[i]);
@@ -123,7 +123,7 @@ void Bullet::move() {
     // Remove bullet if it goes out of bounds
     if ((pos().y() + boundingRect().height() < 0) || (pos().y() > scene()->height()) || (pos().x() + boundingRect().width() < 0) || (pos().x() > scene()->width())) {
         scene()->removeItem(this);
-        delete timer;
+        //delete timer;
         delete this;
     }
 }

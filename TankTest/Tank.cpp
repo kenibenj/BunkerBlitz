@@ -39,7 +39,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     idleAudioPlayer = new QAudioOutput();
 
     fireRateTimer = new QTimer();
-    fireRateTimer->setInterval(2000);
+    fireRateTimer->setInterval(0);
     fireRateTimer->setSingleShot(true);
 
     keyTimer = new QTimer();

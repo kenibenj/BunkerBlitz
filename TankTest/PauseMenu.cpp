@@ -48,7 +48,7 @@ void PauseMenu::paintEvent(QPaintEvent* e) {
 	QPen pen;
 	pen.setColor(Qt::green);
 	painter.setPen(pen);
-	painter.drawRect(0, 0, width(), height());
+	painter.drawRect(0, 0, width()-1, height()-1);
 	
 	QWidget::paintEvent(e);
 }
