@@ -33,5 +33,6 @@
         <file>greenCrosshairGearTwo.png</file>
         <file>greenCrosshairGearThree.png</file>
         <file>greenCrosshairGearFour.png</file>
+        <file>title2.png</file>
     </qresource>
 </RCC>

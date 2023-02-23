@@ -4,7 +4,7 @@
 #include "MainHeader.h"
 
 PauseMenu::PauseMenu() {
-	setFixedSize(100, 80);
+	setFixedSize(100, 85);
 	setWindowTitle("Pause");
 	setWindowFlags(Qt::FramelessWindowHint);
 	QPalette pal = QPalette();
@@ -16,14 +16,15 @@ PauseMenu::PauseMenu() {
 	//Sets the color of the window
 	setPalette(pal);
 
-	//setStyleSheet("border: 1px solid green");
 
 
 	QPushButton* resumeButton = new QPushButton("Resume", this);
 	QPushButton* quitButton = new QPushButton("Quit", this);
 	resumeButton->setGeometry(width() / 2 - 40, 10, 80, 30);
-	quitButton->setGeometry(width() / 2 - 40, 40, 80, 30);
-
+	quitButton->setGeometry(width() / 2 - 40, 45, 80, 30);
+	//Adjusting style for the buttons
+	resumeButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;");
+	quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
 	resumeButton->show();
 	quitButton->show();
 	connect(resumeButton, SIGNAL(clicked()), this, SLOT(resumeButtonClicked()));
