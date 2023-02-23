@@ -20,12 +20,11 @@ GameRunner::GameRunner() {
     //Add title to the view
     view->setWindowTitle("Bunker Blitz");
 
-    //Create rectangle for scene
-    //MyRect* player = new MyRect();
+    //Create Player's Tank
     Tank* tank = new Tank(view);
 
     scene->addItem(tank);
-    scene->setSceneRect(0, 0, 1200, 900);
+    scene->setSceneRect(0, 0, 2400, 1800);
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -41,7 +40,11 @@ GameRunner::GameRunner() {
     QBrush back_brush(QColor(255, 243, 240)); //bricks & box
     //QBrush back_brush(QColor(224, 255, 224)); //forest
 
-    scene->setBackgroundBrush(back_brush);
+    QPixmap backgroundImage(":/images/bg.png");
+    QGraphicsPixmapItem* background = new QGraphicsPixmapItem();
+    background->setPixmap(backgroundImage.scaled(scene->width(), scene->height(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
+    background->setZValue(-10);
+    scene->addItem(background);
 
 
       //makes focuable
@@ -67,10 +70,12 @@ GameRunner::GameRunner() {
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);
 }
+
 // Used when esc key is clicked to pause timers
 void GameRunner::pauseTimer() {
     enemyTimer->stop();
 }
+
 // Used to start timers
 void GameRunner::startTimer() {
     enemyTimer->start(7);
