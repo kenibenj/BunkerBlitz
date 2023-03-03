@@ -106,7 +106,6 @@
     <None Include="tank1.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="TankTest.pro" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\explosion.png" />

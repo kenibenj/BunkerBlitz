@@ -66,7 +66,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>6.5.0</QtInstall>
+    <QtInstall>6.5.0_msvc2019_64</QtInstall>
     <QtModules>core;gui;network;widgets;multimedia</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -234,7 +234,6 @@
   <ItemGroup>
     <None Include="backgroundMusic.mp3" />
     <None Include="bg.jpg" />
-    <None Include="TankTest.pro" />
     <QtRcc Include="res.qrc">
     </QtRcc>
     <None Include="tank1.png" />
