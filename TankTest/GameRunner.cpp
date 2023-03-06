@@ -2,12 +2,16 @@
 #include "StartMenu.h"
 #include "MainHeader.h"
 #include "Tank.h"
+#include <QPointF>
 
 
 QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
     startTimer();
     QScreen* primaryScreen = QApplication::primaryScreen();
+    QWidget* viewPort = new QWidget();
+    viewPort->setFixedSize(1200, 900);
+    
     //Create scene on the heap
     QGraphicsScene* scene = new QGraphicsScene();
 
@@ -26,6 +30,7 @@ GameRunner::GameRunner() {
     scene->addItem(tank);
     scene->setSceneRect(0, 0, 2400, 1800);
 
+    view->setScene(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setBackgroundBrush(QBrush(Qt::black));
@@ -33,6 +38,7 @@ GameRunner::GameRunner() {
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
     view->setGeometry(400, 50, 1200, 900);
+    view->setViewport(viewPort);
     QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
     view->setCursor(cursor);
 
@@ -59,11 +65,47 @@ GameRunner::GameRunner() {
     music.setAudioOutput(&audioPlayer);
     music.setSource(QUrl("qrc:/sounds/backgroundMusic.mp3"));
     music.play();
-
+    view->centerOn(tank);
     view->show();
+
     view->setFixedSize(1200, 900);
+    viewPort->show();
+
 
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
+    
+    //Adding health HUD
+
+    QPixmap health(":/images/heatlh.png");
+    QGraphicsPixmapItem* health1 = new QGraphicsPixmapItem();
+    QGraphicsPixmapItem* health2 = new QGraphicsPixmapItem();
+    QGraphicsPixmapItem* health3 = new QGraphicsPixmapItem();
+    
+    health1->setPixmap(health);
+    health2->setPixmap(health);
+    health3->setPixmap(health);
+    
+    //health1->setParentItem();
+    
+    scene->addItem(health1);
+    scene->addItem(health2);
+    scene->addItem(health3);
+
+    health1->setPos(view->mapToScene(50,50));
+    qDebug() << view->mapFromScene(50, 50);
+    health2->setPos(view->mapToScene(100, 50));
+    health3->setPos(view->mapToScene(150, 50));
+    health1->setZValue(10);
+    health2->setZValue(10);
+    health3->setZValue(10);
+    //connect(enemyTimer, &QTimer::timeout, health1, health1->setPos(view->mapToScene(50, 50)));w
+
+    health1->show();
+    health2->show();
+    health3->show();
+    
+
+
 
     // spawn enemies
     QTimer* timer = new QTimer();
