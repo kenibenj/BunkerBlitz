@@ -43,32 +43,23 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyRect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MapCreator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StartMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Explosion.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GameRunner.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,23 +69,20 @@
     <QtMoc Include="Enemy.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MyRect.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Tank.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="StartMenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Generated Files</Filter>
     </QtMoc>
     <QtMoc Include="Explosion.h">
-      <Filter>Header Files</Filter>
+      <Filter>Generated Files</Filter>
     </QtMoc>
     <QtMoc Include="GameRunner.h">
-      <Filter>Header Files</Filter>
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="StartMenu.h">
+      <Filter>Generated Files</Filter>
     </QtMoc>
     <QtMoc Include="PauseMenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -120,24 +108,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Downloads\explosion.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <Image Include="..\..\..\..\Downloads\explosion.png" />
+    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
+    <Image Include="myicon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map_creator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="my_map.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <Text Include="my_map.txt" />
   </ItemGroup>
 </Project>

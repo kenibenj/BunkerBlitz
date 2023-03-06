@@ -16,9 +16,10 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void keyReleaseEvent(QKeyEvent* event);
     void focusOutEvent(QFocusEvent* event);
-    //static void setPauseActive(bool x);
     bool isMoving();
     void createTurret();
+    float calculateAngleCos(float speed, float angle);
+    float calculateAngleSin(float speed, float angle);
     
 public slots:
     void spawn();
@@ -33,10 +34,12 @@ private:
     QAudioOutput* movingAudioPlayer;
     QAudioOutput* idleAudioPlayer;
 
-    int distance;
+    float traversalSpeed;
+    float rotationSpeed;
     char direction;
     long counter;
     bool changeTreads;
+    bool isPauseActive;
 
     QTimer* fireRateTimer;
     QTimer* keyTimer;
@@ -45,7 +48,7 @@ private:
     QMap<int, bool> keys;
 
     QGraphicsPixmapItem* turret;
-    bool isPauseActive;
+    QGraphicsPixmapItem* fireFlash;
     
 };
 

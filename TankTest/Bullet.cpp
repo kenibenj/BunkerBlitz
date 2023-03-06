@@ -73,7 +73,7 @@ void Bullet::fireSwivel() {
 
     //connect
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
-    enemyTimer->start(17);
+    enemyTimer->start(7);
 
 }
 
