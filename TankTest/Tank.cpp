@@ -63,8 +63,8 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     idleHandler->setLoops(QMediaPlayer::Infinite);
     idleHandler->play();
 
-    connect(keyTimer, SIGNAL(timeout()), this, SLOT(frame()));
-    keyTimer->start(7);
+    connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
+    //keyTimer->start(7);
 
     this->setZValue(-3);
 }
