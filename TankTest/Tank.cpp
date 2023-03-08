@@ -87,7 +87,7 @@ void Tank::createTurret() {
 void Tank::keyPressEvent(QKeyEvent* event)
 {
     keys[event->key()] = true;
-
+    emit positionChanged();
     //Pause menu implementation
     if (event->key() == Qt::Key_Escape) {
         qDebug() << "Pausing";

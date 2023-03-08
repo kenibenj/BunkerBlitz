@@ -5,6 +5,7 @@
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
 #include "PauseMenu.h"
+#include <QPointF>
 
 class Tank :public QObject, public QGraphicsPixmapItem {
 
@@ -24,7 +25,8 @@ public:
 public slots:
     void spawn();
     void frame();
-
+signals:
+    void positionChanged();
 private:
     QMediaPlayer* bulletHandler;
     QMediaPlayer* movingHandler;

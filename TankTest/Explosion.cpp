@@ -7,7 +7,7 @@
 #include <QDebug>
 #include <QMovie>
 #include <QLabel>
-#include <qGraphicsItem>
+#include <QGraphicsItem>
 
 Explosion::Explosion(QPointF position, QGraphicsItem* parent)
     : QGraphicsPixmapItem(parent)

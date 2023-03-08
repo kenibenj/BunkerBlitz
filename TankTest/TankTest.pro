@@ -11,20 +11,38 @@ CONFIG += c++17
 SOURCES += \
     Bullet.cpp \
     Enemy.cpp \
-    MyRect.cpp \
+    Explosion.cpp \
+    GameRunner.cpp \
+    PauseMenu.cpp \
+    StartMenu.cpp \
+    Tank.cpp \
     main.cpp
-
+    Explosion.cpp
+    GameRunner.cpp
+    PauseMenu.cpp
+    StartMenu.cpp
+    Tank.cpp
+    
 
 HEADERS += \
     Bullet.h \
     Enemy.h \
-    MyRect.h
+    Explosion.h \
+    GameRunner.h \
+    MainHeader.h \
+    PauseMenu.h \
+    StartMenu.h \
+    Tank.h
+    GameRunner.h
+    PauseMenu.h
+    StartMenu.h
+    Tank.h
 
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
+QT_AUTO_SCREEN_SCALE_FACTOR=true
 RESOURCES += \
     res.qrc

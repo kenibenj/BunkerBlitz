@@ -99,7 +99,7 @@ void Bullet::move() {
 
         }
         // You could also incorporate the explosion effect into the wall
-        if (typeid(*(colliding_items[i])) == typeid(Wall)) {
+        /*if (typeid(*(colliding_items[i])) == typeid(Wall)) {
 
             //disconnect signal from timer
             disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
@@ -113,7 +113,7 @@ void Bullet::move() {
             delete(colliding_items[i]);
             delete(this);
             return;
-        }
+        }*/
 
     }
 

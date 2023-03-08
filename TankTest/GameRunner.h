@@ -13,7 +13,8 @@ public:
 	static void pauseTimer();
 	static void startTimer();
 public slots:
-	void rePositionHUD();
+    void rePositionHUD();
+    void onTankPositionChange();
 private:
 	QGraphicsScene* scene;
 	QGraphicsView* view;

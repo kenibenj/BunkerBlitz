@@ -6,7 +6,7 @@
 
 StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 {
-    //setFixedSize(1200, 900);
+    setFixedSize(1920, 1080);
     showFullScreen();
     //Title for the window
     setWindowTitle("Bunker Blitz");
@@ -53,6 +53,7 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
     quitButton->show();
     connect(startButton, SIGNAL(clicked()), this, SLOT(startButtonClicked()));
     connect(startButton, SIGNAL(clicked()), this, SLOT(hide()));
+
     connect(quitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
 
 
