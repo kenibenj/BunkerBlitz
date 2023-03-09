@@ -9,8 +9,6 @@ QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
     startTimer();
     QScreen* primaryScreen = QApplication::primaryScreen();
-    QWidget* viewPort = new QWidget();
-    viewPort->setFixedSize(1920, 1080);
 
     //Create scene on the heap
     scene = new QGraphicsScene();
@@ -38,7 +36,7 @@ GameRunner::GameRunner() {
     view->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     view->setRenderHint(QPainter::Antialiasing);
     view->setGeometry(400, 50, 1920, 1080);
-    view->setViewport(viewPort);
+    
     QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
     view->setCursor(cursor);
 
@@ -58,6 +56,7 @@ GameRunner::GameRunner() {
     tank->setFocus();
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
     tank->createTurret();
+    tank->createHUD();
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
@@ -69,50 +68,14 @@ GameRunner::GameRunner() {
     view->show();
 
     view->setFixedSize(1920, 1080);
-    viewPort->show();
-
 
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
     
-    //Adding health HUD
-    QPixmap health(":/images/heatlh.png");
-    health1 = new QGraphicsPixmapItem();
-    health2 = new QGraphicsPixmapItem();
-    health3 = new QGraphicsPixmapItem();
-    
-    health1->setPixmap(health);
-    health2->setPixmap(health);
-    health3->setPixmap(health);
-    
-    scene->addItem(health1);
-    scene->addItem(health2);
-    scene->addItem(health3);
-
-    health1->setPos(view->mapToScene(50,50));
-    qDebug() << view->mapFromScene(50, 50);
-    health2->setPos(view->mapToScene(100, 50));
-    health3->setPos(view->mapToScene(150, 50));
-
-    health1->setZValue(10);
-    health2->setZValue(10);
-    health3->setZValue(10); 
-    qDebug() << enemyTimer->remainingTime();
-    health1->show();
-    health2->show();
-    health3->show();
-    //QObject::connect(enemyTimer, SIGNAL(timeout()), this, SLOT(rePositionHUD()));
-    //connect(enemyTimer, &QTimer::timeout, this, &GameRunner::rePositionHUD);
-    //connect(tank, &Tank::positionChanged, this, qDebug()<< "Position changed");
-    //connect(tank, &Tank::positionChanged, QApplication::instance(), QApplication::quit);
-    connect(tank, &Tank::positionChanged, this, &GameRunner::onTankPositionChange);
-    
-
-
     // spawn enemies
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);
-    //connect(timer, &QTimer::timeout, this, &GameRunner::rePositionHUD);
+
 
 }
 
@@ -126,15 +89,4 @@ void GameRunner::pauseTimer() {
 void GameRunner::startTimer() {
     qDebug() << "Starting Timer";
     enemyTimer->start(7);
-}
-void GameRunner::rePositionHUD() {
-    qDebug() << "Repositioning HUD";
-
-    health1->setPos(view->mapToScene(200, 50));
-    health2->setPos(view->mapToScene(100, 50));
-    health3->setPos(view->mapToScene(150, 50));
-}
-void GameRunner::onTankPositionChange(){
-    qDebug() << "Position change";
-    rePositionHUD();
 }

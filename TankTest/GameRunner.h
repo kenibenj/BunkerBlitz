@@ -3,7 +3,8 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-
+#include <QObject>
+#include <QWidget>
 
 class GameRunner : public QObject
 {
@@ -12,9 +13,7 @@ public:
 	GameRunner();
 	static void pauseTimer();
 	static void startTimer();
-public slots:
-    void rePositionHUD();
-    void onTankPositionChange();
+
 private:
 	QGraphicsScene* scene;
 	QGraphicsView* view;

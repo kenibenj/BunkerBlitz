@@ -15,7 +15,6 @@ public:
 	void paintEvent(QPaintEvent* e);
 
 public slots:
-
 	void startButtonClicked();
 private:
 

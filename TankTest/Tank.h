@@ -11,7 +11,9 @@ class Tank :public QObject, public QGraphicsPixmapItem {
 
     Q_OBJECT
     PauseMenu pause;
-    
+    QGraphicsPixmapItem* health1;
+    QGraphicsPixmapItem* health2;
+    QGraphicsPixmapItem* health3;
 public:
     Tank(QGraphicsView* view, QGraphicsItem* parent = 0);
     void keyPressEvent(QKeyEvent* event);
@@ -19,6 +21,7 @@ public:
     void focusOutEvent(QFocusEvent* event);
     bool isMoving();
     void createTurret();
+    void createHUD();
     float calculateAngleCos(float speed, float angle);
     float calculateAngleSin(float speed, float angle);
     
@@ -51,6 +54,8 @@ private:
 
     QGraphicsPixmapItem* turret;
     QGraphicsPixmapItem* fireFlash;
+
+
     
 };
 

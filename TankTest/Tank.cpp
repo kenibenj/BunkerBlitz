@@ -16,7 +16,9 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     this->setFocus();
     turret = new QGraphicsPixmapItem();
     fireFlash = new QGraphicsPixmapItem();
-
+    health1 = new QGraphicsPixmapItem();
+    health2 = new QGraphicsPixmapItem();
+    health3 = new QGraphicsPixmapItem();
     //Sets up Key Map
     keys.insert(Qt::Key_W, false);
     keys.insert(Qt::Key_A, false);
@@ -65,7 +67,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
 
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
     //keyTimer->start(7);
-
+    //createHUD();
     this->setZValue(-3);
 }
 
@@ -82,6 +84,30 @@ void Tank::createTurret() {
     fireFlash->setVisible(false);
     fireFlash->setZValue(-2);
     scene()->addItem(fireFlash);
+}
+void Tank::createHUD() {
+    QPixmap health(":/images/heatlh.png");
+
+    health1->setPixmap(health);
+    health2->setPixmap(health);
+    health3->setPixmap(health);
+
+    scene()->addItem(health1);
+    scene()->addItem(health2);
+    scene()->addItem(health3);
+
+    health1->setPos(v->mapToScene(25, 25));
+    health2->setPos(v->mapToScene(75, 25));
+    health3->setPos(v->mapToScene(125, 25));
+
+    /*health1->setTransformOriginPoint(x() + 50, y());
+    health2->setTransformOriginPoint(x() + 100, y());
+    health3->setTransformOriginPoint(x() + 150, y());*/
+
+    health1->show();
+    health2->show();
+    health3->show();
+
 }
 
 void Tank::keyPressEvent(QKeyEvent* event)
@@ -123,6 +149,9 @@ void Tank::frame() {
     // Every time the frame() function is called (about 144 times per second) the angle from the cursor to the center of the tank is calculated.
     // The function declared variables below will be deleted when the function exits so I do not believe they will cause memory issues
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
+    health1->setPos(v->mapToScene(25, 25));
+    health2->setPos(v->mapToScene(75, 25));
+    health3->setPos(v->mapToScene(125, 25));
     QPointF cursorPos = QCursor::pos();
     QPointF cursorViewPos = v->mapFromGlobal(cursorPos);
     QPointF tankPos = this->pos();
