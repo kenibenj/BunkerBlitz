@@ -3,15 +3,14 @@
 #include <QGraphicsScene>
 #include <QList>
 #include <stdlib.h> // rand() -> really large int
-
+#include <Explosion.h>
 #include <QDebug>
 
 extern QTimer *enemyTimer;
 Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //set random position
     int random_number = rand() % 700;
-    distance = 5;
-
+    distance = 0.5;
     setPos(random_number, 0);
 
     // drew the rect
@@ -19,6 +18,13 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     setPixmap(QPixmap(":/images/enemyTankNew.png"));
     setTransformOriginPoint(50, 50);
     setRotation(180);
+
+    // Create Health Bar
+    health = 100;
+    healthBar = new QGraphicsRectItem(0, -10, 50, 5, this);
+    healthBar->setBrush(Qt::green);
+    healthBar->setPen(Qt::NoPen);
+    healthBar->setPos(-25, -15);
 
     // connect
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
@@ -73,5 +79,27 @@ void Enemy::move() {
         else if (rotation() == 90) {
             setPos(x() + distance, y());
         }
+    }
+}
+
+void Enemy::setHealth(int health) {
+    // Set the size of the health bar based on the enemy's health
+    healthBar->setRect(0, -10, (health / 100.0) * 50, 5);
+}
+
+void Enemy::takeDamage(int damage) {
+    // Decrease the enemy's health by the specified amount
+    health -= damage;
+
+    // Update the health bar
+    setHealth(health);
+
+    // Check if the enemy has been defeated
+    if (health <= 0) {
+        // Remove the enemy from the scene
+        scene()->removeItem(this);
+
+        // Delete the enemy object
+        this->deleteLater();
     }
 }

@@ -82,19 +82,21 @@ void Bullet::move() {
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; i++) {
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
-            //delete enemy
-            scene()->removeItem(colliding_items[i]);
 
-            //Create explosion on collision
+            Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
+
+            // Reduce enemy's health by bullet's damage
+            enemy->takeDamage(damage);
+
+            // Create explosion on collision
             Explosion* explosion = new Explosion(colliding_items[i]->pos());
             scene()->addItem(explosion);
 
-            //delete bullet
+            // Remove bullet from scene
             scene()->removeItem(this);
             delete this;
 
-            //Delete enemy
-            delete(colliding_items[i]);
+            // Stop checking for collisions with other enemies
             return;
 
         }

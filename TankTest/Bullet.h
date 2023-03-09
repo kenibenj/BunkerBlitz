@@ -22,5 +22,6 @@ private:
     float dx, dy;
     char direct;
     int speed;
+    int damage = 50;
     float angle;
 };
