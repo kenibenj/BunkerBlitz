@@ -8,7 +8,7 @@
 #include <Explosion.h>
 #include "Enemy.h"
 #include "wall.h"
-
+#include "Obstacles.h"
 
 extern QTimer* enemyTimer;
 Bullet::Bullet(char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
@@ -97,6 +97,22 @@ void Bullet::move() {
             delete(colliding_items[i]);
             return;
 
+        }
+        if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
+            //delete enemy
+            scene()->removeItem(colliding_items[i]);
+
+            //Create explosion on collision
+            Explosion* explosion = new Explosion(colliding_items[i]->pos());
+            scene()->addItem(explosion);
+
+            //delete bullet
+            scene()->removeItem(this);
+            delete this;
+
+            //Delete enemy
+            delete(colliding_items[i]);
+            return;
         }
         // You could also incorporate the explosion effect into the wall
         /*if (typeid(*(colliding_items[i])) == typeid(Wall)) {

@@ -2,6 +2,7 @@
 #include "StartMenu.h"
 #include "MainHeader.h"
 #include "Tank.h"
+#include "Obstacles.h"
 #include <QPointF>
 #include <QHBoxLayout>
 
@@ -24,6 +25,7 @@ GameRunner::GameRunner() {
 
     //Create Player's Tank
     Tank* tank = new Tank(view);
+    Obstacles* obstacle = new Obstacles();
 
     scene->addItem(tank);
     scene->setSceneRect(0, 0, 2400, 1800);
@@ -44,7 +46,7 @@ GameRunner::GameRunner() {
     QBrush back_brush(QColor(255, 243, 240)); //bricks & box
     //QBrush back_brush(QColor(224, 255, 224)); //forest
 
-    QPixmap backgroundImage(":/images/bg.png");
+    QPixmap backgroundImage(":/images/map.jpg");
     QGraphicsPixmapItem* background = new QGraphicsPixmapItem();
     background->setPixmap(backgroundImage.scaled(scene->width(), scene->height(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     background->setZValue(-10);
@@ -73,6 +75,8 @@ GameRunner::GameRunner() {
     
     // spawn enemies
     QTimer* timer = new QTimer();
+   // QTimer* Obstimer = new QTimer();
+
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);
 

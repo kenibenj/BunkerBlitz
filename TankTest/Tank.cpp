@@ -6,7 +6,7 @@
 #include "GameRunner.h"
 #include "PauseMenu.h"
 #include <stdlib.h>
-
+#include "Obstacles.h"
 
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
@@ -30,7 +30,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     setPixmap(QPixmap(":/images/greenChasis.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
-    traversalSpeed = .3;
+    traversalSpeed = .9;
     rotationSpeed = .3;
     direction = 'w';
     counter = 0;
@@ -300,5 +300,7 @@ void Tank::spawn() {
     // create an enemy
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
+    Obstacles* obstacle = new Obstacles();
+    scene()->addItem(obstacle);
 }
 
