@@ -10,7 +10,7 @@ extern QTimer *enemyTimer;
 Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //set random position
     int random_number = rand() % 700;
-    distance = 0.5;
+    distance = 1;
     setPos(random_number, 0);
 
     // drew the rect

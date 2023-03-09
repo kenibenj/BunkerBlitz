@@ -100,9 +100,9 @@ void Tank::createHUD() {
     health2->setPos(v->mapToScene(75, 25));
     health3->setPos(v->mapToScene(125, 25));
 
-    /*health1->setTransformOriginPoint(x() + 50, y());
-    health2->setTransformOriginPoint(x() + 100, y());
-    health3->setTransformOriginPoint(x() + 150, y());*/
+    health1->setZValue(10);
+    health2->setZValue(10);
+    health3->setZValue(10);
 
     health1->show();
     health2->show();
