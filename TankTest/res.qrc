@@ -40,5 +40,7 @@
         <file>gunFlash.png</file>
         <file>bg.png</file>
         <file>heatlh.png</file>
+        <file>Ammobox.jpg</file>
+        <file>map.jpg</file>
     </qresource>
 </RCC>

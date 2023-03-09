@@ -43,22 +43,25 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Explosion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StartMenu.cpp">
+    <ClCompile Include="GameRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameRunner.cpp">
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,19 +72,25 @@
     <QtMoc Include="Enemy.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Tank.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="StartMenu.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="PauseMenu.h">
+    <QtMoc Include="Explosion.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="GameRunner.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Explosion.h">
+    <ClInclude Include="MainHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="PauseMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="StartMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Tank.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Obstacles.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -94,10 +103,97 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bullet.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="FriendTank.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="MainTain.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="backgroundMusic.mp3">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="bg.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="brick.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bullet.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bullet1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bulletFireThree.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bulletGreen.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bullettest.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="crosshair.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="enemy.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="enemyTankNew.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="engineIdleThree.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="engineMovingThree.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="explosion.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="giphy-2508825090.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenChasis.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenChasis2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenCrosshairGearFour.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenCrosshairGearOne.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenCrosshairGearThree.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenCrosshairGearTwo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenCrosshairGearZero.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="greenTurret.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gunFlash.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="heatlh.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="mainTankNew.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="my_map.txt">
       <Filter>Resource Files</Filter>
     </None>
     <QtRcc Include="res.qrc">
@@ -106,13 +202,23 @@
     <None Include="tank1.png">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\explosion.png" />
-    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
-    <Image Include="myicon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="my_map.txt" />
+    <None Include="tankIdle.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tankMoving.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tankMovingAndIdle.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tankconcept.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="title2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tnk.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

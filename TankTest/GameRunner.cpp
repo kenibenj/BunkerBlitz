@@ -44,7 +44,7 @@ GameRunner::GameRunner() {
     QBrush back_brush(QColor(255, 243, 240)); //bricks & box
     //QBrush back_brush(QColor(224, 255, 224)); //forest
 
-    QPixmap backgroundImage(":/images/bg.png");
+    QPixmap backgroundImage(":/images/map.jpg");
     QGraphicsPixmapItem* background = new QGraphicsPixmapItem();
     background->setPixmap(backgroundImage.scaled(scene->width(), scene->height(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     background->setZValue(-10);

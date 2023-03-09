@@ -6,7 +6,7 @@
 #include "GameRunner.h"
 #include "PauseMenu.h"
 #include <stdlib.h>
-
+#include "Obstacles.h"
 
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
@@ -300,5 +300,7 @@ void Tank::spawn() {
     // create an enemy
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
+    Obstacles* obstacle = new Obstacles();
+    scene()->addItem(obstacle);
 }
 
