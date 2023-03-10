@@ -86,7 +86,7 @@ void Tank::createTurret() {
     scene()->addItem(fireFlash);
 }
 void Tank::createHUD() {
-    QPixmap health(":/images/heatlh.png");
+    QPixmap health(":/images/gHealth.png");
 
     health1->setPixmap(health);
     health2->setPixmap(health);
@@ -96,9 +96,9 @@ void Tank::createHUD() {
     scene()->addItem(health2);
     scene()->addItem(health3);
 
-    health1->setPos(v->mapToScene(25, 25));
-    health2->setPos(v->mapToScene(75, 25));
-    health3->setPos(v->mapToScene(125, 25));
+    health1->setPos(v->mapToScene(10, 10));
+    health2->setPos(v->mapToScene(70, 10));
+    health3->setPos(v->mapToScene(130, 10));
 
     health1->setZValue(10);
     health2->setZValue(10);
@@ -149,9 +149,13 @@ void Tank::frame() {
     // Every time the frame() function is called (about 144 times per second) the angle from the cursor to the center of the tank is calculated.
     // The function declared variables below will be deleted when the function exits so I do not believe they will cause memory issues
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
-    health1->setPos(v->mapToScene(25, 25));
-    health2->setPos(v->mapToScene(75, 25));
-    health3->setPos(v->mapToScene(125, 25));
+
+    //Set HUD Position to update every frame
+    health1->setPos(v->mapToScene(10, 10));
+    health2->setPos(v->mapToScene(70, 10));
+    health3->setPos(v->mapToScene(130, 10));
+
+
     QPointF cursorPos = QCursor::pos();
     QPointF cursorViewPos = v->mapFromGlobal(cursorPos);
     QPointF tankPos = this->pos();

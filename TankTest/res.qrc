@@ -42,5 +42,6 @@
         <file>heatlh.png</file>
         <file>Ammobox.jpg</file>
         <file>map.jpg</file>
+        <file>gHealth.png</file>
     </qresource>
 </RCC>
