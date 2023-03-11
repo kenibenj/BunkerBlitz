@@ -220,5 +220,6 @@
     <None Include="tnk.jpg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="TankTest.pro" />
   </ItemGroup>
 </Project>
