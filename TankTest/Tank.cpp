@@ -92,6 +92,7 @@ void Tank::createTurret() {
     scene()->addItem(fireFlash);
 }
 void Tank::createHUD() {
+    //Setting up health bar
     QPixmap health(":/images/gHealth.png");
 
     health1->setPixmap(health);
@@ -260,7 +261,7 @@ void Tank::frame() {
 
     // Shooting (Spacebar)
     if (keys[Qt::Key_Space]) {
-        if (!fireRateTimer->isActive()) {
+        if (!fireRateTimer->isActive() && bulletCounter > 0) {
             fireFlash->setVisible(true);
 
             Bullet* bullet = new Bullet(direction, angle);
@@ -274,6 +275,8 @@ void Tank::frame() {
             //Fire Bullet sound
             bulletHandler->setPosition(0);
             bulletHandler->play();
+            // Decrement the bullet counter
+            bulletCounter--;
 
             // Start the fireRateTimer
             fireRateTimer->start();
