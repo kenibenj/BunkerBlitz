@@ -120,7 +120,7 @@ void Tank::createHUD() {
     bulletHUD->setPos(v->mapToScene(10,60));
     bulletHUD->setZValue(10);
 
-    QFont font("Arial", 50);
+    QFont font("Times", 50);
     scene()->addItem(bulletCounterHUD);
     bulletCounterHUD->adjustSize();
     bulletCounterHUD->setFont(font);
