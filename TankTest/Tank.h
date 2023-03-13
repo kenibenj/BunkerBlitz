@@ -6,6 +6,8 @@
 #include <QGraphicsPixmapItem>
 #include "PauseMenu.h"
 #include <QPointF>
+#include <QLabel>
+#include <QGraphicsTextItem>
 
 class Tank :public QObject, public QGraphicsPixmapItem {
 
@@ -54,7 +56,9 @@ private:
 
     QGraphicsPixmapItem* turret;
     QGraphicsPixmapItem* fireFlash;
-
+    QGraphicsPixmapItem* bulletHUD;
+    QGraphicsTextItem* bulletCounterHUD;
+    int bulletCounter;
 
     
 };

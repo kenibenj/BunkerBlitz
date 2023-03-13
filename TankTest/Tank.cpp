@@ -19,6 +19,12 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     health1 = new QGraphicsPixmapItem();
     health2 = new QGraphicsPixmapItem();
     health3 = new QGraphicsPixmapItem();
+    bulletHUD = new QGraphicsPixmapItem();
+    bulletCounterHUD = new QGraphicsTextItem();
+
+    //Initialize bullet counter
+    bulletCounter = 3;
+
     //Sets up Key Map
     keys.insert(Qt::Key_W, false);
     keys.insert(Qt::Key_A, false);
@@ -108,6 +114,20 @@ void Tank::createHUD() {
     health2->show();
     health3->show();
 
+    //Creating bullet counter aspects of the HUD
+    bulletHUD->setPixmap(QPixmap(":/images/bulletHUD.png"));
+    scene()->addItem(bulletHUD);
+    bulletHUD->setPos(v->mapToScene(10,60));
+    bulletHUD->setZValue(10);
+
+    QFont font("Arial", 50);
+    scene()->addItem(bulletCounterHUD);
+    bulletCounterHUD->adjustSize();
+    bulletCounterHUD->setFont(font);
+    bulletCounterHUD->setZValue(10);
+
+
+
 }
 
 void Tank::keyPressEvent(QKeyEvent* event)
@@ -154,6 +174,10 @@ void Tank::frame() {
     health1->setPos(v->mapToScene(10, 10));
     health2->setPos(v->mapToScene(70, 10));
     health3->setPos(v->mapToScene(130, 10));
+    bulletHUD->setPos(v->mapToScene(35,75));
+    bulletCounterHUD->setPlainText(QString::number(bulletCounter));
+    bulletCounterHUD->setPos(v->mapToScene(60, 47));
+
 
 
     QPointF cursorPos = QCursor::pos();

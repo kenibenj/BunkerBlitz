@@ -43,5 +43,6 @@
         <file>Ammobox.jpg</file>
         <file>map.jpg</file>
         <file>gHealth.png</file>
+        <file>bulletHUD.png</file>
     </qresource>
 </RCC>

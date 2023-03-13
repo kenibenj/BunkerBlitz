@@ -15,6 +15,7 @@ SOURCES += \
     Enemy.cpp \
     Explosion.cpp \
     GameRunner.cpp \
+    Obstacles.cpp \
     PauseMenu.cpp \
     StartMenu.cpp \
     Tank.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     Explosion.h \
     GameRunner.h \
     MainHeader.h \
+    Obstacles.h \
     PauseMenu.h \
     StartMenu.h \
     Tank.h
