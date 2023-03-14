@@ -122,7 +122,9 @@ void Tank::createHUD() {
     bulletHUD->setZValue(10);
 
     QFont font("Times", 50);
+    
     scene()->addItem(bulletCounterHUD);
+    bulletCounterHUD->setDefaultTextColor(Qt::white);
     bulletCounterHUD->adjustSize();
     bulletCounterHUD->setFont(font);
     bulletCounterHUD->setZValue(10);
