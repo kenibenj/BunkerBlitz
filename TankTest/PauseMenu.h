@@ -15,8 +15,11 @@ public:
     void keyPressEvent(QKeyEvent* event);
 
     void paintEvent(QPaintEvent* e);
+
+
     
 private slots:
     void resumeButtonClicked();
+    void returnButtonClicked();
 };
 

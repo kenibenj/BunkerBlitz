@@ -4,7 +4,7 @@
 #include "MainHeader.h"
 
 PauseMenu::PauseMenu() {
-	setFixedSize(100, 85);
+	setFixedSize(160, 210);
 	setWindowTitle("Pause");
 	setWindowFlags(Qt::FramelessWindowHint);
 	QPalette pal = QPalette();
@@ -20,11 +20,14 @@ PauseMenu::PauseMenu() {
 
 	QPushButton* resumeButton = new QPushButton("Resume", this);
 	QPushButton* quitButton = new QPushButton("Quit", this);
-	resumeButton->setGeometry(width() / 2 - 40, 10, 80, 30);
-	quitButton->setGeometry(width() / 2 - 40, 45, 80, 30);
+	QPushButton* returnButton = new QPushButton("Return to Main Menu", this);
+	resumeButton->setGeometry(width() / 2 - 70, 10, 140, 60);
+	quitButton->setGeometry(width() / 2 - 70, 75, 140, 60);
+	returnButton->setGeometry(width() / 2 - 70, 140, 140, 60);
 	//Adjusting style for the buttons
 	resumeButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;");
 	quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
+	returnButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
 	resumeButton->show();
 	quitButton->show();
 	connect(resumeButton, SIGNAL(clicked()), this, SLOT(resumeButtonClicked()));
@@ -52,4 +55,7 @@ void PauseMenu::paintEvent(QPaintEvent* e) {
 	painter.drawRect(0, 0, width()-1, height()-1);
 	
 	QWidget::paintEvent(e);
+}void PauseMenu::returnButtonClicked() {
+
+
 }
