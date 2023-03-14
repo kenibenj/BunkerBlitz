@@ -179,7 +179,7 @@ void Tank::frame() {
     bulletHUD->setPos(v->mapToScene(35,75));
     bulletCounterHUD->setPlainText(QString::number(bulletCounter));
     bulletCounterHUD->setPos(v->mapToScene(60, 58));
-
+ 
 
 
     QPointF cursorPos = QCursor::pos();
