@@ -179,7 +179,7 @@ void Tank::frame() {
     health3->setPos(v->mapToScene(130, 10));
     bulletHUD->setPos(v->mapToScene(35,75));
     bulletCounterHUD->setPlainText(QString::number(bulletCounter));
-    bulletCounterHUD->setPos(v->mapToScene(60, 47));
+    bulletCounterHUD->setPos(v->mapToScene(60, 58));
 
 
 
