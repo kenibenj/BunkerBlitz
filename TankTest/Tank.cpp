@@ -93,7 +93,7 @@ void Tank::createTurret() {
 }
 void Tank::createHUD() {
     //Setting up health bar
-    QPixmap health(":/images/gHealth.png");
+    QPixmap health(":/images/Hrt.jpg");
 
     health1->setPixmap(health);
     health2->setPixmap(health);

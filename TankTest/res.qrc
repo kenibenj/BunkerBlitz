@@ -44,5 +44,8 @@
         <file>map.jpg</file>
         <file>gHealth.png</file>
         <file>bulletHUD.png</file>
+        <file>GEARZ1.png</file>
+        <file>Shield.png</file>
+        <file>Hrt.jpg</file>
     </qresource>
 </RCC>

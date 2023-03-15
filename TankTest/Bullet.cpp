@@ -8,6 +8,8 @@
 #include <Explosion.h>
 #include "Enemy.h"
 #include "wall.h"
+#include "Spawner.h"
+#include "Obstacles.h"
 
 
 extern QTimer* enemyTimer;
@@ -98,8 +100,24 @@ void Bullet::move() {
 
             // Stop checking for collisions with other enemies
             return;
+            if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
 
+                //disconnect signal from timer
+                disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
+                enemyTimer->stop();
+
+                //delete bullet and wall
+                scene()->removeItem(colliding_items[i]);
+                scene()->removeItem(this);
+
+                //Delete objects
+                delete(colliding_items[i]);
+                delete(this);
+                return;
+            }
         }
+
+        
         // You could also incorporate the explosion effect into the wall
         /*if (typeid(*(colliding_items[i])) == typeid(Wall)) {
 

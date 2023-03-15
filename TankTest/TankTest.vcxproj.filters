@@ -64,6 +64,9 @@
     <ClCompile Include="Obstacles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -91,6 +94,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Obstacles.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Spawner.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

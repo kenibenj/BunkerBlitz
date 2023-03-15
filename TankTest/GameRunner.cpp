@@ -4,6 +4,7 @@
 #include "Tank.h"
 #include <QPointF>
 #include <QHBoxLayout>
+#include "Spawner.h"
 
 QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
@@ -12,6 +13,9 @@ GameRunner::GameRunner() {
 
     //Create scene on the heap
     scene = new QGraphicsScene();
+
+    Spawner spawner(scene);
+    //spawner.spawnimage()
 
     //Set the icon to the GameRunner Window as well
     QGuiApplication::setWindowIcon(QIcon::fromTheme("myicon", QIcon("myicon.png")));
