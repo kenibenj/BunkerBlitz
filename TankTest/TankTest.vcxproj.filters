@@ -94,25 +94,14 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="backgroundMusic.mp3">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bg.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
     <QtRcc Include="res.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <None Include="tank1.png">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\explosion.png" />
-    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
     <Image Include="myicon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="my_map.txt" />
+    <Text Include="zValueList.txt" />
   </ItemGroup>
 </Project>

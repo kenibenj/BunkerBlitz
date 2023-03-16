@@ -67,6 +67,8 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     keyTimer->start(7);
 
     this->setZValue(-3);
+
+    setPos(view->width() / 2 - 50, view->height() - 50);
 }
 
 
@@ -76,6 +78,7 @@ void Tank::createTurret() {
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 10);
     turret->setPixmap(QPixmap(":/images/greenTurret.png"));
     turret->setTransformOriginPoint(turret->boundingRect().width() / 2, turret->boundingRect().height() / 2 + rotationPoint);
+    turret->setZValue(-2);
     scene()->addItem(turret);
 
     fireFlash->setPixmap(QPixmap(":/images/gunFlash.png"));
@@ -119,14 +122,15 @@ float Tank::calculateAngleSin(float speed, float angle) {
 
 void Tank::frame() {
 
+    QPointF currentPos = pos();
+
     // this code is what lets the tank turret, the muzzle flash, and the bullets follow the cursor. 
     // Every time the frame() function is called (about 144 times per second) the angle from the cursor to the center of the tank is calculated.
     // The function declared variables below will be deleted when the function exits so I do not believe they will cause memory issues
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
     QPointF cursorPos = QCursor::pos();
     QPointF cursorViewPos = v->mapFromGlobal(cursorPos);
-    QPointF tankPos = this->pos();
-    QPointF tankViewPos = v->mapFromScene(tankPos);
+    QPointF tankViewPos = v->mapFromScene(this->pos());
 
     float angle = (atan2(cursorViewPos.y() - (tankViewPos.y() + (this->boundingRect().height() / 2)), cursorViewPos.x() - (tankViewPos.x() + (this->boundingRect().width()) / 2)));
     float angleDegrees = angle * (180 / M_PI);
@@ -206,9 +210,8 @@ void Tank::frame() {
         if (!fireRateTimer->isActive()) {
             fireFlash->setVisible(true);
 
-            Bullet* bullet = new Bullet(direction, angle);
+            Bullet* bullet = new Bullet(this, direction, angle);
             bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - bullet->boundingRect().height() / 2);
-            bullet->setZValue(-1);
             scene()->addItem(bullet);
 
             //This can be set to either 'fire()' for cursor shooting or 'fireAlt()' for directional shooting
@@ -256,6 +259,26 @@ void Tank::frame() {
         QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
         v->setCursor(cursor);
     }
+
+
+    // Checks to see if Tank is going out of bounds
+    if (x() < 0)
+    {
+        setPos(currentPos);
+    }
+    else if (x() + boundingRect().right() > scene()->width())
+    {
+        setPos(currentPos);
+    }
+
+    if (y() < 0)
+    {
+        setPos(currentPos);
+    }
+    else if (y() + boundingRect().bottom() > scene()->height())
+    {
+        setPos(currentPos);
+    }
 }
 
 bool Tank::isMoving() {
@@ -271,5 +294,7 @@ void Tank::spawn() {
     // create an enemy
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
+    enemy->createVision();
+    enemy->createTurret();
 }
 

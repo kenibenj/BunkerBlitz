@@ -39,5 +39,10 @@
         <file>title2.png</file>
         <file>gunFlash.png</file>
         <file>bg.png</file>
+        <file>icon.png</file>
+        <file>bulletRed.png</file>
+        <file>redChasis2.png</file>
+        <file>redChasis.png</file>
+        <file>redTurret.png</file>
     </qresource>
 </RCC>

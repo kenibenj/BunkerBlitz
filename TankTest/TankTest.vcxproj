@@ -232,18 +232,13 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="backgroundMusic.mp3" />
-    <None Include="bg.jpg" />
     <QtRcc Include="res.qrc">
     </QtRcc>
-    <None Include="tank1.png" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Tank.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\explosion.png" />
-    <Image Include="..\..\..\Users\Rowan\Downloads\bullettest.jpg" />
     <Image Include="myicon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +248,7 @@
     <QtMoc Include="PauseMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="my_map.txt" />
+    <Text Include="zValueList.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,0 +1,6 @@
+Background Map (GameRunner) = -10
+Enemy Vision Circle (Enemy) = -5
+Bullet (Bullet) = -4
+Tank Chassis (Tank & Enemy) = -3
+Tank Turret (Tank & Enemy) = -2
+Tank Muzzle Flash (Tank & Enemy) = -2

@@ -12,7 +12,7 @@ GameRunner::GameRunner() {
     QGraphicsScene* scene = new QGraphicsScene();
 
     //Set the icon to the GameRunner Window as well
-    QGuiApplication::setWindowIcon(QIcon::fromTheme("myicon", QIcon("myicon.png")));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme("myicon", QIcon(":/images/icon.png")));
 
     //add a view, this is what displays the graphics
     QGraphicsView* view = new QGraphicsView(scene);
@@ -47,11 +47,11 @@ GameRunner::GameRunner() {
     scene->addItem(background);
 
 
-      //makes focuable
+    //makes focusable
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
-    tank->setPos(view->width() / 2 - 50, view->height() - 50);
     tank->createTurret();
+
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
@@ -61,12 +61,15 @@ GameRunner::GameRunner() {
     music.play();
 
     view->show();
-    view->setFixedSize(1200, 900);
-
-    tank->setPos(view->width() / 2 - 50, view->height() - 50);
+    view->setFixedSize(1920, 1080);
+    view->showFullScreen();
 
     // spawn enemies
     QTimer* timer = new QTimer();
+    tank->spawn();
+    tank->spawn();
+    tank->spawn();
+    tank->spawn();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);
 }
