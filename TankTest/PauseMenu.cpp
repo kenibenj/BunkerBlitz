@@ -22,8 +22,8 @@ PauseMenu::PauseMenu() {
 	QPushButton* quitButton = new QPushButton("Quit", this);
 	QPushButton* returnButton = new QPushButton("Return to Main Menu", this);
 	resumeButton->setGeometry(width() / 2 - 70, 10, 140, 60);
-	quitButton->setGeometry(width() / 2 - 70, 75, 140, 60);
-	returnButton->setGeometry(width() / 2 - 70, 140, 140, 60);
+	quitButton->setGeometry(width() / 2 - 70, 140, 140, 60);
+	returnButton->setGeometry(width() / 2 - 70, 75, 140, 60);
 	//Adjusting style for the buttons
 	resumeButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;");
 	quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
