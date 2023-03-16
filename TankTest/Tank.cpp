@@ -168,6 +168,8 @@ float Tank::calculateAngleSin(float speed, float angle) {
 
 void Tank::frame() {
 
+    QPointF currentPos = pos();
+
     // this code is what lets the tank turret, the muzzle flash, and the bullets follow the cursor. 
     // Every time the frame() function is called (about 144 times per second) the angle from the cursor to the center of the tank is calculated.
     // The function declared variables below will be deleted when the function exits so I do not believe they will cause memory issues
@@ -216,7 +218,7 @@ void Tank::frame() {
         movingHandler->stop();
     }
 
-    // Code that handles the animation for the tank treads. Everytime 20 times the move() function is called while the tank is actually moving,
+    // Code that handles the animation for the tank treads. Every 20 times the move() function is called while the tank is actually moving
     if ((isMoving() == true)) {
         counter++;
         if (counter % 20 == 0) {
@@ -266,9 +268,8 @@ void Tank::frame() {
         if (!fireRateTimer->isActive() && bulletCounter > 0) {
             fireFlash->setVisible(true);
 
-            Bullet* bullet = new Bullet(direction, angle);
+            Bullet* bullet = new Bullet(this, direction, angle);
             bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - bullet->boundingRect().height() / 2);
-            bullet->setZValue(-1);
             scene()->addItem(bullet);
 
             //This can be set to either 'fire()' for cursor shooting or 'fireAlt()' for directional shooting
@@ -318,6 +319,25 @@ void Tank::frame() {
         QCursor cursor = QCursor(QPixmap(":/images/crosshair.png"));
         v->setCursor(cursor);
     }
+
+    // Checks to see if Tank is going out of bounds
+    if (x() < 0)
+    {
+        setPos(currentPos);
+    }
+    else if (x() + boundingRect().right() > scene()->width())
+    {
+        setPos(currentPos);
+    }
+
+    if (y() < 0)
+    {
+        setPos(currentPos);
+    }
+    else if (y() + boundingRect().bottom() > scene()->height())
+    {
+        setPos(currentPos);
+    }
 }
 
 bool Tank::isMoving() {
@@ -333,6 +353,8 @@ void Tank::spawn() {
     // create an enemy
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
+    enemy->createVision();
+    enemy->createTurret();
     Obstacles* obstacle = new Obstacles();
     scene()->addItem(obstacle);
 }

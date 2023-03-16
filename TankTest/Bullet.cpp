@@ -7,64 +7,36 @@
 #include <QLabel>
 #include <Explosion.h>
 #include "Enemy.h"
+#include "Tank.h"
 #include "wall.h"
 #include "Spawner.h"
 #include "Obstacles.h"
 
 
 extern QTimer* enemyTimer;
-Bullet::Bullet(char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
+Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
     direct = direction;
     this->angle = angle;
+    this->tank = tank;
+    this->setZValue(-4);
+    speed = 5;
+    damage = 50;
 
-    setPixmap(QPixmap(":/images/bulletGreen.png"));
+    if (typeid(*(tank)) == typeid(Enemy)) {
+        setPixmap(QPixmap(":/images/bulletRed.png"));
+    }
+    if (typeid(*(tank)) == typeid(Tank)) {
+        setPixmap(QPixmap(":/images/bulletGreen.png"));
+    }
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
-}
-
-// Four-directional shooting that uses the direction the tank is facing
-void Bullet::fireDirectional() {
-
-    // Set speed of bullet
-    speed = 6;
-
-    // Calculate x and y velocity
-    switch (direct) {
-    case 'w':
-        dx = 0;
-        dy = speed * -1;
-        setRotation(0);
-        break;
-    case 'a':
-        dx = speed * -1;
-        dy = 0;
-        setRotation(270);
-        break;
-    case 's':
-        dx = 0;
-        dy = speed;
-        setRotation(180);
-        break;
-    case 'd':
-        dx = speed;
-        dy = 0;
-        setRotation(90);
-        break;
-    }
-
-    //connect
-    connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
-    enemyTimer->start(7);
 }
 
 // Swivel shooting that uses the mouse cursor
 void Bullet::fireSwivel() {
 
     float angleDegrees = angle * (180 / M_PI);
-
-    // Set speed of bullet
-    speed = 20;
 
     // Calculate x and y velocity
     dx = speed * cos(angle);
@@ -82,6 +54,11 @@ void Bullet::fireSwivel() {
 void Bullet::move() {
     //Collison check for enemies
     QList<QGraphicsItem*> colliding_items = collidingItems();
+
+    //List doesn't count tank that originally fired bullet. Prevents self-destruct shooting
+    colliding_items.removeAll(tank);
+
+    // Iterates through detected objects
     for (int i = 0, n = colliding_items.size(); i < n; i++) {
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
 
@@ -91,7 +68,11 @@ void Bullet::move() {
             enemy->takeDamage(damage);
 
             // Create explosion on collision
-            Explosion* explosion = new Explosion(colliding_items[i]->pos());
+            QPointF explosionPos;
+            explosionPos.setX(colliding_items[i]->pos().x() - (colliding_items[i]->boundingRect().width() / 2));
+            explosionPos.setY(colliding_items[i]->pos().y() - (colliding_items[i]->boundingRect().height() / 2));
+
+            Explosion* explosion = new Explosion(explosionPos);
             scene()->addItem(explosion);
 
             // Remove bullet from scene

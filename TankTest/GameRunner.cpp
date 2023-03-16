@@ -18,7 +18,7 @@ GameRunner::GameRunner() {
     //spawner.spawnimage()
 
     //Set the icon to the GameRunner Window as well
-    QGuiApplication::setWindowIcon(QIcon::fromTheme("myicon", QIcon("myicon.png")));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme("myicon", QIcon(":/images/icon.png")));
 
     //add a view, this is what displays the graphics
     view = new QGraphicsView(scene);
@@ -55,12 +55,13 @@ GameRunner::GameRunner() {
     scene->addItem(background);
 
 
-      //makes focuable
+    //makes focuable
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
     tank->createTurret();
     tank->createHUD();
+
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
@@ -68,12 +69,13 @@ GameRunner::GameRunner() {
     music.setAudioOutput(&audioPlayer);
     music.setSource(QUrl("qrc:/sounds/backgroundMusic.mp3"));
     music.play();
+
     view->centerOn(tank);
     view->show();
-
     view->setFixedSize(1920, 1080);
+    view->showFullScreen();
 
-    tank->setPos(view->width() / 2 - 50, view->height() - 50);
+    tank->setPos(scene->width() / 2 - (tank->boundingRect().width() / 2), scene->height() - 150);
     
     // spawn enemies
     QTimer* timer = new QTimer();
@@ -85,12 +87,10 @@ GameRunner::GameRunner() {
 
 // Used when esc key is clicked to pause timers
 void GameRunner::pauseTimer() {
-    qDebug() << "Timer paused";
     enemyTimer->stop();
 }
 
 // Used to start timers
 void GameRunner::startTimer() {
-    qDebug() << "Starting Timer";
     enemyTimer->start(7);
 }

@@ -11,17 +11,17 @@ class Bullet : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT;
 
 public:
-    Bullet(char direction, float angle, QGraphicsItem* parent = 0);
-    void fireDirectional();
+    Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* parent = 0);
     void fireSwivel();
 
 public slots:
     void move();
 
 private:
+    int damage;
     float dx, dy;
     char direct;
-    int speed;
-    int damage = 50;
+    float speed;
     float angle;
+    QGraphicsItem* tank;
 };

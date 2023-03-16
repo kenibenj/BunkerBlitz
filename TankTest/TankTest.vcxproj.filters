@@ -228,4 +228,9 @@
     </None>
     <None Include="TankTest.pro" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="zValueList.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

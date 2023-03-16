@@ -289,6 +289,9 @@
     <None Include="title2.png" />
     <None Include="tnk.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="zValueList.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

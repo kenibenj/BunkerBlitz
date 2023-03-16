@@ -12,7 +12,7 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
     setWindowTitle("Bunker Blitz");
 
     //Set the icon to the window
-    setWindowIcon(QIcon::fromTheme("myicon", QIcon("myicon.png")));
+    setWindowIcon(QIcon::fromTheme("myicon", QIcon(":/images/icon.png")));
 
     //Setting color palette
     QPalette pal = QPalette();
