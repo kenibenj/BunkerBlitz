@@ -17,6 +17,7 @@ SOURCES += \
     GameRunner.cpp \
     Obstacles.cpp \
     PauseMenu.cpp \
+    Spawner.cpp \
     StartMenu.cpp \
     Tank.cpp \
     main.cpp
@@ -35,6 +36,7 @@ HEADERS += \
     MainHeader.h \
     Obstacles.h \
     PauseMenu.h \
+    Spawner.h \
     StartMenu.h \
     Tank.h
     GameRunner.h
