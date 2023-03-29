@@ -2,7 +2,8 @@
 #include <QPushButton>
 #include "GameRunner.h"
 #include "MainHeader.h"
-
+#include <QProcess>
+#include <QDebug>
 PauseMenu::PauseMenu() {
 	setFixedSize(160, 210);
 	setWindowTitle("Pause");
@@ -32,6 +33,7 @@ PauseMenu::PauseMenu() {
 	quitButton->show();
 	connect(resumeButton, SIGNAL(clicked()), this, SLOT(resumeButtonClicked()));
 	connect(quitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+    connect(returnButton, SIGNAL(clicked()), this, SLOT(returnButtonClicked()));
 }
 
 void PauseMenu::resumeButtonClicked() {
@@ -56,6 +58,8 @@ void PauseMenu::paintEvent(QPaintEvent* e) {
 	
 	QWidget::paintEvent(e);
 }void PauseMenu::returnButtonClicked() {
-
+    qDebug() << "Return button clicked";
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 
 }
