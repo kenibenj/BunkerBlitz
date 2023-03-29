@@ -8,6 +8,8 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 {
     setFixedSize(1920, 1080);
     showFullScreen();
+    setAttribute(Qt::WA_DeleteOnClose);
+    //setWindowFlag(Qt::WA_DeleteOnClose);
     //Title for the window
     setWindowTitle("Bunker Blitz");
 
@@ -38,22 +40,10 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
     startButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 30px");
     quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px");
     
-    //Adding in title 
-    
-    //title.setPos(100, 100);
-    //title.setPixmap(QPixmap());
-    //title.show();
-    /*QLabel title = QLabel();
-    title.setPixmap(titleImage);
-    title.setMask(titleImage.mask());
-    title.setParent(this);
-    title.show();*/
 
     startButton->show();
     quitButton->show();
     connect(startButton, SIGNAL(clicked()), this, SLOT(startButtonClicked()));
-    connect(startButton, SIGNAL(clicked()), this, SLOT(hide()));
-
     connect(quitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
 
 
@@ -61,6 +51,7 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 
 void StartMenu::startButtonClicked() {
     GameRunner gameRunner;
+    hide();
 }
 
 //Draws a border around the pause menu
