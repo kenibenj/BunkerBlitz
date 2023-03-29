@@ -59,7 +59,11 @@ void PauseMenu::paintEvent(QPaintEvent* e) {
 	QWidget::paintEvent(e);
 }void PauseMenu::returnButtonClicked() {
     qDebug() << "Return button clicked";
+    //Closes the current running processes
     qApp->quit();
+    //Restarts the main function
     QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+    //Deletes the pausemenu
+    delete this;
 
 }
