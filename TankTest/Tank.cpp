@@ -142,6 +142,9 @@ void Tank::keyPressEvent(QKeyEvent* event)
         qDebug() << "Pausing";
         if (pause.isHidden()) {
             GameRunner::pauseTimer();
+            pause.setWindowFlag(Qt::WindowStaysOnTopHint);
+            pause.setWindowFlag(Qt::FramelessWindowHint);
+
             pause.show();
         }
     }
