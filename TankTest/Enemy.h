@@ -20,8 +20,14 @@ public:
     float calculateAngleSin(float speed, float angle);
     void setHealth(int health);
     void takeDamage(int damage);
+    float angleTo360(float rotation);
+    void setName(char name);
+
+    char name;
+
 public slots:
     void frame();
+
 private:
     float traversalSpeed;
     float rotationSpeed;
@@ -34,6 +40,7 @@ private:
     int counter;
     int treadCounter;
     int pathTravelTime;
+    int pathTurnTime;
     int previousRotation;
 
     bool changeTreads;
@@ -42,6 +49,11 @@ private:
     bool isAgainstWall;
     bool isTurning;
     bool isTurningLeft;
+    bool isWallTurning;
+
+    bool isChargeType;
+    bool isFleeType;
+    bool isHoldType;
 
     QGraphicsEllipseItem* circle;
     QList<QGraphicsItem*> collidingItemsVision;
@@ -54,4 +66,5 @@ private:
     QGraphicsPixmapItem* fireFlash;
 
     QGraphicsRectItem* healthBar; //declaring health bar for enemy
+
 };

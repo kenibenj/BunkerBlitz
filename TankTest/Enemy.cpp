@@ -7,6 +7,7 @@
 #include <stdlib.h> // rand() -> really large int
 #include <QDebug>
 #include <QRandomGenerator>
+#include < QGraphicsDropShadowEffect>
 
 extern QTimer *enemyTimer;
 QRandomGenerator Enemy::generator = QRandomGenerator::securelySeeded();
@@ -15,23 +16,44 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     pathTravelTime = generator.bounded(10, 26) * 144;
 
-    // set random position
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    // set random position & rotation
+    int randomNumberX = QRandomGenerator::global()->bounded(100, 2300);
+    int randomNumberY = QRandomGenerator::global()->bounded(1000, 1700);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
 
+    // determines what kind of aggro-behaviour the AI will have
+    int whatType = QRandomGenerator::global()->bounded(0, 3);
+    switch (whatType) {
+    case 0:
+        isFleeType = true;
+        break;
+    case 1:
+        isHoldType = true;
+        break;
+    case 2:
+        isChargeType = true;
+        break;
+    default:
+        isHoldType = true;
+        break;
+    }
+
+    health = 75;
     traversalSpeed = .3;
     rotationSpeed = .3;
-    turretRotationSpeed = .2;
+    turretRotationSpeed = .4;
     counter = 0;
     treadCounter = 0;
     bulletCoolDownCounter = 0;
+
     seePlayer = false;
     roam = true;
     isAgainstWall = false;
+
     circle = new QGraphicsEllipseItem();
     turret = new QGraphicsPixmapItem();
     fireFlash = new QGraphicsPixmapItem();
+
     direction = 'w';
 
     setPos(randomNumberX, randomNumberY);
@@ -42,12 +64,20 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
 
 
-    // Create Health Bar
-    health = 100;
+    // Create the healthBar item
     healthBar = new QGraphicsRectItem(0, -10, 50, 5, this);
     healthBar->setBrush(Qt::green);
-    healthBar->setPen(Qt::NoPen);
+    healthBar->setPen(QPen(Qt::white, .7));
     healthBar->setPos(-25, -15);
+
+    // Create a QGraphicsDropShadowEffect with a white color and blur radius
+    QGraphicsDropShadowEffect* glowEffect = new QGraphicsDropShadowEffect();
+    glowEffect->setBlurRadius(10);
+    glowEffect->setColor(Qt::white);
+    glowEffect->setOffset(0, 0);
+
+    // Apply the effect to the healthBar item
+    healthBar->setGraphicsEffect(glowEffect);
 
     // connect
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
@@ -56,10 +86,9 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
 void Enemy::createVision() {
     // add a circle
-    circle->setRect(0, 0, 1000, 1000); // diameter 100
+    circle->setRect(0, 0, 1000, 1000); // diameter 1000
     circle->setTransformOriginPoint(circle->boundingRect().width() / 2, circle->boundingRect().height() / 2);
     circle->setPos(x() + this->boundingRect().width() / 2 - circle->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - circle->boundingRect().height() / 2); // center the circle on the enemy
-    circle->setBrush(QBrush(Qt::blue)); // set color and style of the circle's interior\
     circle->setZValue(-5);
     circle->setVisible(false);
     scene()->addItem(circle);
@@ -82,13 +111,14 @@ void Enemy::createTurret() {
 }
 
 void Enemy::frame() {
+    counter++;
     QPointF currentPos = pos();
+    int currentRot = rotation();
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
     circle->setPos(x() + this->boundingRect().width() / 2 - circle->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - circle->boundingRect().height() / 2);
     float angleTank = (rotation() - 90) * (M_PI / 180);
     float dxTank = calculateAngleCos(traversalSpeed, angleTank);
     float dyTank = calculateAngleSin(traversalSpeed, angleTank);
-    counter++;
 
     if (bulletCoolDownCounter != 0) {
         bulletCoolDownCounter++;
@@ -107,19 +137,16 @@ void Enemy::frame() {
         if (!collidingItemsVision.isEmpty()) {
             for (QGraphicsItem* item : collidingItemsVision) {
                 if (typeid(*item) == typeid(Tank)) {
-                    qDebug() << "Player!" << item->zValue();
                     priorityItem = item;
                     seePlayer = true;
                     roam = false;
+                    break;
                 }
                 else if (typeid(*item) == typeid(Enemy)) {
-                    qDebug() << "Enemy!" << item->zValue();
                 }
                 else if (typeid(*item) == typeid(Bullet)) {
-                    qDebug() << "Bullet!" << item->zValue();
                 }
                 else {
-                    qDebug() << "wtf!" << item->zValue();
                 }
             }
         }
@@ -127,34 +154,21 @@ void Enemy::frame() {
         }
     }
 
-    if (counter % pathTravelTime == 0 || (isAgainstWall && !isTurning)) {
-        isTurning = true;
-        int random = generator.bounded(10, 26);
-        if (random % 2 == 0) {
-            isTurningLeft = true;
-        }
-        else {
-            isTurningLeft = false;
-        }
-        pathTravelTime = random * 144;
-        previousRotation = rotation();
-    }
-
-
     if (seePlayer) {
         float angle = (atan2((priorityItem->y() + (priorityItem->boundingRect().height() / 2)) - (y() + (this->boundingRect().height() / 2)), (priorityItem->x() + (priorityItem->boundingRect().width() / 2)) - (x() + (this->boundingRect().width()) / 2)));
         float angleDegrees = angle * (180 / M_PI) + 90;
+        float rotationDifference = angleTo360(angleDegrees - turret->rotation());
 
-        if (angleDegrees > turret->rotation()) {
+        if (rotationDifference < 180) {
             turret->setRotation(turret->rotation() + turretRotationSpeed);
         }
-        else if (angleDegrees < turret->rotation()) {
+        else if (rotationDifference > 180) {
             turret->setRotation(turret->rotation() - turretRotationSpeed);
         }
 
         float turretAngle = (turret->rotation() - 90) * (M_PI / 180);
 
-        if ((abs(angleDegrees - turret->rotation()) / 360) < .05 && (bulletCoolDownCounter == 0)) {
+        if ((abs(angleTo360(angleDegrees - turret->rotation())) / 360) < .02 && (bulletCoolDownCounter == 0)) {
             Bullet* bullet = new Bullet(this, direction, turretAngle);
             bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - bullet->boundingRect().height() / 2);
             scene()->addItem(bullet);
@@ -167,18 +181,36 @@ void Enemy::frame() {
     }
 
     if (roam) {
-        if (isTurning && !isAgainstWall) {
+
+        // Set new path after old path expires
+        if (pathTravelTime < 0 && !isTurning && !isWallTurning) {
+            isTurning = true;
+            int random = generator.bounded(10, 16);
+            if (random % 2 == 0) {
+                isTurningLeft = true;
+            }
+            else {
+                isTurningLeft = false;
+            }
+            pathTravelTime = random * 144;
+            pathTurnTime = generator.bounded(90, 200);
+        }
+
+        // When it is turning
+        else if (isTurning) {
             if (isTurningLeft) {
-                if (rotation() < previousRotation + generator.bounded(40, 90)) {
+                if (pathTurnTime > 0) {
                     setRotation(rotation() + rotationSpeed);
+                    pathTurnTime--;
                 }
                 else {
                     isTurning = false;
                 }
             }
             else {
-                if (rotation() > previousRotation - generator.bounded(40, 90)) {
+                if (pathTurnTime > 0) {
                     setRotation(rotation() - rotationSpeed);
+                    pathTurnTime--;
                 }
                 else {
                     isTurning = false;
@@ -186,41 +218,65 @@ void Enemy::frame() {
             }
         }
 
-        else if (isTurning || isAgainstWall) {
-            if (rotation() > previousRotation - 180) {
-                setRotation(rotation() - rotationSpeed);
+        else if (isWallTurning) {
+            if (isTurningLeft) {
+                if (pathTurnTime > 0) {
+                    setRotation(rotation() + rotationSpeed);
+                    pathTurnTime--;
+                }
+                else {
+                    isWallTurning = false;
+                    isTurning = false;
+                    pathTravelTime = generator.bounded(10, 26) * 144;
+                }
             }
             else {
-                isTurning = false;
-                isAgainstWall = false;
+                if (pathTurnTime > 0) {
+                    setRotation(rotation() - rotationSpeed);
+                    pathTurnTime--;
+                }
+                else {
+                    isWallTurning = false;
+                    isTurning = false;
+                    pathTravelTime = generator.bounded(10, 26) * 144;
+                }
             }
         }
 
-        else if (!isTurning) {
+        // When it is trying to get away from the wall
+        else if (isAgainstWall) {
+            if (pathTravelTime > 0) {
+                setPos(x() - dxTank, y() - dyTank);
+                pathTravelTime--;
+            }
+            else {
+                isAgainstWall = false;
+                isWallTurning = true;
+                pathTurnTime = generator.bounded(190, 300);
+                if (pathTurnTime % 2 == 0) {
+                    isTurningLeft = true;
+                }
+                else {
+                    isTurningLeft = false;
+                }
+            }
+        }
+
+        // Normal movement
+        else{
             setPos(x() + dxTank, y() + dyTank);
+            pathTravelTime--;
+        }
 
-            // Checks to see if Tank is going out of bounds
-            if (x() < 0)
-            {
-                setPos(currentPos);
-                isAgainstWall = true;
-            }
-            else if (x() + boundingRect().right() > scene()->width())
-            {
-                setPos(currentPos);
-                isAgainstWall = true;
-            }
-
-            if (y() < 0)
-            {
-                setPos(currentPos);
-                isAgainstWall = true;
-            }
-            else if (y() + boundingRect().bottom() > scene()->height())
-            {
-                setPos(currentPos);
-                isAgainstWall = true;
-            }
+        // Checks to see if Tank is going out of bounds
+        if ( (x() < 0 || (x() + boundingRect().right() > scene()->width()) || (y() < 0) || (y() + boundingRect().bottom() > scene()->height())))
+        {
+            previousRotation = rotation();
+            setPos(x() - dxTank * 2, y() - dyTank * 2);
+            setRotation(currentRot);
+            isAgainstWall = true;
+            isTurning = false;
+            pathTravelTime = generator.bounded(1, 4) * 144;
         }
 
         if (rotation() > turret->rotation()) {
@@ -282,6 +338,20 @@ float Enemy::calculateAngleCos(float speed, float angle) {
 float Enemy::calculateAngleSin(float speed, float angle) {
     float dy = speed * sin(angle);
     return dy;
+}
+
+float Enemy::angleTo360(float rotation) {
+    while (rotation >= 360.0) {
+        rotation -= 360.0;
+    }
+    while (rotation < 0.0) {
+        rotation += 360.0;
+    }
+    return rotation;
+}
+
+void Enemy::setName(char name) {
+    this->name = name;
 }
 
 // Deletes vision-circle when enemy is destroyed

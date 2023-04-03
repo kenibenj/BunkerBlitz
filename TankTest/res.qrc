@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/sounds">
         <file>backgroundMusic.mp3</file>
-        <file>my_map.txt</file>
         <file>bullet.mp3</file>
         <file>tankIdle.mp3</file>
         <file>tankMoving.mp3</file>
@@ -9,19 +8,10 @@
         <file>bulletFireThree.wav</file>
         <file>engineIdleThree.wav</file>
         <file>engineMovingThree.wav</file>
+        <file>explosion.wav</file>
     </qresource>
     <qresource prefix="/images">
-        <file>tank1.png</file>
         <file>bg.jpg</file>
-        <file>bullet1.png</file>
-        <file>bullettest.jpg</file>
-        <file>tankconcept.jpg</file>
-        <file>tnk.jpg</file>
-        <file>Bullet.jpg</file>
-        <file>enemy.png</file>
-        <file>MainTain.png</file>
-        <file>FriendTank.png</file>
-        <file>brick.png</file>
         <file alias="explosion.gif">giphy-2508825090.gif</file>
         <file>mainTankNew.png</file>
         <file>explosion.png</file>
@@ -40,17 +30,22 @@
         <file>gunFlash.png</file>
         <file>bg.png</file>
         <file>heatlh.png</file>
-        <file>Ammobox.jpg</file>
         <file>map.jpg</file>
         <file>gHealth.png</file>
         <file>bulletHUD.png</file>
-        <file>GEARZ1.png</file>
-        <file>Shield.png</file>
         <file>Hrt.jpg</file>
         <file>bulletRed.png</file>
         <file>redChasis2.png</file>
         <file>redChasis.png</file>
         <file>redTurret.png</file>
         <file>icon.png</file>
+        <file>Ammobox.png</file>
+        <file>Shield.png</file>
+        <file>GEARZ1.png</file>
+        <file>explosionOne.png</file>
+        <file>explosionTwo.png</file>
+        <file>explosionThree.png</file>
+        <file>explosionFour.png</file>
+        <file>bulletGreenHUD.png</file>
     </qresource>
 </RCC>
