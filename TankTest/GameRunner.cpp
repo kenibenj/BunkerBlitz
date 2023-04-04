@@ -2,9 +2,11 @@
 #include "StartMenu.h"
 #include "MainHeader.h"
 #include "Tank.h"
+#include "Enemy.h"
 #include <QPointF>
 #include <QHBoxLayout>
 #include "Spawner.h"
+#include <QGraphicsScene>
 
 QTimer* enemyTimer = new QTimer();
 GameRunner::GameRunner() {
@@ -33,6 +35,7 @@ GameRunner::GameRunner() {
     scene->setSceneRect(0, 0, 2400, 1800);
 
     view->setScene(scene);
+    view->setTransform(QTransform().scale(1.4, 1.4));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setBackgroundBrush(QBrush(Qt::black));

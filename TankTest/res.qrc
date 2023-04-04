@@ -9,6 +9,7 @@
         <file>bulletFireThree.wav</file>
         <file>engineIdleThree.wav</file>
         <file>engineMovingThree.wav</file>
+        <file>explosion.wav</file>
     </qresource>
     <qresource prefix="/images">
         <file>tank1.png</file>
@@ -52,5 +53,8 @@
         <file>redChasis.png</file>
         <file>redTurret.png</file>
         <file>icon.png</file>
+        <file>Ammobox.png</file>
+        <file>bulletGreenHUD.png</file>
+        <file>explosionOne.png</file>
     </qresource>
 </RCC>

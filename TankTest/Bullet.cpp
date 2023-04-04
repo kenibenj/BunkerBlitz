@@ -20,8 +20,8 @@ Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* 
     this->angle = angle;
     this->tank = tank;
     this->setZValue(-4);
-    speed = 5;
-    damage = 50;
+    speed = 3;
+    damage = 25;
 
     if (typeid(*(tank)) == typeid(Enemy)) {
         setPixmap(QPixmap(":/images/bulletRed.png"));
@@ -67,13 +67,13 @@ void Bullet::move() {
             // Reduce enemy's health by bullet's damage
             enemy->takeDamage(damage);
 
-            // Create explosion on collision
             QPointF explosionPos;
-            explosionPos.setX(colliding_items[i]->pos().x() - (colliding_items[i]->boundingRect().width() / 2));
-            explosionPos.setY(colliding_items[i]->pos().y() - (colliding_items[i]->boundingRect().height() / 2));
+            explosionPos.setX(colliding_items[i]->pos().x());
+            explosionPos.setY(colliding_items[i]->pos().y());
 
-            Explosion* explosion = new Explosion(explosionPos);
+            Explosion* explosion = new Explosion();
             scene()->addItem(explosion);
+            explosion->setPos(explosionPos);
 
             // Remove bullet from scene
             scene()->removeItem(this);
@@ -81,27 +81,31 @@ void Bullet::move() {
 
             // Stop checking for collisions with other enemies
             return;
-            if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
-
-                //disconnect signal from timer
-                disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
-                enemyTimer->stop();
-
-                //delete bullet and wall
-                scene()->removeItem(colliding_items[i]);
-                scene()->removeItem(this);
-
-                //Delete objects
-                delete(colliding_items[i]);
-                delete(this);
-                return;
-            }
         }
+        else if (typeid(*(colliding_items[i])) == typeid(Tank)) {
 
-        
-        // You could also incorporate the explosion effect into the wall
-        /*if (typeid(*(colliding_items[i])) == typeid(Wall)) {
+            Tank* playerTank = static_cast<Tank*>(colliding_items[i]);
 
+            // Reduce enemy's health by bullet's damage
+            playerTank->takeDamage(damage);
+
+            // Create explosion on collision
+            QPointF explosionPos;
+            explosionPos.setX(colliding_items[i]->pos().x());
+            explosionPos.setY(colliding_items[i]->pos().y());
+
+            Explosion* explosion = new Explosion();
+            scene()->addItem(explosion);
+            explosion->setPos(explosionPos);
+
+            // Remove bullet from scene
+            scene()->removeItem(this);
+            delete this;
+
+            // Stop checking for collisions with other enemies
+            return;
+        }
+        else if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
             //disconnect signal from timer
             disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
             enemyTimer->stop();
@@ -114,7 +118,8 @@ void Bullet::move() {
             delete(colliding_items[i]);
             delete(this);
             return;
-        }*/
+        }
+
 
     }
 

@@ -9,27 +9,40 @@
 #include <QLabel>
 #include <QGraphicsItem>
 
-Explosion::Explosion(QPointF position, QGraphicsItem* parent)
+extern QTimer* enemyTimer;
+Explosion::Explosion(QGraphicsItem* parent)
     : QGraphicsPixmapItem(parent)
 
 {
-    setPixmap(QPixmap(":/images/explosion.gif"));
+    setPixmap(QPixmap(":/images/explosionOne.png"));
 
     // set the scale of explosion
     setScale(0.5);
 
-    // set the position to the specified position argument
-    setPos(position);
+    connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
 
-    m_timer = new QTimer();
-    connect(m_timer, &QTimer::timeout, this, &Explosion::removeExplosion);
-    m_timer->start(150);
+    explosionPlayer = new QMediaPlayer();
+    explosionOutput = new QAudioOutput();
+
+    explosionOutput->setVolume(.3);
+
+    explosionPlayer->setAudioOutput(explosionOutput);
+    explosionPlayer->setSource(QUrl("qrc:/sounds/explosion.wav"));
+    explosionPlayer->play();
+
+    counter = 0;
+    explosionLength = .1 * 144;
+}
+
+void Explosion::frame() {
+    if (counter / explosionLength > 1) {
+        removeExplosion();
+    }
+    counter++;
 }
 
 // Method to remove the explosion and associated timer
-void Explosion::removeExplosion()
-{
-    delete m_timer;
+void Explosion::removeExplosion() {
     scene()->removeItem(this);
     delete this;
 }
