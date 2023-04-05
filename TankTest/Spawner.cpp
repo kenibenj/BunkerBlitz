@@ -5,7 +5,7 @@ Spawner::Spawner(QGraphicsScene* scene, QObject* parent)
       m_scene(scene)
 {
     // Load images
-    m_images.append(QPixmap(":/images/Ammobox.jpg"));
+    m_images.append(QPixmap(":/images/Ammobox.png"));
     m_images.append(QPixmap(":/images/GEARZ1.png"));
     m_images.append(QPixmap(":/images/Shield.png"));
 
@@ -26,5 +26,6 @@ void Spawner::spawnImage()
     item->setPos(QRandomGenerator::global()->bounded(2400 - m_imageWidth),
         QRandomGenerator::global()->bounded(1800 - m_imageHeight));
     item->setData(Qt::UserRole, "obstacle"); // set data to identify the item as an obstacle
+    item->setZValue(-6);
     m_scene->addItem(item);
 }

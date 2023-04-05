@@ -81,6 +81,9 @@ GameRunner::GameRunner() {
     tank->setPos(scene->width() / 2 - (tank->boundingRect().width() / 2), scene->height() - 150);
     
     // spawn enemies
+    tank->spawn();
+    tank->spawn();
+
     QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
     timer->start(10000);

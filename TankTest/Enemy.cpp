@@ -26,15 +26,26 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     switch (whatType) {
     case 0:
         isFleeType = true;
+        isHoldType = false;
+        isChargeType = false;
+        qDebug() << 1;
         break;
     case 1:
+        isFleeType = false;
         isHoldType = true;
+        isChargeType = false;
+        qDebug() << 2;
         break;
     case 2:
+        isFleeType = false;
+        isHoldType = false;
         isChargeType = true;
+        qDebug() << 3;
         break;
     default:
-        isHoldType = true;
+        isFleeType = true;
+        isHoldType = false;
+        isChargeType = false;
         break;
     }
 
@@ -167,16 +178,32 @@ void Enemy::frame() {
             turret->setRotation(turret->rotation() - turretRotationSpeed);
         }
 
+        // Enemy will turn towards player if they don't have hold ground behavior
+        if (!isHoldType) {
+            float rotationDifferenceChassis = angleTo360(angleDegrees - this->rotation());
+            if (rotationDifferenceChassis < 180) {
+                setRotation(rotation() + rotationSpeed);
+            }
+            else if (rotationDifferenceChassis > 180) {
+                setRotation(rotation() - rotationSpeed);
+            }
+
+            if (isChargeType) {
+                setPos(x() + dxTank, y() + dyTank);
+            }
+            else {
+                setPos(x() - .5*dxTank, y() - .5*dyTank);
+            }
+        }
+
+
         float turretAngle = (turret->rotation() - 90) * (M_PI / 180);
 
         if ((abs(angleTo360(angleDegrees - turret->rotation())) / 360) < .02 && (bulletCoolDownCounter == 0)) {
             Bullet* bullet = new Bullet(this, direction, turretAngle);
             bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - bullet->boundingRect().height() / 2);
             scene()->addItem(bullet);
-
-            //This can be set to either 'fire()' for cursor shooting or 'fireAlt()' for directional shooting
             bullet->fireSwivel();
-
             bulletCoolDownCounter = 1;
         }
     }

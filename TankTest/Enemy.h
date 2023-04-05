@@ -39,6 +39,7 @@ private:
     int bulletCoolDownCounter;
     int counter;
     int treadCounter;
+    int retreatCounter;
     int pathTravelTime;
     int pathTurnTime;
     int previousRotation;
