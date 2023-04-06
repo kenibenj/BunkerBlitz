@@ -8,6 +8,7 @@
 #include "PauseMenu.h"
 #include "Obstacles.h"
 #include <QGraphicsBlurEffect>  
+#include "GameOver.h"
 
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
@@ -375,6 +376,8 @@ void Tank::takeDamage(int damage) {
 
         connect(enemyTimer, SIGNAL(timeout()), this, SLOT(blur()));
         counter = 0;
+        GameOver* gameover = new GameOver();
+        gameover->show();
     }
 }
 
