@@ -27,6 +27,7 @@ GameOver::GameOver()
 	returnButton->show();
 	quitButton->show();
 	connect(quitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+	connect(returnButton, SIGNAL(clicked()), this, SLOT(returnClicked()));
 
 }
 
@@ -41,7 +42,7 @@ void GameOver::paintEvent(QPaintEvent* e)
 
 	QWidget::paintEvent(e);
 }
-void GameOver::returnButtonClicked() {
+void GameOver::returnClicked() {
 	//Closes the current running process
 	qApp->quit();
 	//Restarts the main function

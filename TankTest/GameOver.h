@@ -11,7 +11,7 @@ public:
 	GameOver();
 	void paintEvent(QPaintEvent* e);
 
-private:
-	void returnButtonClicked();
+private slots:
+	void returnClicked();
 };
 
