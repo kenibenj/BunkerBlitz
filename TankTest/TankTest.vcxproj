@@ -14,7 +14,7 @@
     <ProjectGuid>{9E11302D-857F-3890-BC98-5ABB7E6F2D20}</ProjectGuid>
     <RootNamespace>TankTest</RootNamespace>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.22621.0</WindowsTargetPlatformMinVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -79,7 +79,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;release;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr /Zc:__cplusplus -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>None</DebugInformationFormat>
@@ -142,7 +142,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;debug;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr /Zc:__cplusplus -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -198,20 +198,24 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ammo.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameRunner.cpp" />
     <ClCompile Include="Obstacles.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="Repair.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Spawner.h" />
-    <QtMoc Include="Obstacles.h" />
+    <QtMoc Include="Repair.h" />
+    <QtMoc Include="Shield.h" />
     <QtMoc Include="Bullet.h">
     </QtMoc>
     <QtMoc Include="Enemy.h">
@@ -220,8 +224,14 @@
     </QtMoc>
     <QtMoc Include="GameRunner.h">
     </QtMoc>
+    <QtMoc Include="GameOver.h" />
+    <QtMoc Include="Ammo.h" />
     <ClInclude Include="MainHeader.h" />
+    <QtMoc Include="Obstacles.h">
+    </QtMoc>
     <QtMoc Include="PauseMenu.h">
+    </QtMoc>
+    <QtMoc Include="Spawner.h">
     </QtMoc>
     <QtMoc Include="StartMenu.h">
     </QtMoc>
@@ -233,23 +243,28 @@
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr /Zc:__cplusplus -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_predefs.h;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <FileType>Document</FileType>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr /Zc:__cplusplus -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generate moc_predefs.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_predefs.h;%(Outputs)</Outputs>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Ammobox.jpg" />
+    <None Include="Ammobox.png" />
     <None Include="Bullet.jpg" />
     <None Include="FriendTank.png" />
+    <None Include="GEARZ1.png" />
+    <None Include="Hrt.jpg" />
     <None Include="MainTain.png" />
+    <None Include="Shield.png" />
     <None Include="backgroundMusic.mp3" />
     <None Include="bg.jpg" />
     <None Include="bg.png" />
@@ -258,6 +273,9 @@
     <None Include="bullet1.png" />
     <None Include="bulletFireThree.wav" />
     <None Include="bulletGreen.png" />
+    <None Include="bulletGreenHUD.png" />
+    <None Include="bulletHUD.png" />
+    <None Include="bulletRed.png" />
     <None Include="bullettest.jpg" />
     <None Include="crosshair.png" />
     <None Include="enemy.png" />
@@ -265,6 +283,9 @@
     <None Include="engineIdleThree.wav" />
     <None Include="engineMovingThree.wav" />
     <None Include="explosion.png" />
+    <None Include="explosion.wav" />
+    <None Include="explosionOne.png" />
+    <None Include="gHealth.png" />
     <None Include="giphy-2508825090.gif" />
     <None Include="greenChasis.png" />
     <None Include="greenChasis2.png" />
@@ -276,8 +297,13 @@
     <None Include="greenTurret.png" />
     <None Include="gunFlash.png" />
     <None Include="heatlh.png" />
+    <None Include="icon.png" />
     <None Include="mainTankNew.png" />
+    <None Include="map.jpg" />
     <None Include="my_map.txt" />
+    <None Include="redChasis.png" />
+    <None Include="redChasis2.png" />
+    <None Include="redTurret.png" />
     <QtRcc Include="res.qrc">
     </QtRcc>
     <None Include="tank1.png" />
@@ -285,12 +311,8 @@
     <None Include="tankMoving.mp3" />
     <None Include="tankMovingAndIdle.mp3" />
     <None Include="tankconcept.jpg" />
-    <None Include="TankTest.pro" />
     <None Include="title2.png" />
     <None Include="tnk.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="zValueList.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

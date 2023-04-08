@@ -11,8 +11,9 @@
 #include "wall.h"
 #include "Spawner.h"
 #include "Obstacles.h"
-
-
+#include "Shield.h"
+#include "Ammo.h"
+#include "Repair.h"
 extern QTimer* enemyTimer;
 Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
@@ -21,7 +22,7 @@ Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* 
     this->tank = tank;
     this->setZValue(-4);
     speed = 3;
-    damage = 25;
+    damage = 27;
 
     if (typeid(*(tank)) == typeid(Enemy)) {
         setPixmap(QPixmap(":/images/bulletRed.png"));
@@ -78,7 +79,6 @@ void Bullet::move() {
             // Remove bullet from scene
             scene()->removeItem(this);
             delete this;
-
             // Stop checking for collisions with other enemies
             return;
         }
@@ -119,8 +119,78 @@ void Bullet::move() {
             delete(this);
             return;
         }
+        else if (typeid(*(colliding_items[i])) == typeid(Shield)) {
 
+            //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
 
+            // Reduce enemy's health by bullet's damage
+            //enemy->takeDamage(damage);
+
+            QPointF explosionPos;
+            explosionPos.setX(colliding_items[i]->pos().x());
+            explosionPos.setY(colliding_items[i]->pos().y());
+
+            Explosion* explosion = new Explosion();
+            scene()->addItem(explosion);
+            explosion->setPos(explosionPos);
+
+            // Remove bullet from scene
+            scene()->removeItem(colliding_items[i]);
+
+            scene()->removeItem(this);
+            delete this;
+
+            // Stop checking for collisions with other enemies
+            return;
+        }
+        else if (typeid(*(colliding_items[i])) == typeid(Repair)) {
+
+            //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
+
+            // Reduce enemy's health by bullet's damage
+            //enemy->takeDamage(damage);
+
+            QPointF explosionPos;
+            explosionPos.setX(colliding_items[i]->pos().x());
+            explosionPos.setY(colliding_items[i]->pos().y());
+
+            Explosion* explosion = new Explosion();
+            scene()->addItem(explosion);
+            explosion->setPos(explosionPos);
+
+            // Remove bullet from scene
+            scene()->removeItem(colliding_items[i]);
+
+            scene()->removeItem(this);
+            delete this;
+
+            // Stop checking for collisions with other enemies
+            return;
+        }
+        else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {
+
+        //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
+
+        // Reduce enemy's health by bullet's damage
+        //enemy->takeDamage(damage);
+
+        QPointF explosionPos;
+        explosionPos.setX(colliding_items[i]->pos().x());
+        explosionPos.setY(colliding_items[i]->pos().y());
+
+        Explosion* explosion = new Explosion();
+        scene()->addItem(explosion);
+        explosion->setPos(explosionPos);
+
+        // Remove bullet from scene
+        scene()->removeItem(colliding_items[i]);
+
+        scene()->removeItem(this);
+        delete this;
+
+        // Stop checking for collisions with other enemies
+        return;
+        }
     }
 
     // Move bullet towards the direction of the cursor when it was fired

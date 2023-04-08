@@ -8,11 +8,13 @@
 #include "PauseMenu.h"
 #include "Obstacles.h"
 #include <QGraphicsBlurEffect>  
-#include "GameOver.h"
-
+#include <Ammo.h>
+#include <Shield.h>
+#include <Repair.h>
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
+    
     isPauseActive = false;
     v = view;
     this->setFocus();
@@ -47,7 +49,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     counter = 0;
     changeTreads = false;
     isDestroyed = false;
-
+    
     bulletHandler = new QMediaPlayer();
     movingHandler = new QMediaPlayer();
     idleHandler = new QMediaPlayer();
@@ -144,13 +146,15 @@ void Tank::keyPressEvent(QKeyEvent* event)
     }
 }
 
+
+
 void Tank::keyReleaseEvent(QKeyEvent* event) {
     keys[event->key()] = false;
 }
 
 void Tank::focusOutEvent(QFocusEvent* event)
 {
-    this->setFocus();  
+    this->setFocus();
 }
 
 float Tank::calculateAngleCos(float speed, float angle) {
@@ -224,17 +228,24 @@ void Tank::frame() {
         if ((isMoving() == true)) {
             counter++;
             if (counter % 20 == 0) {
-                if (changeTreads == true) {
-                    setPixmap(QPixmap(":/images/greenChasis2.png"));
-                    changeTreads = false;
-                }
-                else {
-                    setPixmap(QPixmap(":/images/greenChasis.png"));
-                    changeTreads = true;
-                }
+                //if (changeTreads == true) {
+                //    setPixmap(QPixmap(":/images/greenChasis2.png"));
+                //    changeTreads = false;
+                //}
+               // else {
+               //    setPixmap(QPixmap(":/images/greenChasis.png"));
+               //     changeTreads = true;
+               // }
             }
         }
+        if (health <= 100 && health > 50) {
+            setPixmap(QPixmap(":/images/FriendTank.png"));
 
+        }
+        if (health <= 50) {
+            setPixmap(QPixmap(":/images/greenChasis2.png"));
+
+        }
         // Movement & Shooting:
 
         float angleTank = (rotation() - 90) * (M_PI / 180);
@@ -335,8 +346,117 @@ void Tank::frame() {
             setRotation(currentRot);
             setPos(currentPos);
         }
+
+        //Collison check for enemies
+        QList<QGraphicsItem*> colliding_items = collidingItems();
+
+        // Iterates through detected objects
+        for (int i = 0, n = colliding_items.size(); i < n; i++) {
+            if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
+
+                Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
+                QPointF explosionPos;
+                explosionPos.setX(colliding_items[i]->pos().x());
+                explosionPos.setY(colliding_items[i]->pos().y());
+
+                Explosion* explosion = new Explosion();
+                scene()->addItem(explosion);
+                explosion->setPos(explosionPos);
+
+
+                // Reduce enemy's health by bullet's damage
+                enemy->takeDamage(20);
+
+                return;
+            }
+            else if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
+                //disconnect signal from timer
+                disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
+                enemyTimer->stop();
+
+                //delete bullet and wall
+                scene()->removeItem(colliding_items[i]);
+                //scene()->removeItem(this);
+
+                //Delete objects
+                //delete(colliding_items[i]);
+                //delete(this);
+                return;
+            }
+            else if (typeid(*(colliding_items[i])) == typeid(Shield)) {
+
+                //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
+
+                // Reduce enemy's health by bullet's damage
+                //enemy->takeDamage(damage);
+
+                QPointF explosionPos;
+                explosionPos.setX(colliding_items[i]->pos().x());
+                explosionPos.setY(colliding_items[i]->pos().y());
+
+                Explosion* explosion = new Explosion();
+                scene()->addItem(explosion);
+                explosion->setPos(explosionPos);
+
+                // Remove bullet from scene
+                scene()->removeItem(colliding_items[i]);
+                
+                return;
+            }
+            else if (typeid(*(colliding_items[i])) == typeid(Repair)) {
+
+                //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
+
+                // Reduce enemy's health by bullet's damage
+                //enemy->takeDamage(damage);
+
+                QPointF explosionPos;
+                explosionPos.setX(colliding_items[i]->pos().x());
+                explosionPos.setY(colliding_items[i]->pos().y());
+
+                Explosion* explosion = new Explosion();
+                scene()->addItem(explosion);
+                explosion->setPos(explosionPos);
+
+                // Remove bullet from scene
+                scene()->removeItem(colliding_items[i]);
+                if (health < 150){
+                    //health += 50;
+                    takeDamage(-50);
+                }
+               
+                return;
+            }
+            else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {
+
+                QPointF explosionPos;
+                explosionPos.setX(colliding_items[i]->pos().x());
+                explosionPos.setY(colliding_items[i]->pos().y());
+
+                Explosion* explosion = new Explosion();
+                scene()->addItem(explosion);
+                explosion->setPos(explosionPos);
+
+                // Remove powerup from scene
+                scene()->removeItem(colliding_items[i]);
+
+                bulletCounter=7;
+                for (int i = 0; i <= bulletList.size() - 1; ++i) {
+                        if (bulletList[i]->opacity() == 0.5) { // if the bullet has an opacity of 100
+                            bulletList[i]->setOpacity(1);    // set its opacity to 0.5
+                        }
+                    
+                }
+                
+                return;
+            }
+        }
     }
+
+
+
 }
+
 
 bool Tank::isMoving() {
     if (keys[Qt::Key_W] || keys[Qt::Key_A] || keys[Qt::Key_S] || keys[Qt::Key_D]) {
@@ -376,8 +496,6 @@ void Tank::takeDamage(int damage) {
 
         connect(enemyTimer, SIGNAL(timeout()), this, SLOT(blur()));
         counter = 0;
-        GameOver* gameover = new GameOver();
-        gameover->show();
     }
 }
 
@@ -395,7 +513,12 @@ void Tank::spawn() {
     scene()->addItem(enemy);
     enemy->createVision();
     enemy->createTurret();
-    Obstacles* obstacle = new Obstacles();
-    scene()->addItem(obstacle);
+    Shield* shield = new Shield();
+    scene()->addItem(shield);
+    Ammo* ammo = new Ammo();
+    scene()->addItem(ammo);
+    Repair* repair = new Repair();
+    scene()->addItem(repair);
+
 }
 

@@ -29,6 +29,7 @@ public:
     float calculateAngleCos(float speed, float angle);
     float calculateAngleSin(float speed, float angle);
     void takeDamage(int damage);
+    //void move();
 
 public slots:
     void spawn();

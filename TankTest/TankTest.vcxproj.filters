@@ -49,7 +49,13 @@
     <ClCompile Include="GameRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Obstacles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StartMenu.cpp">
@@ -61,10 +67,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacles.cpp">
+    <ClCompile Include="GameOver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Spawner.cpp">
+    <ClCompile Include="Shield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ammo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Repair.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,7 +96,13 @@
     <ClInclude Include="MainHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <QtMoc Include="Obstacles.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="PauseMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Spawner.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="StartMenu.h">
@@ -93,10 +111,16 @@
     <QtMoc Include="Tank.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Obstacles.h">
+    <QtMoc Include="GameOver.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Spawner.h">
+    <QtMoc Include="Shield.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Repair.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Ammo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -109,13 +133,28 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Ammobox.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Ammobox.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Bullet.jpg">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="FriendTank.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="GEARZ1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Hrt.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="MainTain.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shield.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="backgroundMusic.mp3">
@@ -142,6 +181,15 @@
     <None Include="bulletGreen.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="bulletGreenHUD.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bulletHUD.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bulletRed.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="bullettest.jpg">
       <Filter>Resource Files</Filter>
     </None>
@@ -161,6 +209,15 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="explosion.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="explosion.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="explosionOne.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gHealth.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="giphy-2508825090.gif">
@@ -196,10 +253,25 @@
     <None Include="heatlh.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="icon.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="mainTankNew.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="map.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="my_map.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="redChasis.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="redChasis2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="redTurret.png">
       <Filter>Resource Files</Filter>
     </None>
     <QtRcc Include="res.qrc">
@@ -226,11 +298,5 @@
     <None Include="tnk.jpg">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="TankTest.pro" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="zValueList.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

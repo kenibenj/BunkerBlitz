@@ -9,6 +9,7 @@
 extern QTimer* enemyTimer;
 Obstacles::Obstacles(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //set random position
+    //Rand range dimensions of the screen
     int random_number = rand() % 700;
 
 

@@ -16,7 +16,7 @@ GameRunner::GameRunner() {
     //Create scene on the heap
     scene = new QGraphicsScene();
 
-    Spawner spawner(scene);
+    //Spawner spawner(scene);
     //spawner.spawnimage()
 
     //Set the icon to the GameRunner Window as well
