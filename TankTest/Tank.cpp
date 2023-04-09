@@ -14,7 +14,7 @@
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
-    
+    QTimer* shieldTimer;
     isPauseActive = false;
     v = view;
     this->setFocus();
@@ -86,10 +86,10 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
 
 
 // Creates turret and sets its point of rotation.
-void Tank::createTurret() {
+void Tank::createTurret(QString str) {
     int rotationPoint = 7; // 7 pixels down the turret is where the hatch on the turret is which is where the rotation point needs to be.
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 10);
-    turret->setPixmap(QPixmap(":/images/greenTurret.png"));
+    turret->setPixmap(QPixmap(str));
     turret->setTransformOriginPoint(turret->boundingRect().width() / 2, turret->boundingRect().height() / 2 + rotationPoint);
     scene()->addItem(turret);
 
@@ -238,12 +238,24 @@ void Tank::frame() {
                // }
             }
         }
+        if (health > 100) {
+            setPixmap(QPixmap(":/images/greenChasis.png"));
+            //Tank::createTurret(":/images/greenTurret.png");
+
+        }
         if (health <= 100 && health > 50) {
-            setPixmap(QPixmap(":/images/FriendTank.png"));
+            setPixmap(QPixmap(":/images/Gc1.png"));
+            //Tank::createTurret(":/images/greenTurret.png");
+
 
         }
         if (health <= 50) {
-            setPixmap(QPixmap(":/images/greenChasis2.png"));
+            setPixmap(QPixmap(":/images/Gc2.png"));
+            //Tank::createTurret(":/images/greenTurret.png");
+
+        }
+        if (health >= 500) {
+            setPixmap(QPixmap(":/images/blueChasis.png"));
 
         }
         // Movement & Shooting:
@@ -365,7 +377,7 @@ void Tank::frame() {
 
 
                 // Reduce enemy's health by bullet's damage
-                enemy->takeDamage(20);
+                enemy->takeDamage(50);
 
                 return;
             }
@@ -397,10 +409,12 @@ void Tank::frame() {
                 Explosion* explosion = new Explosion();
                 scene()->addItem(explosion);
                 explosion->setPos(explosionPos);
+               // setPixmap(QPixmap(":/images/FriendTank1.png"));
 
                 // Remove bullet from scene
                 scene()->removeItem(colliding_items[i]);
-                
+                health += 500;
+                Tank::createTurret(":/images/blueTurret.png");
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Repair)) {
@@ -512,7 +526,7 @@ void Tank::spawn() {
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
     enemy->createVision();
-    enemy->createTurret();
+    enemy->createTurret(":/images/redTurret.png");
     Shield* shield = new Shield();
     scene()->addItem(shield);
     Ammo* ammo = new Ammo();

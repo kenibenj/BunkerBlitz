@@ -62,7 +62,7 @@ GameRunner::GameRunner() {
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
     tank->setPos(view->width() / 2 - 50, view->height() - 50);
-    tank->createTurret();
+    tank->createTurret(":/images/greenTurret.png");
     tank->createHUD();
 
     //Play music

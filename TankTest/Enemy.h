@@ -15,6 +15,7 @@ public:
     ~Enemy();
     QList<QGraphicsItem*> objectDetected();
     void createVision();
+    void createTurret(QString str);
     void createTurret();
     float calculateAngleCos(float speed, float angle);
     float calculateAngleSin(float speed, float angle);

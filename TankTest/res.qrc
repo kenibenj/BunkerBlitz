@@ -57,5 +57,14 @@
         <file>bulletGreenHUD.png</file>
         <file>explosionOne.png</file>
         <file>Ammo_Pickup.png</file>
+        <file>Gc1.png</file>
+        <file>Gc2.png</file>
+        <file>redChasis3.png</file>
+        <file>redChasis1.png</file>
+        <file>FriendTank1.png</file>
+        <file>FriendTanktop.png</file>
+        <file>blueTurret.png</file>
+        <file>blueChasis.png</file>
     </qresource>
+    <qresource prefix="/new/prefix1"/>
 </RCC>

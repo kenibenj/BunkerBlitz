@@ -49,7 +49,7 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
         break;
     }
 
-    health = 75;
+    health = 60;
     traversalSpeed = .3;
     rotationSpeed = .3;
     turretRotationSpeed = .4;
@@ -107,7 +107,7 @@ void Enemy::createVision() {
 }
 
 // Creates turret and sets its point of rotation.
-void Enemy::createTurret() {
+void Enemy::createTurret(QString str) {
     int rotationPoint = 7; // 7 pixels down the turret is where the hatch on the turret is which is where the rotation point needs to be.
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 10);
     turret->setPixmap(QPixmap(":/images/redTurret.png"));
@@ -327,7 +327,14 @@ void Enemy::takeDamage(int damage) {
 
     // Update the health bar
     setHealth(health);
+    if (health <= 100 && health > 50) {
+        setPixmap(QPixmap(":/images/redChasis1.png"));
 
+    }
+    if (health <= 50) {
+        setPixmap(QPixmap(":/images/redChasis3.png"));
+
+    }
     // Check if the enemy has been defeated
     if (health <= 0) {
         // Remove the enemy from the scene
