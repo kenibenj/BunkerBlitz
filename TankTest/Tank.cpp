@@ -8,6 +8,8 @@
 #include "PauseMenu.h"
 #include "Obstacles.h"
 #include <QGraphicsBlurEffect>  
+#include "GameOver.h"
+
 #include <Ammo.h>
 #include <Shield.h>
 #include <Repair.h>
@@ -510,6 +512,8 @@ void Tank::takeDamage(int damage) {
 
         connect(enemyTimer, SIGNAL(timeout()), this, SLOT(blur()));
         counter = 0;
+        GameOver * gameOver = new GameOver();
+        gameOver->show();
     }
 }
 

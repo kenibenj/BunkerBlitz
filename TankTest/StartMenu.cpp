@@ -2,6 +2,7 @@
 #include "MainHeader.h"
 #include "Tank.h"
 #include "GameRunner.h"
+#include "instructions.h"
 #include <QWindow>
 
 StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
@@ -32,19 +33,24 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
     int quitButtonWidth = 150;
     QPushButton* startButton = new QPushButton("Start", this);
     QPushButton* quitButton = new QPushButton("Quit", this);
+    QPushButton* instructionsButton = new QPushButton("Instructions", this);
+
     startButton->setGeometry(width() / 2 - (startButtonWidth / 2), height() / 2 - (startButtonHeight / 2), 250, 120); // 125
-    quitButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight), 150, 90);
+    instructionsButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight) - 10, 150, 90);
+    quitButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight) + quitButtonHeight + 5, 150, 90);
 
 
     //Adjusting style for the buttons
     startButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 30px");
     quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px");
-    
+    instructionsButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px");
 
     startButton->show();
+    instructionsButton->show();
     quitButton->show();
     connect(startButton, SIGNAL(clicked()), this, SLOT(startButtonClicked()));
     connect(quitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+    connect(instructionsButton, SIGNAL(clicked()), this, SLOT(instructionButtonClicked()));
 
 
 }
@@ -52,6 +58,11 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 void StartMenu::startButtonClicked() {
     GameRunner gameRunner;
     hide();
+}
+
+void StartMenu::instructionButtonClicked(){
+    Instructions* instructionMenu = new Instructions();
+    instructionMenu->show();
 }
 
 //Draws a border around the pause menu

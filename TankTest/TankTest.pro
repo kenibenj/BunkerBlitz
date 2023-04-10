@@ -14,12 +14,14 @@ SOURCES += \
     Bullet.cpp \
     Enemy.cpp \
     Explosion.cpp \
+    GameOver.cpp \
     GameRunner.cpp \
     Obstacles.cpp \
     PauseMenu.cpp \
     Spawner.cpp \
     StartMenu.cpp \
     Tank.cpp \
+    instructions.cpp \
     main.cpp
     Explosion.cpp
     GameRunner.cpp
@@ -32,13 +34,15 @@ HEADERS += \
     Bullet.h \
     Enemy.h \
     Explosion.h \
+    GameOver.h \
     GameRunner.h \
     MainHeader.h \
     Obstacles.h \
     PauseMenu.h \
     Spawner.h \
     StartMenu.h \
-    Tank.h
+    Tank.h \
+    instructions.h
     GameRunner.h
     PauseMenu.h
     StartMenu.h

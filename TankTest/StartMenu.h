@@ -16,6 +16,7 @@ public:
 
 public slots:
 	void startButtonClicked();
+    void instructionButtonClicked();
 private:
 
 };
