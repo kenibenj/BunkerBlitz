@@ -36,8 +36,8 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
     QPushButton* instructionsButton = new QPushButton("Instructions", this);
 
     startButton->setGeometry(width() / 2 - (startButtonWidth / 2), height() / 2 - (startButtonHeight / 2), 250, 120); // 125
-    instructionsButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight) - 10, 150, 90);
-    quitButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight) + quitButtonHeight + 5, 150, 90);
+    instructionsButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight) - 20, 150, 90);
+    quitButton->setGeometry(width() / 2 - (quitButtonWidth / 2), (height() / 2) + (quitButtonHeight) + quitButtonHeight - 10, 150, 90);
 
 
     //Adjusting style for the buttons
