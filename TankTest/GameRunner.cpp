@@ -9,8 +9,10 @@
 #include <QGraphicsScene>
 
 QTimer* enemyTimer = new QTimer();
+QTimer* timer = new QTimer();
 GameRunner::GameRunner() {
     startTimer();
+
     QScreen* primaryScreen = QApplication::primaryScreen();
 
     //Create scene on the heap
@@ -84,9 +86,9 @@ GameRunner::GameRunner() {
     tank->spawn();
     tank->spawn();
 
-    QTimer* timer = new QTimer();
+    //QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
-    timer->start(10000);
+
 
 
 }
@@ -94,9 +96,11 @@ GameRunner::GameRunner() {
 // Used when esc key is clicked to pause timers
 void GameRunner::pauseTimer() {
     enemyTimer->stop();
+    timer->stop();
 }
 
 // Used to start timers
 void GameRunner::startTimer() {
     enemyTimer->start(7);
+    timer->start(1000);
 }
