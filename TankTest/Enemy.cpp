@@ -7,7 +7,7 @@
 #include <stdlib.h> // rand() -> really large int
 #include <QDebug>
 #include <QRandomGenerator>
-#include < QGraphicsDropShadowEffect>
+#include <QGraphicsDropShadowEffect>
 
 extern QTimer *enemyTimer;
 QRandomGenerator Enemy::generator = QRandomGenerator::securelySeeded();
