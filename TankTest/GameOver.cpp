@@ -22,8 +22,8 @@ GameOver::GameOver()
     quitButton->setGeometry(width() / 2 - 70, height() - 80, 140, 60);
     returnButton->setGeometry(width() / 2 - 70, height() -150, 140, 60);
 	//Adjusting style for the buttons
-	quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
-	returnButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
+    quitButton->setStyleSheet("QPushButton {color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;} } QPushButton:pressed { background-color: darkGreen;}");
+    returnButton->setStyleSheet("QPushButton {color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;} } QPushButton:pressed { background-color: darkGreen;}");
 	returnButton->show();
 	quitButton->show();
 	connect(quitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));

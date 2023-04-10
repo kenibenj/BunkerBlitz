@@ -41,9 +41,9 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
 
 
     //Adjusting style for the buttons
-    startButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 30px");
-    quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px");
-    instructionsButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px");
+    startButton->setStyleSheet("QPushButton {color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 30px;} QPushButton:pressed { background-color: darkGreen;}");
+    quitButton->setStyleSheet("QPushButton {color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px} QPushButton:pressed { background-color: darkGreen;}" );
+    instructionsButton->setStyleSheet("QPushButton {color: black; background-color: lightGreen; border-style: outset; border-width: 3px; border-color: darkGreen; font: 20px} } QPushButton:pressed { background-color: darkGreen;}");
 
     startButton->show();
     instructionsButton->show();

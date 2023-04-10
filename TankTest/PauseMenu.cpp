@@ -26,9 +26,9 @@ PauseMenu::PauseMenu() {
 	quitButton->setGeometry(width() / 2 - 70, 140, 140, 60);
 	returnButton->setGeometry(width() / 2 - 70, 75, 140, 60);
 	//Adjusting style for the buttons
-	resumeButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;");
-	quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
-	returnButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
+    resumeButton->setStyleSheet("QPushButton {color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;} } QPushButton:pressed { background-color: darkGreen;}");
+    quitButton->setStyleSheet("QPushButton {color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;} } QPushButton:pressed { background-color: darkGreen;}");
+    returnButton->setStyleSheet("QPushButton {color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;} } QPushButton:pressed { background-color: darkGreen;}");
 	resumeButton->show();
 	quitButton->show();
 	connect(resumeButton, SIGNAL(clicked()), this, SLOT(resumeButtonClicked()));

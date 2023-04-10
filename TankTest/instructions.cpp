@@ -16,7 +16,7 @@ Instructions::Instructions()
 
     QPushButton *close = new QPushButton("Close", this);
     //Adjusting style for the close button
-    close->setStyleSheet("color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;");
+    close->setStyleSheet("QPushButton {color: blqack; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen;} } QPushButton:pressed { background-color: darkGreen;}");
     //Setting size and location of the close button
     close->setGeometry(width() / 2 - 70, height() - 70, 140, 60);
     close->show();
