@@ -5,7 +5,7 @@
 #include <QPalette>
 GameOver::GameOver()
 {
-	setFixedSize(320, 420);
+    setFixedSize(320, 225);
 	setWindowFlag(Qt::FramelessWindowHint);
 	setWindowFlag(Qt::WindowStaysOnTopHint);
 	QPalette pal = QPalette();
@@ -19,8 +19,8 @@ GameOver::GameOver()
 	//Creating the buttons
 	QPushButton* quitButton = new QPushButton("Quit", this);
 	QPushButton* returnButton = new QPushButton("Return to Main Menu", this);
-	quitButton->setGeometry(width() / 2 - 70, 350, 140, 60);
-	returnButton->setGeometry(width() / 2 - 70, 280, 140, 60);
+    quitButton->setGeometry(width() / 2 - 70, height() - 80, 140, 60);
+    returnButton->setGeometry(width() / 2 - 70, height() -150, 140, 60);
 	//Adjusting style for the buttons
 	quitButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
 	returnButton->setStyleSheet("color: black; background-color: lightGreen; border-style: outset; border-width: 1px; border-color: darkGreen; ");
@@ -39,6 +39,11 @@ void GameOver::paintEvent(QPaintEvent* e)
 	pen.setColor(Qt::green);
 	painter.setPen(pen);
 	painter.drawRect(0, 0, width() - 1, height() - 1);
+    painter.drawLine(0, 50, 320, 50);
+    pen.setColor(Qt::darkGreen);
+    painter.setPen(pen);
+    painter.setFont(QFont("Times", 30));
+    painter.drawText(60, 40, "Game Over");
 
 	QWidget::paintEvent(e);
 }
