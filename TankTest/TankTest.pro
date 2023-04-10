@@ -11,6 +11,7 @@ QMAKE_CXXFLAGS += /Zc:__cplusplus
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Ammo.cpp \
     Bullet.cpp \
     Enemy.cpp \
     Explosion.cpp \
@@ -18,6 +19,8 @@ SOURCES += \
     GameRunner.cpp \
     Obstacles.cpp \
     PauseMenu.cpp \
+    Repair.cpp \
+    Shield.cpp \
     Spawner.cpp \
     StartMenu.cpp \
     Tank.cpp \
@@ -31,6 +34,7 @@ SOURCES += \
     
 
 HEADERS += \
+    Ammo.h \
     Bullet.h \
     Enemy.h \
     Explosion.h \
@@ -39,6 +43,8 @@ HEADERS += \
     MainHeader.h \
     Obstacles.h \
     PauseMenu.h \
+    Repair.h \
+    Shield.h \
     Spawner.h \
     StartMenu.h \
     Tank.h \
