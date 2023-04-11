@@ -4,10 +4,13 @@
 #include "MainHeader.h"
 #include <QProcess>
 #include <QDebug>
+#include <QApplication>
+#include <QFont>
 PauseMenu::PauseMenu() {
     setFixedSize(250, 300);
 	setWindowTitle("Pause");
 	setWindowFlags(Qt::FramelessWindowHint);
+    move((1920 / 2) - 125, (1080 / 2) -150);
 	QPalette pal = QPalette();
 	//Sets the palette color to black
 	pal.setColor(QPalette::Window, Qt::black);

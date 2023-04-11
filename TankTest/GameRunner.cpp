@@ -26,7 +26,7 @@ GameRunner::GameRunner() {
 
     //add a view, this is what displays the graphics
     view = new QGraphicsView(scene);
-
+    view->showFullScreen();
     //Add title to the view
     view->setWindowTitle("Bunker Blitz");
 

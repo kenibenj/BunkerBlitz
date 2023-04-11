@@ -1,11 +1,13 @@
 #include "instructions.h"
 #include <QPainter>
-#include <QTextEdit>
+
+#include <QFont>
 Instructions::Instructions()
 {
     setFixedSize(320, 380);
     setWindowFlag(Qt::FramelessWindowHint);
     setWindowFlag(Qt::WindowStaysOnTopHint);
+    move((1920 / 2) - 160, (1080 / 2) -190);
     QPalette pal = QPalette();
     //sets the palette color to black
     pal.setColor(QPalette::Window, Qt::black);

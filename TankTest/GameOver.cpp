@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QPalette>
 #include "GameRunner.h"
+#include <QFont>
 
 GameOver::GameOver()
 {
@@ -11,6 +12,7 @@ GameOver::GameOver()
     setFixedSize(320, 225);
 	setWindowFlag(Qt::FramelessWindowHint);
 	setWindowFlag(Qt::WindowStaysOnTopHint);
+    move((1920 / 2) - 160, (1080 / 2) -112.5);
 	QPalette pal = QPalette();
 	//sets the palette color to black
 	pal.setColor(QPalette::Window, Qt::black);
