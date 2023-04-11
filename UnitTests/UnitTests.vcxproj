@@ -34,7 +34,7 @@
     <QtInstall>6.5.0</QtInstall>
     <QtBuildConfig>debug</QtBuildConfig>
     <QtQMakeTemplate>vcapp</QtQMakeTemplate>
-    <QtModules>core;gui;qmltest</QtModules>
+    <QtModules>core;gui;qml;quick;qmltest;testlib;widgets;core5compat;help;multimedia;quickwidgets;designer;uitools</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.5.0</QtInstall>
@@ -57,16 +57,18 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalUsingDirectories>C:\Users\pawan\OneDrive\Documents\GitHub\CS4488TeamTank\TankTest;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(QTDIR)\lib\Qt6EntryPointd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\lib;C:\Users\pawan\OneDrive\Documents\GitHub\CS4488TeamTank\TankTest\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -107,7 +109,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="mytest.h" />
+    <ClInclude Include="mytest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

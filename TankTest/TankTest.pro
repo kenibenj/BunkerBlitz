@@ -24,6 +24,7 @@ SOURCES += \
     PauseMenu.cpp
     StartMenu.cpp
     Tank.cpp
+    Obstacles.cpp
     
 
 HEADERS += \
@@ -39,6 +40,7 @@ HEADERS += \
     PauseMenu.h
     StartMenu.h
     Tank.h
+    Obstacles.h
 
 
 # Default rules for deployment.

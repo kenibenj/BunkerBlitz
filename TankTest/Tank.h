@@ -20,6 +20,7 @@ public:
     void keyReleaseEvent(QKeyEvent* event);
     void focusOutEvent(QFocusEvent* event);
     bool isMoving();
+    QGraphicsPixmapItem* getTurret() const;
     void createTurret();
     void createHUD();
     float calculateAngleCos(float speed, float angle);

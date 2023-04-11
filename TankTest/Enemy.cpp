@@ -3,7 +3,7 @@
 #include <QGraphicsScene>
 #include <QList>
 #include <stdlib.h> // rand() -> really large int
-#include <Explosion.h>
+#include "Explosion.h"
 #include <QDebug>
 
 extern QTimer *enemyTimer;

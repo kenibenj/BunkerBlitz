@@ -7,6 +7,7 @@
 #include "PauseMenu.h"
 #include <stdlib.h>
 #include "Obstacles.h"
+#include <QObject>
 
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
@@ -142,6 +143,8 @@ float Tank::calculateAngleSin(float speed, float angle) {
     float dy = speed * sin(angle);
     return dy;
 }
+
+
 
 void Tank::frame() {
 
@@ -308,3 +311,6 @@ void Tank::spawn() {
     scene()->addItem(obstacle);
 }
 
+QGraphicsPixmapItem* Tank::getTurret() const {
+    return turret;
+}

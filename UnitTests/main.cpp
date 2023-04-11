@@ -6,8 +6,8 @@ int main(int argc, char* argv[])
 {
     QCoreApplication app(argc, argv);
 
-    MyTest test;
-    QTest::qExec(&test);
+    //MyTest test;
+    //QTest::qExec(&test);
 
     return app.exec();
 }

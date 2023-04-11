@@ -1,0 +1,8 @@
+// This list keeps track of the z values we are using for the graphical objects in the game
+
+Background Map (GameRunner) = -10
+Enemy Vision Circle (Enemy) = -5
+Bullet (Bullet) = -4
+Tank Chassis (Tank & Enemy) = -3
+Tank Turret (Tank & Enemy) = -2
+Tank Muzzle Flash (Tank & Enemy) = -2

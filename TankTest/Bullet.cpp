@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QMovie>
 #include <QLabel>
-#include <Explosion.h>
+#include "Explosion.h"
 #include "Enemy.h"
 #include "wall.h"
 
