@@ -52,11 +52,15 @@ void PauseMenu::keyPressEvent(QKeyEvent* event) {
 void PauseMenu::paintEvent(QPaintEvent* e) {
 	QPainter painter(this);
 	QPen pen;
-	pen.setColor(Qt::green);
+	QBrush brush;
+	brush.setColor(Qt::green);
+	brush.setStyle(Qt::SolidPattern);
+	painter.fillRect(0, 0, 250, 50, brush);
+	pen.setColor(Qt::darkGreen);
 	painter.setPen(pen);
 	painter.drawRect(0, 0, width()-1, height()-1);
     painter.drawLine(0,50,250, 50);
-    pen.setColor(Qt::darkGreen);
+    pen.setColor(Qt::black);
     painter.setPen(pen);
     painter.setFont(QFont("Times", 30));
     painter.drawText(75, 40, "Pause");
