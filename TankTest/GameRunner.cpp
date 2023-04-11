@@ -102,5 +102,5 @@ void GameRunner::pauseTimer() {
 // Used to start timers
 void GameRunner::startTimer() {
     enemyTimer->start(7);
-    timer->start(1000);
+    timer->start(10000);
 }
