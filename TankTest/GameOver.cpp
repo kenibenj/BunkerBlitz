@@ -3,11 +3,16 @@
 #include <QProcess>
 #include <QDebug>
 #include <QPalette>
+#include "GameRunner.h"
+#include <QFont>
+
 GameOver::GameOver()
 {
+	GameRunner::gameOverTimers();
     setFixedSize(320, 225);
 	setWindowFlag(Qt::FramelessWindowHint);
 	setWindowFlag(Qt::WindowStaysOnTopHint);
+    move((1920 / 2) - 160, (1080 / 2) -112.5);
 	QPalette pal = QPalette();
 	//sets the palette color to black
 	pal.setColor(QPalette::Window, Qt::black);
@@ -36,11 +41,15 @@ void GameOver::paintEvent(QPaintEvent* e)
 {
 	QPainter painter(this);
 	QPen pen;
-	pen.setColor(Qt::green);
+	QBrush brush;
+	brush.setColor(QColor(144, 238, 144));
+	brush.setStyle(Qt::SolidPattern);
+	painter.fillRect(0, 0, 320, 50, brush);
+	pen.setColor(Qt::darkGreen);
 	painter.setPen(pen);
 	painter.drawRect(0, 0, width() - 1, height() - 1);
     painter.drawLine(0, 50, 320, 50);
-    pen.setColor(Qt::darkGreen);
+    pen.setColor(Qt::black);
     painter.setPen(pen);
     painter.setFont(QFont("Times", 30));
     painter.drawText(60, 40, "Game Over");

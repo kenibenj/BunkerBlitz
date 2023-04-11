@@ -1,11 +1,13 @@
 #include "instructions.h"
 #include <QPainter>
-#include <QTextEdit>
+
+#include <QFont>
 Instructions::Instructions()
 {
     setFixedSize(320, 380);
     setWindowFlag(Qt::FramelessWindowHint);
     setWindowFlag(Qt::WindowStaysOnTopHint);
+    move((1920 / 2) - 160, (1080 / 2) -190);
     QPalette pal = QPalette();
     //sets the palette color to black
     pal.setColor(QPalette::Window, Qt::black);
@@ -28,17 +30,22 @@ void Instructions::paintEvent(QPaintEvent* e)
 {
     QPainter painter(this);
     QPen pen;
-    pen.setColor(Qt::green);
+    QBrush brush;
+    brush.setColor(QColor(144, 238, 144));
+    brush.setStyle(Qt::SolidPattern);
+    pen.setColor(Qt::darkGreen);
     painter.setPen(pen);
+    painter.fillRect(0, 0, 320, 50, brush);
     //Draws border lines
     painter.drawRect(0, 0, width() - 1, height() - 1);
     painter.drawLine(0, 50, 320, 50);
-    pen.setColor(Qt::darkGreen);
+    pen.setColor(Qt::black);
     painter.setPen(pen);
     //Draws instructions
     painter.setFont(QFont("Times", 30));
     painter.drawText(70, 40, "Instructions");
-
+    pen.setColor(Qt::darkGreen);
+    painter.setPen(pen);
     painter.setFont(QFont("Times", 20));
     painter.drawText(7, 100, "W: Move Forward");
     painter.drawText(7, 130, "S: Move Backward");

@@ -26,7 +26,7 @@ public:
     void focusOutEvent(QFocusEvent* event);
     bool isMoving();
     void createTurret();
-    void createTurret(char str[]);
+    //void createTurret(char str[]);
     void createTurret(QString str);
     void createHUD();
     float calculateAngleCos(float speed, float angle);

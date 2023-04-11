@@ -13,7 +13,7 @@ public:
 	GameRunner();
 	static void pauseTimer();
 	static void startTimer();
-
+	static void gameOverTimers();
 private:
 	QGraphicsScene* scene;
 	QGraphicsView* view;

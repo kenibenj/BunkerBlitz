@@ -65,7 +65,7 @@ void StartMenu::instructionButtonClicked(){
     instructionMenu->show();
 }
 
-//Draws a border around the pause menu
+//Draws a border around the start menu
 void StartMenu::paintEvent(QPaintEvent* e) {
     QPainter painter(this);
     QPen pen;
