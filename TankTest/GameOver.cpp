@@ -3,8 +3,11 @@
 #include <QProcess>
 #include <QDebug>
 #include <QPalette>
+#include "GameRunner.h"
+
 GameOver::GameOver()
 {
+	GameRunner::gameOverTimers();
     setFixedSize(320, 225);
 	setWindowFlag(Qt::FramelessWindowHint);
 	setWindowFlag(Qt::WindowStaysOnTopHint);

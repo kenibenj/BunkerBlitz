@@ -104,3 +104,6 @@ void GameRunner::startTimer() {
     enemyTimer->start(7);
     timer->start(10000);
 }
+void GameRunner::gameOverTimers() {
+    timer->stop();
+}
