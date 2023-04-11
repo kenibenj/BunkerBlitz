@@ -29,7 +29,7 @@ void Instructions::paintEvent(QPaintEvent* e)
     QPainter painter(this);
     QPen pen;
     QBrush brush;
-    brush.setColor(Qt::green);
+    brush.setColor(QColor(144, 238, 144));
     brush.setStyle(Qt::SolidPattern);
     pen.setColor(Qt::darkGreen);
     painter.setPen(pen);

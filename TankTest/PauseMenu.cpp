@@ -53,7 +53,7 @@ void PauseMenu::paintEvent(QPaintEvent* e) {
 	QPainter painter(this);
 	QPen pen;
 	QBrush brush;
-	brush.setColor(Qt::green);
+	brush.setColor(QColor(144, 238, 144));
 	brush.setStyle(Qt::SolidPattern);
 	painter.fillRect(0, 0, 250, 50, brush);
 	pen.setColor(Qt::darkGreen);
