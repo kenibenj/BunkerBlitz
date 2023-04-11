@@ -10,6 +10,7 @@
 #include <QGraphicsTextItem>
 #include <QGraphicsBlurEffect>
 #include <QStack>
+#include <QString>
 
 class Tank :public QObject, public QGraphicsPixmapItem {
 
@@ -71,6 +72,8 @@ private:
 
     int health;
     int bulletCounter;
+
+    QString graphicString;
 
     QList<QGraphicsItem*> healthList;
     QList<QGraphicsPixmapItem*> bulletList;

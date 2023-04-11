@@ -79,6 +79,9 @@
     <ClCompile Include="Repair.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="instructions.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -122,6 +125,9 @@
     </QtMoc>
     <QtMoc Include="Ammo.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="instructions.h">
+      <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

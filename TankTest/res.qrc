@@ -65,6 +65,11 @@
         <file>FriendTanktop.png</file>
         <file>blueTurret.png</file>
         <file>blueChasis.png</file>
+        <file>greenChassisDamagedFullTwo.png</file>
+        <file>greenChassisDamagedFullOne.png</file>
+        <file>greenChassisDamagedHalfTwo.png</file>
+        <file>greenChassisDamagedHalfOne.png</file>
+        <file>greenChassisNoDamageTwo.png</file>
+        <file>greenChassisNoDamageOne.png</file>
     </qresource>
-    <qresource prefix="/new/prefix1"/>
 </RCC>

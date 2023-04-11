@@ -9,7 +9,6 @@
 #include "Obstacles.h"
 #include <QGraphicsBlurEffect>  
 #include "GameOver.h"
-
 #include <Ammo.h>
 #include <Shield.h>
 #include <Repair.h>
@@ -42,6 +41,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     keys.insert(Qt::Key_Space, false);
     keys.insert(Qt::Key_Escape, false);
 
+    graphicString = "greenChassisNoDamage";
     setPixmap(QPixmap(":/images/greenChasis.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
@@ -230,30 +230,27 @@ void Tank::frame() {
         if ((isMoving() == true)) {
             counter++;
             if (counter % 20 == 0) {
-                //if (changeTreads == true) {
-                //    setPixmap(QPixmap(":/images/greenChasis2.png"));
-                //    changeTreads = false;
-                //}
-               // else {
-               //    setPixmap(QPixmap(":/images/greenChasis.png"));
-               //     changeTreads = true;
-               // }
+                if (changeTreads == true) {
+                    setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+                    changeTreads = false;
+                }
+                else {
+                    setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+                   changeTreads = true;
+                }
             }
         }
         if (health > 100) {
-            setPixmap(QPixmap(":/images/greenChasis.png"));
-            //Tank::createTurret(":/images/greenTurret.png");
+            graphicString = "greenChassisNoDamage";
 
         }
         if (health <= 100 && health > 50) {
-            setPixmap(QPixmap(":/images/Gc1.png"));
-            //Tank::createTurret(":/images/greenTurret.png");
+            graphicString = "greenChassisDamagedHalf";
 
 
         }
         if (health <= 50) {
-            setPixmap(QPixmap(":/images/Gc2.png"));
-            //Tank::createTurret(":/images/greenTurret.png");
+            graphicString = "greenChassisDamagedFull";
 
         }
         if (health >= 500) {

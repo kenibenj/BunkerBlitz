@@ -28,19 +28,16 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
         isFleeType = true;
         isHoldType = false;
         isChargeType = false;
-        qDebug() << 1;
         break;
     case 1:
         isFleeType = false;
         isHoldType = true;
         isChargeType = false;
-        qDebug() << 2;
         break;
     case 2:
         isFleeType = false;
         isHoldType = false;
         isChargeType = true;
-        qDebug() << 3;
         break;
     default:
         isFleeType = true;
