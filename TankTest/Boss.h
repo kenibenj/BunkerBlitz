@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QRandomGenerator>
 #include <QGraphicsRectItem>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 class Boss : public QObject, public QGraphicsPixmapItem {
     QTimer* timer = new QTimer();
@@ -66,6 +68,9 @@ private:
 
     QGraphicsPixmapItem* turret;
     QGraphicsPixmapItem* fireFlash;
+
+    QAudioOutput* bulletAudioPlayer;
+    QMediaPlayer* bulletHandler;
 
     QGraphicsRectItem* healthBar; //declaring health bar for Boss
 

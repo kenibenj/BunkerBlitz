@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QRandomGenerator>
 #include <QGraphicsRectItem>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 class Enemy : public QObject, public QGraphicsPixmapItem {
     QTimer* timer = new QTimer();
@@ -37,6 +39,7 @@ private:
     char direction;
 
     int health;
+    int MAXHEALTH;
     int bulletCoolDownCounter;
     int counter;
     int treadCounter;
@@ -56,6 +59,9 @@ private:
     bool isChargeType;
     bool isFleeType;
     bool isHoldType;
+
+    QAudioOutput* bulletAudioPlayer;
+    QMediaPlayer* bulletHandler;
 
     QGraphicsEllipseItem* circle;
     QList<QGraphicsItem*> collidingItemsVision;

@@ -4,7 +4,6 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
-#include <stdlib.h> // rand() -> really large int
 #include <QDebug>
 #include <QRandomGenerator>
 #include <QGraphicsDropShadowEffect>
@@ -46,6 +45,7 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
         break;
     }
 
+    MAXHEALTH = 60;
     health = 60;
     traversalSpeed = .3;
     rotationSpeed = .3;
@@ -87,6 +87,12 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     // Apply the effect to the healthBar item
     healthBar->setGraphicsEffect(glowEffect);
+
+    bulletHandler = new QMediaPlayer();
+    bulletAudioPlayer = new QAudioOutput();
+    bulletAudioPlayer->setVolume(.15);
+    bulletHandler->setAudioOutput(bulletAudioPlayer);
+    bulletHandler->setSource(QUrl("qrc:/sounds/bulletFireThree.wav"));
 
     // connect
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
@@ -202,11 +208,13 @@ void Enemy::frame() {
             scene()->addItem(bullet);
             bullet->fireSwivel();
             bulletCoolDownCounter = 1;
+            //Fire Bullet sound
+            bulletHandler->setPosition(0);
+            bulletHandler->play();
         }
     }
 
     if (roam) {
-
         // Set new path after old path expires
         if (pathTravelTime < 0 && !isTurning && !isWallTurning) {
             isTurning = true;
@@ -324,11 +332,14 @@ void Enemy::takeDamage(int damage) {
 
     // Update the health bar
     setHealth(health);
-    if (health <= 100 && health > 50) {
-        setPixmap(QPixmap(":/images/redChasis1.png"));
 
+    float percentHealthLeft = (float) health / (float) MAXHEALTH;
+    qDebug() << percentHealthLeft;
+
+    if ( (percentHealthLeft < 1) && (percentHealthLeft > .5) ) {
+        setPixmap(QPixmap(":/images/redChasis1.png"));
     }
-    if (health <= 50) {
+    else if (percentHealthLeft <= .5) {
         setPixmap(QPixmap(":/images/redChasis3.png"));
 
     }

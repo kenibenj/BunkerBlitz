@@ -10,6 +10,7 @@
         <file>engineIdleThree.wav</file>
         <file>engineMovingThree.wav</file>
         <file>explosion.wav</file>
+        <file>bossShoot.wav</file>
     </qresource>
     <qresource prefix="/images">
         <file>tank1.png</file>

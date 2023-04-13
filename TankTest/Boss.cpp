@@ -4,7 +4,6 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
-#include <stdlib.h> // rand() -> really large int
 #include <QDebug>
 #include <QRandomGenerator>
 #include <QGraphicsDropShadowEffect>
@@ -75,7 +74,7 @@ Boss::Boss(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     // Create the healthBar item
     healthBar = new QGraphicsRectItem(0, -10, 50, 5, this);
     healthBar->setRect(0, -10, (health / 100.0) * 50, 5);
-    healthBar->setBrush(QColor("#ffed81"));
+    healthBar->setBrush(QColor("#ffed81")); // Yellow color of the Boss tank treads
     healthBar->setPen(QPen(Qt::white, .85));
     healthBar->setPos(-25, -15);
 
@@ -88,6 +87,12 @@ Boss::Boss(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     // Apply the effect to the healthBar item
     healthBar->setGraphicsEffect(glowEffect);
 
+    bulletHandler = new QMediaPlayer();
+    bulletAudioPlayer = new QAudioOutput();
+    bulletAudioPlayer->setVolume(.15);
+    bulletHandler->setAudioOutput(bulletAudioPlayer);
+    bulletHandler->setSource(QUrl("qrc:/sounds/bossShoot.wav"));
+
     // connect
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
 
@@ -95,10 +100,9 @@ Boss::Boss(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
 void Boss::createVision() {
     // add a circle
-    circle->setRect(0, 0, 1000, 1000); // diameter 100
+    circle->setRect(0, 0, 1000, 1000); // diameter 1000
     circle->setTransformOriginPoint(circle->boundingRect().width() / 2, circle->boundingRect().height() / 2);
     circle->setPos(x() + this->boundingRect().width() / 2 - circle->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - circle->boundingRect().height() / 2); // center the circle on the enemy
-    circle->setBrush(QBrush(Qt::blue)); // set color and style of the circle's interior\
     circle->setZValue(-5);
     circle->setVisible(false);
     scene()->addItem(circle);
@@ -203,6 +207,9 @@ void Boss::frame() {
             scene()->addItem(bullet);
             bullet->fireSwivel();
             bulletCoolDownCounter = 1;
+            //Fire Bullet sound
+            bulletHandler->setPosition(0);
+            bulletHandler->play();
         }
     }
 

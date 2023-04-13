@@ -14,6 +14,7 @@
 #include <Repair.h>
 #include "Boss.h"
 
+
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
@@ -298,7 +299,6 @@ void Tank::frame() {
                 bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - bullet->boundingRect().height() / 2);
                 scene()->addItem(bullet);
 
-                //This can be set to either 'fire()' for cursor shooting or 'fireAlt()' for directional shooting
                 bullet->fireSwivel();
 
                 //Fire Bullet sound
