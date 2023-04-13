@@ -334,7 +334,6 @@ void Enemy::takeDamage(int damage) {
     setHealth(health);
 
     float percentHealthLeft = (float) health / (float) MAXHEALTH;
-    qDebug() << percentHealthLeft;
 
     if ( (percentHealthLeft < 1) && (percentHealthLeft > .5) ) {
         setPixmap(QPixmap(":/images/redChasis1.png"));
