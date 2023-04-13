@@ -85,6 +85,7 @@ GameRunner::GameRunner() {
     // spawn enemies
     tank->spawn();
     tank->spawn();
+    
 
     //QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));

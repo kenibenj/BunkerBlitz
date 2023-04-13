@@ -199,6 +199,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ammo.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
@@ -228,6 +229,7 @@
     <QtMoc Include="GameOver.h" />
     <QtMoc Include="Ammo.h" />
     <QtMoc Include="instructions.h" />
+    <QtMoc Include="Boss.h" />
     <ClInclude Include="MainHeader.h" />
     <QtMoc Include="Obstacles.h">
     </QtMoc>

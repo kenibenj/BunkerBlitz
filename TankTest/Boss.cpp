@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Boss.h"
 #include "Bullet.h"
 #include "Tank.h"
 #include <QTimer>
@@ -9,10 +9,10 @@
 #include <QRandomGenerator>
 #include <QGraphicsDropShadowEffect>
 
-extern QTimer *enemyTimer;
-QRandomGenerator Enemy::generator = QRandomGenerator::securelySeeded();
+extern QTimer* enemyTimer;
+QRandomGenerator Boss::generator = QRandomGenerator::securelySeeded();
 
-Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
+Boss::Boss(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     pathTravelTime = generator.bounded(10, 26) * 144;
 
@@ -46,9 +46,9 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
         break;
     }
 
-    health = 60;
-    traversalSpeed = .3;
-    rotationSpeed = .3;
+    health = 180;
+    traversalSpeed = .1;
+    rotationSpeed = .15;
     turretRotationSpeed = .4;
     counter = 0;
     treadCounter = 0;
@@ -68,15 +68,15 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     setRotation(randomNumberRotation);
     setZValue(-3);
 
-    setPixmap(QPixmap(":/images/redChasis.png"));
+    setPixmap(QPixmap(":/images/bossChassis.png"));
     setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
 
 
     // Create the healthBar item
     healthBar = new QGraphicsRectItem(0, -10, 50, 5, this);
     healthBar->setRect(0, -10, (health / 100.0) * 50, 5);
-    healthBar->setBrush(QColor("#c17d7c"));
-    healthBar->setPen(QPen(Qt::white, .7));
+    healthBar->setBrush(QColor("#ffed81"));
+    healthBar->setPen(QPen(Qt::white, .85));
     healthBar->setPos(-25, -15);
 
     // Create a QGraphicsDropShadowEffect with a white color and blur radius
@@ -90,9 +90,10 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     // connect
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
+
 }
 
-void Enemy::createVision() {
+void Boss::createVision() {
     // add a circle
     circle->setRect(0, 0, 1000, 1000); // diameter 100
     circle->setTransformOriginPoint(circle->boundingRect().width() / 2, circle->boundingRect().height() / 2);
@@ -104,10 +105,10 @@ void Enemy::createVision() {
 }
 
 // Creates turret and sets its point of rotation.
-void Enemy::createTurret(QString str) {
+void Boss::createTurret(QString str) {
     int rotationPoint = 7; // 7 pixels down the turret is where the hatch on the turret is which is where the rotation point needs to be.
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 10);
-    turret->setPixmap(QPixmap(":/images/redTurret.png"));
+    turret->setPixmap(QPixmap(":/images/bossTurret.png"));
     turret->setTransformOriginPoint(turret->boundingRect().width() / 2, turret->boundingRect().height() / 2 + rotationPoint);
     turret->setZValue(-2);
     turret->setRotation(rotation());
@@ -119,7 +120,7 @@ void Enemy::createTurret(QString str) {
     scene()->addItem(fireFlash);
 }
 
-void Enemy::frame() {
+void Boss::frame() {
     counter++;
     QPointF currentPos = pos();
     int currentRot = rotation();
@@ -132,7 +133,7 @@ void Enemy::frame() {
     if (bulletCoolDownCounter != 0) {
         bulletCoolDownCounter++;
     }
-    if (bulletCoolDownCounter == 288) {
+    if (bulletCoolDownCounter == 72) {
         bulletCoolDownCounter = 0;
     }
 
@@ -151,7 +152,7 @@ void Enemy::frame() {
                     roam = false;
                     break;
                 }
-                else if (typeid(*item) == typeid(Enemy)) {
+                else if (typeid(*item) == typeid(Boss)) {
                 }
                 else if (typeid(*item) == typeid(Bullet)) {
                 }
@@ -175,7 +176,7 @@ void Enemy::frame() {
             turret->setRotation(turret->rotation() - turretRotationSpeed);
         }
 
-        // Enemy will turn towards player if they don't have hold ground behavior
+        // Boss will turn towards player if they don't have hold ground behavior
         if (!isHoldType) {
             float rotationDifferenceChassis = angleTo360(angleDegrees - this->rotation());
             if (rotationDifferenceChassis < 180) {
@@ -189,7 +190,7 @@ void Enemy::frame() {
                 setPos(x() + dxTank, y() + dyTank);
             }
             else {
-                setPos(x() - .5*dxTank, y() - .5*dyTank);
+                setPos(x() - .5 * dxTank, y() - .5 * dyTank);
             }
         }
 
@@ -313,23 +314,23 @@ void Enemy::frame() {
     }
 }
 
-void Enemy::setHealth(int health) {
+void Boss::setHealth(int health) {
     // Set the size of the health bar based on the enemy's health
     healthBar->setRect(0, -10, (health / 100.0) * 50, 5);
 }
 
-void Enemy::takeDamage(int damage) {
+void Boss::takeDamage(int damage) {
     // Decrease the enemy's health by the specified amount
     health -= damage;
 
     // Update the health bar
     setHealth(health);
     if (health <= 100 && health > 50) {
-        setPixmap(QPixmap(":/images/redChasis1.png"));
+        //setPixmap(QPixmap(":/images/redChasis1.png"));
 
     }
     if (health <= 50) {
-        setPixmap(QPixmap(":/images/redChasis3.png"));
+        //setPixmap(QPixmap(":/images/redChasis3.png"));
 
     }
     // Check if the enemy has been defeated
@@ -343,7 +344,7 @@ void Enemy::takeDamage(int damage) {
 }
 
 // Returns list of meaningful objects colliding with this Enemy's vision circle
-QList<QGraphicsItem*> Enemy::objectDetected() {
+QList<QGraphicsItem*> Boss::objectDetected() {
     QList<QGraphicsItem*> collidingItemsVision = circle->collidingItems();
 
     // Removes its own Tank graphic from list
@@ -362,7 +363,7 @@ QList<QGraphicsItem*> Enemy::objectDetected() {
     return collidingItemsVision;
 }
 
-float Enemy::angleTo360(float rotation) {
+float Boss::angleTo360(float rotation) {
     while (rotation >= 360.0) {
         rotation -= 360.0;
     }
@@ -372,18 +373,18 @@ float Enemy::angleTo360(float rotation) {
     return rotation;
 }
 
-float Enemy::calculateAngleCos(float speed, float angle) {
+float Boss::calculateAngleCos(float speed, float angle) {
     float dx = speed * cos(angle);
     return dx;
 }
 
-float Enemy::calculateAngleSin(float speed, float angle) {
+float Boss::calculateAngleSin(float speed, float angle) {
     float dy = speed * sin(angle);
     return dy;
 }
 
 // Deletes vision-circle when enemy is destroyed
-Enemy::~Enemy() {
+Boss::~Boss() {
     delete circle;
     delete turret;
     delete fireFlash;

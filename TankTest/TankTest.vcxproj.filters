@@ -82,6 +82,9 @@
     <ClCompile Include="instructions.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bullet.h">
@@ -128,6 +131,9 @@
     </QtMoc>
     <QtMoc Include="instructions.h">
       <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Boss.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

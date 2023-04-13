@@ -12,6 +12,8 @@
 #include <Ammo.h>
 #include <Shield.h>
 #include <Repair.h>
+#include "Boss.h"
+
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
@@ -528,6 +530,12 @@ void Tank::spawn() {
     scene()->addItem(enemy);
     enemy->createVision();
     enemy->createTurret(":/images/redTurret.png");
+
+    Boss* boss = new Boss();
+    scene()->addItem(boss);
+    boss->createVision();
+    boss->createTurret(":/images/redTurret.png");
+
     Shield* shield = new Shield();
     scene()->addItem(shield);
     Ammo* ammo = new Ammo();

@@ -71,5 +71,8 @@
         <file>greenChassisDamagedHalfOne.png</file>
         <file>greenChassisNoDamageTwo.png</file>
         <file>greenChassisNoDamageOne.png</file>
+        <file>bossChassis.png</file>
+        <file>bossTurret.png</file>
+        <file>bossBullet.png</file>
     </qresource>
 </RCC>

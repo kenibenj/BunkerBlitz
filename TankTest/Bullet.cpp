@@ -8,12 +8,14 @@
 #include <Explosion.h>
 #include "Enemy.h"
 #include "Tank.h"
+#include "Boss.h"
 #include "wall.h"
 #include "Spawner.h"
 #include "Obstacles.h"
 #include "Shield.h"
 #include "Ammo.h"
 #include "Repair.h"
+
 extern QTimer* enemyTimer;
 Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     //draw bullet
@@ -22,16 +24,19 @@ Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* 
     this->tank = tank;
     this->setZValue(-4);
     speed = 3;
-    damage = 27;
+    damage = 20;
 
     if (typeid(*(tank)) == typeid(Enemy)) {
         setPixmap(QPixmap(":/images/bulletRed.png"));
     }
-    if (typeid(*(tank)) == typeid(Tank)) {
+    else if (typeid(*(tank)) == typeid(Tank)) {
         setPixmap(QPixmap(":/images/bulletGreen.png"));
     }
+    else if (typeid(*(tank)) == typeid(Boss)) {
+        setPixmap(QPixmap(":/images/bossBullet.png"));
+        damage = 5;
+    }
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
-
 }
 
 // Swivel shooting that uses the mouse cursor
@@ -67,6 +72,27 @@ void Bullet::move() {
 
             // Reduce enemy's health by bullet's damage
             enemy->takeDamage(damage);
+
+            QPointF explosionPos;
+            explosionPos.setX(colliding_items[i]->pos().x());
+            explosionPos.setY(colliding_items[i]->pos().y());
+
+            Explosion* explosion = new Explosion();
+            scene()->addItem(explosion);
+            explosion->setPos(explosionPos);
+
+            // Remove bullet from scene
+            scene()->removeItem(this);
+            delete this;
+            // Stop checking for collisions with other enemies
+            return;
+        }
+        else if (typeid(*(colliding_items[i])) == typeid(Boss)) {
+
+            Boss* boss = static_cast<Boss*>(colliding_items[i]);
+
+            // Reduce enemy's health by bullet's damage
+            boss->takeDamage(damage);
 
             QPointF explosionPos;
             explosionPos.setX(colliding_items[i]->pos().x());
