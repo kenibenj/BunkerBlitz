@@ -17,8 +17,6 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     pathTravelTime = generator.bounded(10, 26) * 144;
 
     // set random position
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
 
     // determines what kind of aggro-behaviour the AI will have
@@ -67,8 +65,7 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     direction = 'w';
 
-    setPos(randomNumberX, randomNumberY);
-    setRotation(randomNumberRotation);
+
     setZValue(-3);
 
     setPixmap(QPixmap(":/images/redChasis.png"));

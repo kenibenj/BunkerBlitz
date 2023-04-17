@@ -174,7 +174,7 @@ void Tank::frame() {
         if (fadeScreen->opacity() > 0) {
             fadeScreen->setOpacity(fadeScreen->opacity() - .01);
         }
-        QPointF currentPos = pos();
+        currentPos = pos();
         int currentRot = rotation();
 
         // this code is what lets the tank turret, the muzzle flash, and the bullets follow the cursor. 
@@ -526,17 +526,66 @@ void Tank::blur() {
 
 
 void Tank::spawn() {
+    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
+    while (randomNumberX <= currentPos.x() - 25 && randomNumberX >= currentPos.x() ){
+        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    }
+    while (randomNumberY <= currentPos.y() - 25 && randomNumberY >= currentPos.y() ){
+        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+    }
+
     // create an enemy
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
+    enemy->setPos(randomNumberX, randomNumberY);
+    enemy->setRotation(randomNumberRotation);
     enemy->createVision();
     enemy->createTurret(":/images/redTurret.png");
-    Shield* shield = new Shield();
-    scene()->addItem(shield);
+
+
+}
+//Spawns ammo
+void Tank::ammoSpawn(){
+    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    while (randomNumberX <= currentPos.x() - 25 && randomNumberX >= currentPos.x() ){
+        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    }
+    while (randomNumberY <= currentPos.y() - 25 && randomNumberY >= currentPos.y() ){
+        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+    }
     Ammo* ammo = new Ammo();
     scene()->addItem(ammo);
+    ammo->setPos(randomNumberX, randomNumberY);
+}
+//Spawns repairs
+void Tank::repairSpawn(){
+    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    while (randomNumberX <= currentPos.x() - 25 && randomNumberX >= currentPos.x() ){
+        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    }
+    while (randomNumberY <= currentPos.y() - 25 && randomNumberY >= currentPos.y() ){
+        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+    }
     Repair* repair = new Repair();
     scene()->addItem(repair);
-
+    repair->setPos(randomNumberX, randomNumberY);
+}
+//Spawns Shield
+void Tank::shieldSpawn(){
+    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    while (randomNumberX <= currentPos.x() - 25 && randomNumberX >= currentPos.x() ){
+        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    }
+    while (randomNumberY <= currentPos.y() - 25 && randomNumberY >= currentPos.y() ){
+        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+    }
+    Shield* shield = new Shield();
+    scene()->addItem(shield);
+    shield->setPos(randomNumberX, randomNumberY);
 }
 

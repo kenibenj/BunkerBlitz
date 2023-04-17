@@ -88,6 +88,9 @@ GameRunner::GameRunner() {
 
     //QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(shieldSpawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(ammoSpawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(repairSpawn()));
 
 
 
