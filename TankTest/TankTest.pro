@@ -12,6 +12,7 @@ QMAKE_CXXFLAGS += /Zc:__cplusplus
 
 SOURCES += \
     Ammo.cpp \
+    Boss.cpp \
     Bullet.cpp \
     Enemy.cpp \
     Explosion.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 
 HEADERS += \
     Ammo.h \
+    Boss.h \
     Bullet.h \
     Enemy.h \
     Explosion.h \

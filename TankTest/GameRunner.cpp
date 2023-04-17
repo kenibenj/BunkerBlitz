@@ -89,6 +89,9 @@ GameRunner::GameRunner() {
 
     //QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(spawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(shieldSpawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(ammoSpawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(repairSpawn()));
 
 
 
@@ -103,7 +106,7 @@ void GameRunner::pauseTimer() {
 // Used to start timers
 void GameRunner::startTimer() {
     enemyTimer->start(7);
-    timer->start(100000);
+    timer->start(10000);
 }
 void GameRunner::gameOverTimers() {
     timer->stop();

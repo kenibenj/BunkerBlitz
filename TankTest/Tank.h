@@ -38,6 +38,9 @@ public slots:
     void spawn();
     void frame();
     void blur();
+    void ammoSpawn();
+    void shieldSpawn();
+    void repairSpawn();
 
 signals:
     void positionChanged();
@@ -46,7 +49,7 @@ private:
     QMediaPlayer* bulletHandler;
     QMediaPlayer* movingHandler;
     QMediaPlayer* idleHandler;
-
+    QPointF currentPos;
     QAudioOutput* bulletAudioPlayer;
     QAudioOutput* movingAudioPlayer;
     QAudioOutput* idleAudioPlayer;

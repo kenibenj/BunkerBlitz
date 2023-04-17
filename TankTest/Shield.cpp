@@ -9,12 +9,12 @@ Shield::Shield(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //v = view;
     //this->setFocus();
     // set random position
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    //int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    //int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
 
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
-    setPos(randomNumberX, randomNumberY);
+    //setPos(randomNumberX, randomNumberY);
     setZValue(-3);
 
     setPixmap(QPixmap(":/images/Shield.png"));
