@@ -32,6 +32,7 @@ public:
     float calculateAngleCos(float speed, float angle);
     float calculateAngleSin(float speed, float angle);
     void takeDamage(int damage);
+    static int distanceFormula(int x, int y, QPointF currentPos);
     //void move();
 
 public slots:

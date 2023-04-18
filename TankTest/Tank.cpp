@@ -13,7 +13,7 @@
 #include <Shield.h>
 #include <Repair.h>
 #include "Boss.h"
-
+#include <cmath>
 
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
@@ -516,6 +516,8 @@ void Tank::takeDamage(int damage) {
     }
 }
 
+
+
 void Tank::blur() {
     if (counter > 22 && counter % 1 == 0 && blurEffect->blurRadius() < 7) {
         blurEffect->setBlurRadius(blurEffect->blurRadius() + .4);
@@ -523,18 +525,21 @@ void Tank::blur() {
     counter++;
 }
 
+//Finds the distance between given points (used in spawn functions)
+int Tank::distanceFormula(int x, int y, QPointF currentPos)
+{
+    int distance = sqrt(pow(x - currentPos.x(), 2) + pow(y - currentPos.y(), 2));
+    return distance;
+}
 
 void Tank::spawn() {
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
-    while (randomNumberX <= currentPos.x() - 10 && randomNumberX >= currentPos.x() + 10 ){
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
-    while (randomNumberY <= currentPos.y() - 10 && randomNumberY >= currentPos.y() + 10){
-        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
-    }
-
     // create an enemy
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
@@ -554,11 +559,9 @@ void Tank::spawn() {
 void Tank::ammoSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
-    while (randomNumberX <= currentPos.x() - 10 && randomNumberX >= currentPos.x() +10){
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    }
-    while (randomNumberY <= currentPos.y() - 10 && randomNumberY >= currentPos.y() + 10){
-        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
     Ammo* ammo = new Ammo();
     scene()->addItem(ammo);
@@ -568,11 +571,9 @@ void Tank::ammoSpawn(){
 void Tank::repairSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
-    while (randomNumberX <= currentPos.x() - 10 && randomNumberX >= currentPos.x() + 10){
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    }
-    while (randomNumberY <= currentPos.y() - 10 && randomNumberY >= currentPos.y() + 10){
-        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
     Repair* repair = new Repair();
     scene()->addItem(repair);
@@ -582,11 +583,9 @@ void Tank::repairSpawn(){
 void Tank::shieldSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
-    while (randomNumberX <= currentPos.x() - 10 && randomNumberX >= currentPos.x() + 10){
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    }
-    while (randomNumberY <= currentPos.y() - 10 && randomNumberY >= currentPos.y() + 10){
-        randomNumberY = QRandomGenerator::global()->bounded(0, 2400);
+        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
     Shield* shield = new Shield();
     scene()->addItem(shield);
