@@ -55,6 +55,7 @@ private:
     bool isTurning;
     bool isTurningLeft;
     bool isWallTurning;
+    bool isMoving;
 
     bool isChargeType;
     bool isFleeType;
@@ -72,6 +73,8 @@ private:
 
     QGraphicsPixmapItem* turret;
     QGraphicsPixmapItem* fireFlash;
+
+    QString graphicString;
 
     QGraphicsRectItem* healthBar; //declaring health bar for enemy
 

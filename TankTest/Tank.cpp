@@ -45,7 +45,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     keys.insert(Qt::Key_Escape, false);
 
     graphicString = "greenChassisNoDamage";
-    setPixmap(QPixmap(":/images/greenChasis.png"));
+    setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
     traversalSpeed = .3;
@@ -71,7 +71,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
 
     bulletAudioPlayer->setVolume(.3);
     movingAudioPlayer->setVolume(.1);
-    idleAudioPlayer->setVolume(.1);
+    idleAudioPlayer->setVolume(.05);
 
     bulletHandler->setAudioOutput(bulletAudioPlayer);
     bulletHandler->setSource(QUrl("qrc:/sounds/bulletFireThree.wav"));
@@ -243,6 +243,7 @@ void Tank::frame() {
                 }
             }
         }
+
         if (health > 100) {
             graphicString = "greenChassisNoDamage";
 
@@ -534,7 +535,7 @@ int Tank::distanceFormula(int x, int y, QPointF currentPos)
 
 void Tank::spawn() {
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
     while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
@@ -546,19 +547,13 @@ void Tank::spawn() {
     enemy->setPos(randomNumberX, randomNumberY);
     enemy->setRotation(randomNumberRotation);
     enemy->createVision();
-    enemy->createTurret(":/images/redTurret.png");
-
-
-    Boss* boss = new Boss();
-    scene()->addItem(boss);
-    boss->createVision();
-    boss->createTurret(":/images/redTurret.png");
+    enemy->createTurret("");
 
 }
 //Spawns ammo
 void Tank::ammoSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
@@ -570,7 +565,7 @@ void Tank::ammoSpawn(){
 //Spawns repairs
 void Tank::repairSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
@@ -582,7 +577,7 @@ void Tank::repairSpawn(){
 //Spawns Shield
 void Tank::shieldSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);

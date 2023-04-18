@@ -26,14 +26,12 @@ public:
     void focusOutEvent(QFocusEvent* event);
     bool isMoving();
     void createTurret();
-    //void createTurret(char str[]);
     void createTurret(QString str);
     void createHUD();
     float calculateAngleCos(float speed, float angle);
     float calculateAngleSin(float speed, float angle);
     void takeDamage(int damage);
     static int distanceFormula(int x, int y, QPointF currentPos);
-    //void move();
 
 public slots:
     void spawn();

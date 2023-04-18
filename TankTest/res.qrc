@@ -75,5 +75,11 @@
         <file>bossChassis.png</file>
         <file>bossTurret.png</file>
         <file>bossBullet.png</file>
+        <file>redChassisDamagedFullTwo.png</file>
+        <file>redChassisDamagedFullOne.png</file>
+        <file>redChassisDamagedHalfTwo.png</file>
+        <file>redChassisDamagedHalfOne.png</file>
+        <file>redChassisNoDamageTwo.png</file>
+        <file>redChassisNoDamageOne.png</file>
     </qresource>
 </RCC>

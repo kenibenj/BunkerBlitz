@@ -12,12 +12,8 @@ Ammo::Ammo(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
     setZValue(-3);
 
-    setPixmap(QPixmap(":/images/Ammo_Pickup.png"));
+    setPixmap(QPixmap(":/images/Ammobox.png"));
     setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
-
-
-
-
 
     this->setZValue(-3);
 }

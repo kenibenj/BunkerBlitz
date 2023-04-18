@@ -52,9 +52,13 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     treadCounter = 0;
     bulletCoolDownCounter = 0;
 
+    graphicString = "redChassisNoDamage";
+    setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+
     seePlayer = false;
     roam = true;
     isAgainstWall = false;
+    changeTreads = false;
 
     circle = new QGraphicsEllipseItem();
     turret = new QGraphicsPixmapItem();
@@ -65,7 +69,6 @@ Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
 
     setZValue(-3);
 
-    setPixmap(QPixmap(":/images/redChasis.png"));
     setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
 
 
@@ -124,6 +127,7 @@ void Enemy::createTurret(QString str) {
 
 void Enemy::frame() {
     counter++;
+    isMoving = false;
     QPointF currentPos = pos();
     int currentRot = rotation();
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
@@ -190,9 +194,11 @@ void Enemy::frame() {
 
             if (isChargeType) {
                 setPos(x() + dxTank, y() + dyTank);
+                isMoving = true;
             }
             else {
                 setPos(x() - .5*dxTank, y() - .5*dyTank);
+                isMoving = true;
             }
         }
 
@@ -277,6 +283,7 @@ void Enemy::frame() {
         else if (isAgainstWall) {
             if (pathTravelTime > 0) {
                 setPos(x() - dxTank, y() - dyTank);
+                isMoving = true;
                 pathTravelTime--;
             }
             else {
@@ -295,6 +302,7 @@ void Enemy::frame() {
         // Normal movement
         else {
             setPos(x() + dxTank, y() + dyTank);
+            isMoving = true;
             pathTravelTime--;
         }
 
@@ -303,6 +311,7 @@ void Enemy::frame() {
         {
             previousRotation = rotation();
             setPos(x() - dxTank * 2, y() - dyTank * 2);
+            isMoving = true;
             setRotation(currentRot);
             isAgainstWall = true;
             isTurning = false;
@@ -314,6 +323,21 @@ void Enemy::frame() {
         }
         else if (rotation() < turret->rotation()) {
             turret->setRotation(turret->rotation() - turretRotationSpeed);
+        }
+    }
+
+    // Code that handles the animation for the tank treads. Every 20 times the move() function is called while the tank is actually moving
+    if ((isMoving == true)) {
+        treadCounter++;
+        if (treadCounter % 20 == 0) {
+            if (changeTreads == true) {
+                setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+                changeTreads = false;
+            }
+            else {
+                setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+                changeTreads = true;
+            }
         }
     }
 }
@@ -333,11 +357,22 @@ void Enemy::takeDamage(int damage) {
     float percentHealthLeft = (float) health / (float) MAXHEALTH;
 
     if ( (percentHealthLeft < 1) && (percentHealthLeft > .5) ) {
-        setPixmap(QPixmap(":/images/redChasis1.png"));
+        graphicString = "redChassisDamagedHalf";
+        if (changeTreads) {
+            setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+        }
+        else {
+            setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+        }
     }
     else if (percentHealthLeft <= .5) {
-        setPixmap(QPixmap(":/images/redChasis3.png"));
-
+        graphicString = "redChassisDamagedFull";
+        if (changeTreads) {
+            setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+        }
+        else {
+            setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+        }
     }
     // Check if the enemy has been defeated
     if (health <= 0) {
