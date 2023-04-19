@@ -537,7 +537,7 @@ void Tank::spawn() {
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
@@ -554,7 +554,7 @@ void Tank::spawn() {
 void Tank::ammoSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
@@ -566,7 +566,7 @@ void Tank::ammoSpawn(){
 void Tank::repairSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
@@ -578,7 +578,7 @@ void Tank::repairSpawn(){
 void Tank::shieldSpawn(){
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 50) {
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }

@@ -42,6 +42,8 @@ Bullet::Bullet(QGraphicsItem* tank, char direction, float angle, QGraphicsItem* 
 // Swivel shooting that uses the mouse cursor
 void Bullet::fireSwivel() {
 
+    float inaccuracyModifier = QRandomGenerator::global()->bounded(-7, 8) / 100.00;
+    angle += inaccuracyModifier;
     float angleDegrees = angle * (180 / M_PI);
 
     // Calculate x and y velocity
