@@ -26,7 +26,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     fireFlash = new QGraphicsPixmapItem();
 
     // Create the healthBar item
-    health = 1500;
+    health = 150;
 
     // Fade
     fadeScreen = new QGraphicsRectItem(0, 0, 3000, 3000);
@@ -48,7 +48,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
-    traversalSpeed = 3;
+    traversalSpeed = .3;
     rotationSpeed = .3;
     direction = 'w';
     counter = 0;
