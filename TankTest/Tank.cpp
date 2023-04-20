@@ -26,7 +26,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     fireFlash = new QGraphicsPixmapItem();
 
     // Create the healthBar item
-    health = 150;
+    health = 1500;
 
     // Fade
     fadeScreen = new QGraphicsRectItem(0, 0, 3000, 3000);
@@ -48,7 +48,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
-    traversalSpeed = .3;
+    traversalSpeed = 3;
     rotationSpeed = .3;
     direction = 'w';
     counter = 0;
@@ -444,6 +444,10 @@ void Tank::frame() {
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {
+                //for (QGraphicsItem* item : enemiesOnScreen) {
+                //    Enemy* enemy = dynamic_cast<Enemy*>(item);
+                //    enemy->takeDamage(200);
+                //}
 
                 QPointF explosionPos;
                 explosionPos.setX(colliding_items[i]->pos().x());
@@ -468,11 +472,7 @@ void Tank::frame() {
             }
         }
     }
-
-
-
 }
-
 
 bool Tank::isMoving() {
     if (keys[Qt::Key_W] || keys[Qt::Key_A] || keys[Qt::Key_S] || keys[Qt::Key_D]) {
@@ -548,7 +548,7 @@ void Tank::spawn() {
     enemy->setRotation(randomNumberRotation);
     enemy->createVision();
     enemy->createTurret("");
-
+    enemiesOnScreen.append(enemy);
 }
 //Spawns ammo
 void Tank::ammoSpawn(){

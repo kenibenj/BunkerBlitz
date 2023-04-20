@@ -202,7 +202,6 @@ void Enemy::frame() {
             }
         }
 
-
         float turretAngle = (turret->rotation() - 90) * (M_PI / 180);
 
         if ((abs(angleTo360(angleDegrees - turret->rotation())) / 360) < .02 && (bulletCoolDownCounter == 0)) {
@@ -214,6 +213,13 @@ void Enemy::frame() {
             //Fire Bullet sound
             bulletHandler->setPosition(0);
             bulletHandler->play();
+        }
+
+        // Checks to see if Tank is going out of bounds
+        if ((x() < 0 || (x() + boundingRect().right() > scene()->width()) || (y() < 0) || (y() + boundingRect().bottom() > scene()->height())))
+        {
+            setPos(currentPos);
+            setRotation(currentRot);
         }
     }
 
@@ -380,7 +386,7 @@ void Enemy::takeDamage(int damage) {
         scene()->removeItem(this);
 
         // Delete the enemy object
-        this->deleteLater();
+        delete this;
     }
 }
 
@@ -429,4 +435,7 @@ Enemy::~Enemy() {
     delete circle;
     delete turret;
     delete fireFlash;
+    delete bulletAudioPlayer;
+    delete bulletHandler;
+    delete healthBar;
 }

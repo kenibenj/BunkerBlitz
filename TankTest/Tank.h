@@ -33,6 +33,9 @@ public:
     void takeDamage(int damage);
     static int distanceFormula(int x, int y, QPointF currentPos);
 
+    QList<QGraphicsItem*> enemiesOnScreen;
+    int enemiesDestroyed;
+
 public slots:
     void spawn();
     void frame();
