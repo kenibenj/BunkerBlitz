@@ -134,6 +134,18 @@ void Tank::createHUD() {
         bullet->setScale(.55);
         bulletList.append(bullet);
     }
+    //Tells player when boss tank is spawned
+    bossTankText = new QGraphicsTextItem();
+    if (isBossTankSpawned == true) {
+        
+        scene()->addItem(bossTankText);
+        bossTankText->setPlainText("Defeat the Boss Tank");
+        bossTankText->setDefaultTextColor(Qt::white);
+        bossTankText->setPos(v->mapToScene(900, 20));
+        bossTankText->setScale(2);
+        
+
+    }
 }
 
 void Tank::keyPressEvent(QKeyEvent* event)
@@ -190,6 +202,7 @@ void Tank::frame() {
 
         healthBar->setPos(v->mapToScene(10, 10));
         healthBarDepleted->setPos(v->mapToScene(10, 10));
+        bossTankText->setPos(v->mapToScene(850, 20));
 
         int i = 0;
         foreach(QGraphicsPixmapItem * item, bulletList) {
