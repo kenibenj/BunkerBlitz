@@ -214,8 +214,10 @@
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="YouWin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="YouWin.h" />
     <QtMoc Include="Repair.h" />
     <QtMoc Include="Shield.h" />
     <QtMoc Include="Bullet.h">

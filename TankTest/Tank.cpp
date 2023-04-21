@@ -14,6 +14,7 @@
 #include <Repair.h>
 #include "Boss.h"
 #include <cmath>
+#include "YouWin.h"
 
 extern QTimer* enemyTimer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
