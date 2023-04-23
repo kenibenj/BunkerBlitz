@@ -65,6 +65,7 @@ private:
     bool changeTreads;
     bool isPauseActive;
     bool isDestroyed;
+    bool isBossTankSpawned;
 
     QTimer* fireRateTimer;
     QGraphicsView* v;
@@ -75,7 +76,7 @@ private:
     QGraphicsPixmapItem* fireFlash;
     QGraphicsPixmapItem* bulletHUD;
     QGraphicsTextItem* bulletCounterHUD;
-
+    QGraphicsTextItem* bossTankText;
     int health;
     int bulletCounter;
 
