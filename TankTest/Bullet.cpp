@@ -72,9 +72,6 @@ void Bullet::move() {
 
             Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
 
-            // Reduce enemy's health by bullet's damage
-            enemy->takeDamage(damage);
-
             QPointF explosionPos;
             explosionPos.setX(colliding_items[i]->pos().x());
             explosionPos.setY(colliding_items[i]->pos().y());
@@ -83,6 +80,8 @@ void Bullet::move() {
             scene()->addItem(explosion);
             explosion->setPos(explosionPos);
 
+            // Reduce enemy's health by bullet's damage
+            enemy->takeDamage(damage);
             // Remove bullet from scene
             scene()->removeItem(this);
             delete this;
@@ -93,9 +92,6 @@ void Bullet::move() {
 
             Boss* boss = static_cast<Boss*>(colliding_items[i]);
 
-            // Reduce enemy's health by bullet's damage
-            boss->takeDamage(damage);
-
             QPointF explosionPos;
             explosionPos.setX(colliding_items[i]->pos().x());
             explosionPos.setY(colliding_items[i]->pos().y());
@@ -104,6 +100,8 @@ void Bullet::move() {
             scene()->addItem(explosion);
             explosion->setPos(explosionPos);
 
+            // Reduce enemy's health by bullet's damage
+            boss->takeDamage(damage);
             // Remove bullet from scene
             scene()->removeItem(this);
             delete this;

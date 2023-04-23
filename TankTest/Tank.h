@@ -31,6 +31,7 @@ public:
     float calculateAngleCos(float speed, float angle);
     float calculateAngleSin(float speed, float angle);
     void takeDamage(int damage);
+    void killConfirmed(QGraphicsItem* item);
     static int distanceFormula(int x, int y, QPointF currentPos);
 
     QList<QGraphicsItem*> enemiesOnScreen;

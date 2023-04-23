@@ -16,6 +16,7 @@
 #include <cmath>
 
 extern QTimer* enemyTimer;
+extern QTimer* timer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
     QTimer* shieldTimer;
@@ -52,6 +53,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     rotationSpeed = .3;
     direction = 'w';
     counter = 0;
+    enemiesDestroyed = 0;
     changeTreads = false;
     isDestroyed = false;
     
@@ -86,6 +88,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     idleHandler->play();
 
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
     this->setZValue(-3);
 }
 
@@ -443,11 +446,7 @@ void Tank::frame() {
                
                 return;
             }
-            else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {
-                //for (QGraphicsItem* item : enemiesOnScreen) {
-                //    Enemy* enemy = dynamic_cast<Enemy*>(item);
-                //    enemy->takeDamage(200);
-                //}
+            else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {                
 
                 QPointF explosionPos;
                 explosionPos.setX(colliding_items[i]->pos().x());
@@ -469,6 +468,17 @@ void Tank::frame() {
                 }
                 
                 return;
+            }
+        }
+
+        if (enemiesDestroyed >= 8) {
+            disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
+            QList<QGraphicsItem*> allItems = scene()->items();
+            for (QGraphicsItem* item : allItems) {
+                if (Enemy* enemy = dynamic_cast<Enemy*>(item)) {
+                    // Item is an Enemy, remove it from the scene
+                    enemy->takeDamage(300);
+                }
             }
         }
     }
@@ -542,13 +552,12 @@ void Tank::spawn() {
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
     // create an enemy
-    Enemy* enemy = new Enemy();
+    Enemy* enemy = new Enemy(this);
     scene()->addItem(enemy);
     enemy->setPos(randomNumberX, randomNumberY);
     enemy->setRotation(randomNumberRotation);
     enemy->createVision();
     enemy->createTurret("");
-    enemiesOnScreen.append(enemy);
 }
 //Spawns ammo
 void Tank::ammoSpawn(){
@@ -585,5 +594,9 @@ void Tank::shieldSpawn(){
     Shield* shield = new Shield();
     scene()->addItem(shield);
     shield->setPos(randomNumberX, randomNumberY);
+}
+
+void Tank::killConfirmed(QGraphicsItem* item) {
+    enemiesDestroyed++;
 }
 

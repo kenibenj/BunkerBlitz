@@ -11,7 +11,9 @@
 extern QTimer *enemyTimer;
 QRandomGenerator Enemy::generator = QRandomGenerator::securelySeeded();
 
-Enemy::Enemy(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
+Enemy::Enemy(QGraphicsItem* player, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
+
+    playerTank = dynamic_cast<Tank*>(player);
 
     pathTravelTime = generator.bounded(10, 26) * 144;
 
@@ -384,6 +386,8 @@ void Enemy::takeDamage(int damage) {
     if (health <= 0) {
         // Remove the enemy from the scene
         scene()->removeItem(this);
+        
+        playerTank->killConfirmed(this);
 
         // Delete the enemy object
         delete this;
