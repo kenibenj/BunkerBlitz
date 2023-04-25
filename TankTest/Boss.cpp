@@ -11,7 +11,9 @@
 extern QTimer* enemyTimer;
 QRandomGenerator Boss::generator = QRandomGenerator::securelySeeded();
 
-Boss::Boss(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
+Boss::Boss(QGraphicsItem* player, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
+
+    playerTank = dynamic_cast<Tank*>(player);
 
     pathTravelTime = generator.bounded(10, 26) * 144;
 
@@ -45,7 +47,7 @@ Boss::Boss(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
         break;
     }
 
-    health = 180;
+    health = 10;
     traversalSpeed = .1;
     rotationSpeed = .15;
     turretRotationSpeed = .4;
@@ -345,8 +347,10 @@ void Boss::takeDamage(int damage) {
         // Remove the enemy from the scene
         scene()->removeItem(this);
 
+        playerTank->killConfirmed(this);
+
         // Delete the enemy object
-        this->deleteLater();
+        delete this;
     }
 }
 

@@ -37,7 +37,7 @@ GameRunner::GameRunner() {
     scene->setSceneRect(0, 0, 2400, 1800);
 
     view->setScene(scene);
-    view->setTransform(QTransform().scale(1.4, 1.4));
+    view->setTransform(QTransform().scale(.7, .7));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setBackgroundBrush(QBrush(Qt::black));
@@ -88,9 +88,7 @@ GameRunner::GameRunner() {
     
 
     //QTimer* timer = new QTimer();
-    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(shieldSpawn()));
-    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(ammoSpawn()));
-    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(repairSpawn()));
+    QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(pickupSpawn()));
 
 
 

@@ -7,13 +7,14 @@
 #include <QGraphicsRectItem>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include "Tank.h"
 
 class Boss : public QObject, public QGraphicsPixmapItem {
     QTimer* timer = new QTimer();
 
     Q_OBJECT
 public:
-    Boss(QGraphicsItem* parent = 0);
+    Boss(QGraphicsItem* player, QGraphicsItem* parent = 0);
     ~Boss();
     QList<QGraphicsItem*> objectDetected();
     void createVision();
@@ -32,6 +33,8 @@ public slots:
     void frame();
 
 private:
+    Tank* playerTank;
+
     float traversalSpeed;
     float rotationSpeed;
     float turretRotationSpeed;

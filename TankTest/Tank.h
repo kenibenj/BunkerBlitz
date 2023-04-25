@@ -34,6 +34,8 @@ public:
     void killConfirmed(QGraphicsItem* item);
     static int distanceFormula(int x, int y, QPointF currentPos);
 
+    void spawnBoss();
+
     QList<QGraphicsItem*> enemiesOnScreen;
     int enemiesDestroyed;
 
@@ -41,9 +43,7 @@ public slots:
     void spawn();
     void frame();
     void blur();
-    void ammoSpawn();
-    void shieldSpawn();
-    void repairSpawn();
+    void pickupSpawn();
 
 signals:
     void positionChanged();
@@ -57,6 +57,10 @@ private:
     QAudioOutput* movingAudioPlayer;
     QAudioOutput* idleAudioPlayer;
 
+    void ammoSpawn();
+    void shieldSpawn();
+    void repairSpawn();
+
     float traversalSpeed;
     float rotationSpeed;
     char direction;
@@ -66,6 +70,7 @@ private:
     bool isPauseActive;
     bool isDestroyed;
     bool isBossTankSpawned;
+    bool bossHasSpawned;
 
     QTimer* fireRateTimer;
     QGraphicsView* v;
@@ -77,8 +82,12 @@ private:
     QGraphicsPixmapItem* bulletHUD;
     QGraphicsTextItem* bulletCounterHUD;
     QGraphicsTextItem* bossTankText;
+
     int health;
     int bulletCounter;
+    int MAXHEALTH;
+
+    int howManyPickups;
 
     QString graphicString;
 

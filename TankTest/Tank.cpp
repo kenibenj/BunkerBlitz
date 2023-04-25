@@ -27,6 +27,8 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     turret = new QGraphicsPixmapItem();
     fireFlash = new QGraphicsPixmapItem();
 
+    howManyPickups = 0;
+
     // Create the healthBar item
     health = 150;
 
@@ -50,6 +52,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
     setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
 
+    MAXHEALTH = 150;
     traversalSpeed = .3;
     rotationSpeed = .3;
     direction = 'w';
@@ -57,6 +60,7 @@ Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(par
     enemiesDestroyed = 0;
     changeTreads = false;
     isDestroyed = false;
+    bossHasSpawned = true;
     
     bulletHandler = new QMediaPlayer();
     movingHandler = new QMediaPlayer();
@@ -260,20 +264,6 @@ void Tank::frame() {
                 }
             }
         }
-
-        if (health > 100) {
-            graphicString = "greenChassisNoDamage";
-
-        }
-        if (health <= 100 && health > 50) {
-            graphicString = "greenChassisDamagedHalf";
-
-
-        }
-        if (health <= 50) {
-            graphicString = "greenChassisDamagedFull";
-
-        }
         if (health >= 500) {
             setPixmap(QPixmap(":/images/blueChasis.png"));
 
@@ -415,11 +405,7 @@ void Tank::frame() {
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Shield)) {
-
-                //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
-
-                // Reduce enemy's health by bullet's damage
-                //enemy->takeDamage(damage);
+                howManyPickups--;
 
                 QPointF explosionPos;
                 explosionPos.setX(colliding_items[i]->pos().x());
@@ -428,20 +414,14 @@ void Tank::frame() {
                 Explosion* explosion = new Explosion();
                 scene()->addItem(explosion);
                 explosion->setPos(explosionPos);
-               // setPixmap(QPixmap(":/images/FriendTank1.png"));
 
-                // Remove bullet from scene
                 scene()->removeItem(colliding_items[i]);
                 health += 500;
                 Tank::createTurret(":/images/blueTurret.png");
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Repair)) {
-
-                //Enemy* enemy = static_cast<Enemy*>(colliding_items[i]);
-
-                // Reduce enemy's health by bullet's damage
-                //enemy->takeDamage(damage);
+                howManyPickups--;
 
                 QPointF explosionPos;
                 explosionPos.setX(colliding_items[i]->pos().x());
@@ -460,7 +440,8 @@ void Tank::frame() {
                
                 return;
             }
-            else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {                
+            else if (typeid(*(colliding_items[i])) == typeid(Ammo)) {        
+                howManyPickups--;
 
                 QPointF explosionPos;
                 explosionPos.setX(colliding_items[i]->pos().x());
@@ -485,7 +466,7 @@ void Tank::frame() {
             }
         }
 
-        if (enemiesDestroyed >= 8) {
+        if ((enemiesDestroyed >= 8) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
             for (QGraphicsItem* item : allItems) {
@@ -494,6 +475,9 @@ void Tank::frame() {
                     enemy->takeDamage(300);
                 }
             }
+            spawnBoss();
+            bossHasSpawned = false;
+
         }
     }
 }
@@ -516,6 +500,27 @@ void Tank::takeDamage(int damage) {
         if (item->isVisible()) {
             item->setVisible(false);
             break;  // Stop iterating once we have hidden the last visible item
+        }
+    }
+
+    float percentHealthLeft = (float)health / (float)MAXHEALTH;
+
+    if ((percentHealthLeft < .67) && (percentHealthLeft > .33)) {
+        graphicString = "greenChassisDamagedHalf";
+        if (changeTreads) {
+            setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+        }
+        else {
+            setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+        }
+    }
+    else if (percentHealthLeft <= .33) {
+        graphicString = "greenChassisDamagedFull";
+        if (changeTreads) {
+            setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+        }
+        else {
+            setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
         }
     }
 
@@ -573,44 +578,110 @@ void Tank::spawn() {
     enemy->createVision();
     enemy->createTurret("");
 }
-//Spawns ammo
-void Tank::ammoSpawn(){
+
+void Tank::spawnBoss() {
     int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
     int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
     while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
-    Ammo* ammo = new Ammo();
-    scene()->addItem(ammo);
-    ammo->setPos(randomNumberX, randomNumberY);
+    // create an enemy
+    Boss* boss = new Boss(this);
+    scene()->addItem(boss);
+    boss->setPos(randomNumberX, randomNumberY);
+    boss->setRotation(randomNumberRotation);
+    boss->createVision();
+    boss->createTurret("");
+    isBossTankSpawned = true;
+    bossTankText = new QGraphicsTextItem();
+    if (isBossTankSpawned == true) {
+
+        scene()->addItem(bossTankText);
+        bossTankText->setPlainText("Defeat the Boss Tank");
+        bossTankText->setDefaultTextColor(Qt::white);
+        bossTankText->setPos(v->mapToScene(900, 20));
+        bossTankText->setScale(2);
+
+
+    }
+}
+
+//Spawns ammo
+void Tank::ammoSpawn(){
+    if (howManyPickups < 8) {
+        howManyPickups++;
+        int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+        int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
+            randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+            randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        }
+        Ammo* ammo = new Ammo();
+        scene()->addItem(ammo);
+        ammo->setPos(randomNumberX, randomNumberY);
+    }
 }
 //Spawns repairs
 void Tank::repairSpawn(){
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
-        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    if (howManyPickups < 8) {
+        howManyPickups++;
+        int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+        int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
+            randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+            randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        }
+        Repair* repair = new Repair();
+        scene()->addItem(repair);
+        repair->setPos(randomNumberX, randomNumberY);
     }
-    Repair* repair = new Repair();
-    scene()->addItem(repair);
-    repair->setPos(randomNumberX, randomNumberY);
 }
 //Spawns Shield
 void Tank::shieldSpawn(){
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
-        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    if (howManyPickups < 8) {
+        howManyPickups++;
+        int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+        int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
+            randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+            randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        }
+        Shield* shield = new Shield();
+        scene()->addItem(shield);
+        shield->setPos(randomNumberX, randomNumberY);
     }
-    Shield* shield = new Shield();
-    scene()->addItem(shield);
-    shield->setPos(randomNumberX, randomNumberY);
+}
+
+void Tank::pickupSpawn() {
+    int whatType = QRandomGenerator::global()->bounded(0, 3);
+    switch (whatType) {
+    case 0:
+        ammoSpawn();
+    case 1:
+        repairSpawn();
+        break;
+    case 2:
+        shieldSpawn();
+        break;
+    default:
+        ammoSpawn();
+        break;
+    }
 }
 
 void Tank::killConfirmed(QGraphicsItem* item) {
     enemiesDestroyed++;
+
+    if (typeid(*(item)) == typeid(Boss)) {
+        bossTankText->hide();
+        YouWin* youWin = new YouWin();
+        youWin->show();
+        // set the blur effect to the view
+        v->setGraphicsEffect(blurEffect);
+
+        connect(enemyTimer, SIGNAL(timeout()), this, SLOT(blur()));
+    }
 }
 
