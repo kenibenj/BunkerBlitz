@@ -264,10 +264,6 @@ void Tank::frame() {
                 }
             }
         }
-        if (health >= 500) {
-            setPixmap(QPixmap(":/images/blueChasis.png"));
-
-        }
         // Movement & Shooting:
 
         float angleTank = (rotation() - 90) * (M_PI / 180);
@@ -405,6 +401,7 @@ void Tank::frame() {
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Shield)) {
+                shieldCoolDownCounter = 1;
                 howManyPickups--;
 
                 QPointF explosionPos;
@@ -416,8 +413,6 @@ void Tank::frame() {
                 explosion->setPos(explosionPos);
 
                 scene()->removeItem(colliding_items[i]);
-                health += 500;
-                Tank::createTurret(":/images/blueTurret.png");
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Repair)) {
@@ -479,6 +474,26 @@ void Tank::frame() {
             bossHasSpawned = false;
 
         }
+        // If shield is active:
+        if (shieldCoolDownCounter != 0) {
+            shieldCoolDownCounter++;
+            turret->setPixmap(QPixmap(":/images/blueTurret.png"));
+            this->setPixmap(QPixmap(":/images/blueChasis.png"));
+            healthBar->setBrush(QColor("#9ec1e1"));
+        }
+
+        // If shield needs to be turned off
+        if (shieldCoolDownCounter >= 2880) {
+            shieldCoolDownCounter = 0;
+            healthBar->setBrush(QColor("#90EE90"));
+            turret->setPixmap(QPixmap(":/images/greenTurret.png"));
+            if (changeTreads) {
+                setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+            }
+            else {
+                setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+            }
+        }
     }
 }
 
@@ -492,57 +507,59 @@ bool Tank::isMoving() {
 }
 
 void Tank::takeDamage(int damage) {
-    health = health - damage;
-    healthBar->setRect(20, 20, (health / 100.0) * 145, 17);
-    // Iterate through the Healthlist in reverse order
-    for (int i = healthList.size() - 1; i >= 0; i--) {
-        QGraphicsItem* item = healthList.at(i);
-        if (item->isVisible()) {
-            item->setVisible(false);
-            break;  // Stop iterating once we have hidden the last visible item
+    if (shieldCoolDownCounter == 0) {
+        health = health - damage;
+        healthBar->setRect(20, 20, (health / 100.0) * 145, 17);
+        // Iterate through the Healthlist in reverse order
+        for (int i = healthList.size() - 1; i >= 0; i--) {
+            QGraphicsItem* item = healthList.at(i);
+            if (item->isVisible()) {
+                item->setVisible(false);
+                break;  // Stop iterating once we have hidden the last visible item
+            }
         }
-    }
 
-    float percentHealthLeft = (float)health / (float)MAXHEALTH;
+        float percentHealthLeft = (float)health / (float)MAXHEALTH;
 
-    if ((percentHealthLeft < .67) && (percentHealthLeft > .33)) {
-        graphicString = "greenChassisDamagedHalf";
-        if (changeTreads) {
-            setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+        if ((percentHealthLeft < .67) && (percentHealthLeft > .33)) {
+            graphicString = "greenChassisDamagedHalf";
+            if (changeTreads) {
+                setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+            }
+            else {
+                setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+            }
         }
-        else {
-            setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+        else if (percentHealthLeft <= .33) {
+            graphicString = "greenChassisDamagedFull";
+            if (changeTreads) {
+                setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+            }
+            else {
+                setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+            }
         }
-    }
-    else if (percentHealthLeft <= .33) {
-        graphicString = "greenChassisDamagedFull";
-        if (changeTreads) {
-            setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+
+        // Check if the tank has been defeated
+        if (health <= 0) {
+
+            // Remove the enemy from the scene
+            isDestroyed = true;
+            healthBar->setVisible(false);
+
+            this->setVisible(false);
+            turret->setVisible(false);
+            movingHandler->stop();
+            idleHandler->stop();
+
+            // set the blur effect to the view
+            v->setGraphicsEffect(blurEffect);
+
+            connect(enemyTimer, SIGNAL(timeout()), this, SLOT(blur()));
+            counter = 0;
+            GameOver* gameOver = new GameOver();
+            gameOver->show();
         }
-        else {
-            setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
-        }
-    }
-
-    // Check if the tank has been defeated
-    if (health <= 0) {
-
-        // Remove the enemy from the scene
-        isDestroyed = true;
-        healthBar->setVisible(false);
-
-        this->setVisible(false);
-        turret->setVisible(false);
-        movingHandler->stop();
-        idleHandler->stop();
-
-        // set the blur effect to the view
-        v->setGraphicsEffect(blurEffect);
-
-        connect(enemyTimer, SIGNAL(timeout()), this, SLOT(blur()));
-        counter = 0;
-        GameOver * gameOver = new GameOver();
-        gameOver->show();
     }
 }
 
@@ -655,10 +672,11 @@ void Tank::shieldSpawn(){
 }
 
 void Tank::pickupSpawn() {
-    int whatType = QRandomGenerator::global()->bounded(0, 3);
+    int whatType = QRandomGenerator::global()->bounded(2, 3);
     switch (whatType) {
     case 0:
         ammoSpawn();
+        break;
     case 1:
         repairSpawn();
         break;

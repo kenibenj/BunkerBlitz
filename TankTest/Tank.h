@@ -15,10 +15,11 @@
 class Tank :public QObject, public QGraphicsPixmapItem {
 
     Q_OBJECT
-        PauseMenu pause;
+    PauseMenu pause;
     QGraphicsPixmapItem* health1;
     QGraphicsPixmapItem* health2;
     QGraphicsPixmapItem* health3;
+
 public:
     Tank(QGraphicsView* view, QGraphicsItem* parent = 0);
     void keyPressEvent(QKeyEvent* event);
@@ -33,6 +34,9 @@ public:
     void takeDamage(int damage);
     void killConfirmed(QGraphicsItem* item);
     static int distanceFormula(int x, int y, QPointF currentPos);
+    void ammoSpawn();
+    void shieldSpawn();
+    void repairSpawn();
 
     void spawnBoss();
 
@@ -56,10 +60,6 @@ private:
     QAudioOutput* bulletAudioPlayer;
     QAudioOutput* movingAudioPlayer;
     QAudioOutput* idleAudioPlayer;
-
-    void ammoSpawn();
-    void shieldSpawn();
-    void repairSpawn();
 
     float traversalSpeed;
     float rotationSpeed;
@@ -86,6 +86,7 @@ private:
     int health;
     int bulletCounter;
     int MAXHEALTH;
+    int shieldCoolDownCounter;
 
     int howManyPickups;
 

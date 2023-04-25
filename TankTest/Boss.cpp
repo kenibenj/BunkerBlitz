@@ -23,29 +23,9 @@ Boss::Boss(QGraphicsItem* player, QGraphicsItem* parent) : QObject(), QGraphicsP
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
 
     // determines what kind of aggro-behaviour the AI will have
-    int whatType = QRandomGenerator::global()->bounded(0, 3);
-    switch (whatType) {
-    case 0:
-        isFleeType = true;
-        isHoldType = false;
-        isChargeType = false;
-        break;
-    case 1:
-        isFleeType = false;
-        isHoldType = true;
-        isChargeType = false;
-        break;
-    case 2:
-        isFleeType = false;
-        isHoldType = false;
-        isChargeType = true;
-        break;
-    default:
-        isFleeType = true;
-        isHoldType = false;
-        isChargeType = false;
-        break;
-    }
+    isFleeType = false;
+    isHoldType = false;
+    isChargeType = true;
 
     health = 180;
     traversalSpeed = .1;
@@ -212,6 +192,13 @@ void Boss::frame() {
             //Fire Bullet sound
             bulletHandler->setPosition(0);
             bulletHandler->play();
+        }
+
+        // Checks to see if Tank is going out of bounds
+        if ((x() < 0 || (x() + boundingRect().right() > scene()->width()) || (y() < 0) || (y() + boundingRect().bottom() > scene()->height())))
+        {
+            setPos(currentPos);
+            setRotation(currentRot);
         }
     }
 
