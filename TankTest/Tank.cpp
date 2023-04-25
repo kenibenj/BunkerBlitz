@@ -466,7 +466,7 @@ void Tank::frame() {
             }
         }
 
-        if ((enemiesDestroyed >= 8) && (bossHasSpawned)) {
+        if ((enemiesDestroyed >= 2) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
             for (QGraphicsItem* item : allItems) {

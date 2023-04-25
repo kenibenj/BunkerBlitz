@@ -47,7 +47,7 @@ Boss::Boss(QGraphicsItem* player, QGraphicsItem* parent) : QObject(), QGraphicsP
         break;
     }
 
-    health = 10;
+    health = 180;
     traversalSpeed = .1;
     rotationSpeed = .15;
     turretRotationSpeed = .4;
