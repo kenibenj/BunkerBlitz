@@ -461,7 +461,7 @@ void Tank::frame() {
             }
         }
 
-        if ((enemiesDestroyed >= 2) && (bossHasSpawned)) {
+        if ((enemiesDestroyed >= 8) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
             for (QGraphicsItem* item : allItems) {
@@ -672,7 +672,7 @@ void Tank::shieldSpawn(){
 }
 
 void Tank::pickupSpawn() {
-    int whatType = QRandomGenerator::global()->bounded(2, 3);
+    int whatType = QRandomGenerator::global()->bounded(0, 3);
     switch (whatType) {
     case 0:
         ammoSpawn();
