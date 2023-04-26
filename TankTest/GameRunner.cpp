@@ -86,7 +86,9 @@ GameRunner::GameRunner() {
     tank->spawn();
     tank->spawn();
     
-
+    for (int i = 0; i < 10; i++) {
+        tank->obstacleSpawn();
+    }
     //QTimer* timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), tank, SLOT(pickupSpawn()));
 

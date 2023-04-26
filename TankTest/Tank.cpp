@@ -20,6 +20,8 @@ extern QTimer* enemyTimer;
 extern QTimer* timer;
 Tank::Tank(QGraphicsView* view, QGraphicsItem* parent) : QGraphicsPixmapItem(parent)
 {
+    shieldCoolDownCounter = 0;
+
     QTimer* shieldTimer;
     isPauseActive = false;
     v = view;
@@ -588,6 +590,8 @@ void Tank::spawn() {
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
     // create an enemy
+    
+
     Enemy* enemy = new Enemy(this);
     scene()->addItem(enemy);
     enemy->setPos(randomNumberX, randomNumberY);
@@ -624,6 +628,22 @@ void Tank::spawnBoss() {
 
     }
 }
+//Spawns ammo
+void Tank::obstacleSpawn() {
+    if (howManyPickups < 8) {
+        howManyPickups++;
+        int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+        int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
+            randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+            randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        }
+        Obstacles* obstacle = new Obstacles();
+        scene()->addItem(obstacle);
+        obstacle->setPos(randomNumberX, randomNumberY);
+    }
+}
+
 
 //Spawns ammo
 void Tank::ammoSpawn(){

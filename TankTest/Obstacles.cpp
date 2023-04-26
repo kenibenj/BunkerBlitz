@@ -6,21 +6,36 @@
 
 #include <QDebug>
 
-extern QTimer* enemyTimer;
+
+
 Obstacles::Obstacles(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
-    //set random position
-    //Rand range dimensions of the screen
-    int random_number = rand() % 700;
+
+    //isPauseActive = false;
+    //v = view;
+    //this->setFocus();
+    // set random position
+    //int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    //int randomNumberY = QRandomGenerator::global()->bounded(900, 1800);
+    //int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
+
+    setTransformOriginPoint(boundingRect().width() / 2, boundingRect().height() / 2);
+    //setPos(randomNumberX, randomNumberY);
+    setZValue(-3);
+
+    setPixmap(QPixmap(":/images/rock.jpg"));
+    setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
 
 
-    setPos(random_number, random_number);
-
-    // drew the rect
-   // setRect(0, 0, 100, 100);
-    setPixmap(QPixmap(":/images/Ammobox.jpg"));
 
 
-    // connect
-    //connect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
 
+    //connect(enemyTimer, SIGNAL(timeout()), this, SLOT(frame()));
+    this->setZValue(-3);
 }
+//void Shield::spawn() {
+    // create an enemy
+ //   Shield* shield = new Shield();
+ //   scene()->addItem(shield);
+    //Obstacles* obstacle = new Obstacles();
+    //scene()->addItem(obstacle);
+//}

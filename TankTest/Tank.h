@@ -40,6 +40,8 @@ public:
 
     void spawnBoss();
 
+    void obstacleSpawn();
+
     QList<QGraphicsItem*> enemiesOnScreen;
     int enemiesDestroyed;
 

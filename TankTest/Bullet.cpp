@@ -133,16 +133,21 @@ void Bullet::move() {
         }
         else if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
             //disconnect signal from timer
-            disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
-            enemyTimer->stop();
+            QPointF explosionPos;
+            explosionPos.setX(colliding_items[i]->pos().x());
+            explosionPos.setY(colliding_items[i]->pos().y());
 
-            //delete bullet and wall
+            Explosion* explosion = new Explosion();
+            scene()->addItem(explosion);
+            explosion->setPos(explosionPos);
+
+            // Remove bullet from scene
             scene()->removeItem(colliding_items[i]);
-            scene()->removeItem(this);
 
-            //Delete objects
-            delete(colliding_items[i]);
-            delete(this);
+            scene()->removeItem(this);
+            delete this;
+
+            // Stop checking for collisions with other enemies
             return;
         }
         else if (typeid(*(colliding_items[i])) == typeid(Shield)) {

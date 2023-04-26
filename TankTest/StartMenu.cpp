@@ -75,7 +75,7 @@ void StartMenu::paintEvent(QPaintEvent* e) {
     painter.setPen(pen);
     painter.drawRect(0, 0, width() - 1, height() - 1);
 
-    QPixmap titleImage = QPixmap(":/images/title2.png");
+    QPixmap titleImage = QPixmap(":/images/title.JPG");
     painter.drawPixmap((width() / 2) - 373.5, 175, titleImage);
 
     QWidget::paintEvent(e);
