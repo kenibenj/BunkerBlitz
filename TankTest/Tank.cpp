@@ -383,23 +383,39 @@ void Tank::frame() {
                 explosion->setPos(explosionPos);
 
 
-                // Reduce enemy's health by bullet's damage
-                enemy->takeDamage(50);
+                // Reduce enemy's health
+                enemy->takeDamage(200);
+
+                return;
+            }
+            else if (typeid(*(colliding_items[i])) == typeid(Boss)) {
+
+                Boss* boss = static_cast<Boss*>(colliding_items[i]);
+                QPointF explosionPos;
+                explosionPos.setX(colliding_items[i]->pos().x());
+                explosionPos.setY(colliding_items[i]->pos().y());
+
+                Explosion* explosion = new Explosion();
+                scene()->addItem(explosion);
+                explosion->setPos(explosionPos);
+
+                // Reduce player's health
+                this->takeDamage(200);
 
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Obstacles)) {
-                //disconnect signal from timer
-                disconnect(enemyTimer, SIGNAL(timeout()), this, SLOT(move()));
-                enemyTimer->stop();
 
-                //delete bullet and wall
+                QPointF explosionPos;
+                explosionPos.setX(colliding_items[i]->pos().x());
+                explosionPos.setY(colliding_items[i]->pos().y());
+
+                Explosion* explosion = new Explosion();
+                scene()->addItem(explosion);
+                explosion->setPos(explosionPos);
+
                 scene()->removeItem(colliding_items[i]);
-                //scene()->removeItem(this);
-
-                //Delete objects
-                //delete(colliding_items[i]);
-                //delete(this);
+                takeDamage(15);
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Shield)) {
@@ -418,6 +434,8 @@ void Tank::frame() {
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Repair)) {
+                int heal = 50;
+
                 howManyPickups--;
 
                 QPointF explosionPos;
@@ -430,9 +448,12 @@ void Tank::frame() {
 
                 // Remove bullet from scene
                 scene()->removeItem(colliding_items[i]);
-                if (health < 150){
-                    //health += 50;
-                    takeDamage(-50);
+                if ( (health + heal) > MAXHEALTH){
+                    int difference = (health + heal) - MAXHEALTH;
+                    takeDamage(-difference);
+                }
+                else {
+                    takeDamage(-heal);
                 }
                
                 return;
@@ -463,7 +484,7 @@ void Tank::frame() {
             }
         }
 
-        if ((enemiesDestroyed >= 8) && (bossHasSpawned)) {
+        if ((enemiesDestroyed >= 1) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
             for (QGraphicsItem* item : allItems) {
@@ -589,9 +610,8 @@ void Tank::spawn() {
         randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
         randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
-    // create an enemy
-    
 
+    // create an enemy
     Enemy* enemy = new Enemy(this);
     scene()->addItem(enemy);
     enemy->setPos(randomNumberX, randomNumberY);
@@ -630,18 +650,15 @@ void Tank::spawnBoss() {
 }
 //Spawns ammo
 void Tank::obstacleSpawn() {
-    if (howManyPickups < 8) {
-        howManyPickups++;
-        int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-        int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-        while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
-            randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-            randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
-        }
-        Obstacles* obstacle = new Obstacles();
-        scene()->addItem(obstacle);
-        obstacle->setPos(randomNumberX, randomNumberY);
+    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
+        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
+        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
     }
+    Obstacles* obstacle = new Obstacles();
+    scene()->addItem(obstacle);
+    obstacle->setPos(randomNumberX, randomNumberY);
 }
 
 
