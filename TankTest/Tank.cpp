@@ -484,7 +484,7 @@ void Tank::frame() {
             }
         }
 
-        if ((enemiesDestroyed >= 1) && (bossHasSpawned)) {
+        if ((enemiesDestroyed >= 8) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
             for (QGraphicsItem* item : allItems) {
@@ -643,7 +643,14 @@ void Tank::spawnBoss() {
         bossTankText->setPlainText("Defeat the Boss Tank");
         bossTankText->setDefaultTextColor(Qt::white);
         bossTankText->setPos(v->mapToScene(900, 20));
-        bossTankText->setScale(2);
+        bossTankText->setScale(3);
+        QGraphicsDropShadowEffect* glowEffect = new QGraphicsDropShadowEffect();
+        glowEffect->setBlurRadius(16);
+        glowEffect->setColor(Qt::white);
+        glowEffect->setOffset(0, 0);
+
+        // Apply the effect to the healthBar item
+        bossTankText->setGraphicsEffect(glowEffect);
 
 
     }
