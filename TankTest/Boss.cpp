@@ -35,9 +35,15 @@ Boss::Boss(QGraphicsItem* player, QGraphicsItem* parent) : QObject(), QGraphicsP
     treadCounter = 0;
     bulletCoolDownCounter = 0;
 
+    graphicString = "yellowChassisNoDamage";
+    setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+
     seePlayer = false;
     roam = true;
     isAgainstWall = false;
+    changeTreads = false;
+    isTurning = false;
+    isWallTurning = false;
 
     circle = new QGraphicsEllipseItem();
     turret = new QGraphicsPixmapItem();
@@ -49,7 +55,6 @@ Boss::Boss(QGraphicsItem* player, QGraphicsItem* parent) : QObject(), QGraphicsP
     setRotation(randomNumberRotation);
     setZValue(-3);
 
-    setPixmap(QPixmap(":/images/bossChassis.png"));
     setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
 
 
@@ -108,6 +113,7 @@ void Boss::createTurret(QString str) {
 
 void Boss::frame() {
     counter++;
+    isMoving = false;
     QPointF currentPos = pos();
     int currentRot = rotation();
     turret->setPos(x() + this->boundingRect().width() / 2 - turret->boundingRect().width() / 2, y() + this->boundingRect().height() / 2 - turret->boundingRect().height() / 2 - 7);
@@ -167,16 +173,20 @@ void Boss::frame() {
             float rotationDifferenceChassis = angleTo360(angleDegrees - this->rotation());
             if (rotationDifferenceChassis < 180) {
                 setRotation(rotation() + rotationSpeed);
+                isMoving = true;
             }
             else if (rotationDifferenceChassis > 180) {
                 setRotation(rotation() - rotationSpeed);
+                isMoving = true;
             }
 
             if (isChargeType) {
                 setPos(x() + dxTank, y() + dyTank);
+                isMoving = true;
             }
             else {
                 setPos(x() - .5 * dxTank, y() - .5 * dyTank);
+                isMoving = true;
             }
         }
 
@@ -199,6 +209,7 @@ void Boss::frame() {
         {
             setPos(currentPos);
             setRotation(currentRot);
+            isMoving = true;
         }
     }
 
@@ -224,6 +235,7 @@ void Boss::frame() {
                 if (pathTurnTime > 0) {
                     setRotation(rotation() + rotationSpeed);
                     pathTurnTime--;
+                    isMoving = true;
                 }
                 else {
                     isTurning = false;
@@ -233,6 +245,7 @@ void Boss::frame() {
                 if (pathTurnTime > 0) {
                     setRotation(rotation() - rotationSpeed);
                     pathTurnTime--;
+                    isMoving = true;
                 }
                 else {
                     isTurning = false;
@@ -245,6 +258,7 @@ void Boss::frame() {
                 if (pathTurnTime > 0) {
                     setRotation(rotation() + rotationSpeed);
                     pathTurnTime--;
+                    isMoving = true;
                 }
                 else {
                     isWallTurning = false;
@@ -256,6 +270,7 @@ void Boss::frame() {
                 if (pathTurnTime > 0) {
                     setRotation(rotation() - rotationSpeed);
                     pathTurnTime--;
+                    isMoving = true;
                 }
                 else {
                     isWallTurning = false;
@@ -270,6 +285,7 @@ void Boss::frame() {
             if (pathTravelTime > 0) {
                 setPos(x() - dxTank, y() - dyTank);
                 pathTravelTime--;
+                isMoving = true;
             }
             else {
                 isAgainstWall = false;
@@ -288,6 +304,7 @@ void Boss::frame() {
         else {
             setPos(x() + dxTank, y() + dyTank);
             pathTravelTime--;
+            isMoving = true;
         }
 
         // Checks to see if Tank is going out of bounds
@@ -299,6 +316,7 @@ void Boss::frame() {
             isAgainstWall = true;
             isTurning = false;
             pathTravelTime = generator.bounded(1, 4) * 144;
+            isMoving = true;
         }
 
         if (rotation() > turret->rotation()) {
@@ -306,6 +324,21 @@ void Boss::frame() {
         }
         else if (rotation() < turret->rotation()) {
             turret->setRotation(turret->rotation() - turretRotationSpeed);
+        }
+    }
+
+    // Code that handles the animation for the tank treads. Every 20 times the move() function is called while the tank is actually moving
+    if ((isMoving == true)) {
+        treadCounter++;
+        if (treadCounter % 20 == 0) {
+            if (changeTreads == true) {
+                setPixmap(QPixmap(":/images/" + graphicString + "One.png"));
+                changeTreads = false;
+            }
+            else {
+                setPixmap(QPixmap(":/images/" + graphicString + "Two.png"));
+                changeTreads = true;
+            }
         }
     }
 }

@@ -244,7 +244,6 @@ void Enemy::frame() {
 
         // When it is turning
         else if (isTurning) {
-            qDebug() << "Turning2!";
             if (isTurningLeft) {
                 if (pathTurnTime > 0) {
                     setRotation(rotation() + rotationSpeed);
@@ -266,7 +265,6 @@ void Enemy::frame() {
         }
 
         else if (isWallTurning) {
-            qDebug() << "Turning3!";
             if (isTurningLeft) {
                 if (pathTurnTime > 0) {
                     setRotation(rotation() + rotationSpeed);

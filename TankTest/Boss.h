@@ -57,6 +57,7 @@ private:
     bool isTurning;
     bool isTurningLeft;
     bool isWallTurning;
+    bool isMoving;
 
     bool isChargeType;
     bool isFleeType;
@@ -68,6 +69,7 @@ private:
     static QRandomGenerator generator;
 
     QGraphicsItem* priorityItem;
+    QString graphicString;
 
     QGraphicsPixmapItem* turret;
     QGraphicsPixmapItem* fireFlash;
