@@ -484,6 +484,7 @@ void Tank::frame() {
             }
         }
 
+        // Spawns Boss tank when threshold has been met
         if ((enemiesDestroyed >= 5) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
@@ -603,12 +604,12 @@ int Tank::distanceFormula(int x, int y, QPointF currentPos)
 }
 
 void Tank::spawn() {
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    int randomNumberX = QRandomGenerator::global()->bounded(100, 2300);
+    int randomNumberY = QRandomGenerator::global()->bounded(100, 1700);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
     while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
-        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+        int randomNumberX = QRandomGenerator::global()->bounded(100, 2300);
+        int randomNumberY = QRandomGenerator::global()->bounded(100, 1700);
     }
 
     // create an enemy
@@ -621,12 +622,12 @@ void Tank::spawn() {
 }
 
 void Tank::spawnBoss() {
-    int randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-    int randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    int randomNumberX = QRandomGenerator::global()->bounded(100, 2300);
+    int randomNumberY = QRandomGenerator::global()->bounded(100, 1700);
     int randomNumberRotation = QRandomGenerator::global()->bounded(0, 360);
-    while (distanceFormula(randomNumberX, randomNumberY, currentPos) < 100) {
-        randomNumberX = QRandomGenerator::global()->bounded(0, 2400);
-        randomNumberY = QRandomGenerator::global()->bounded(0, 1800);
+    while ((distanceFormula(randomNumberX, randomNumberY, currentPos) < 100)) {
+        int randomNumberX = QRandomGenerator::global()->bounded(100, 2300);
+        int randomNumberY = QRandomGenerator::global()->bounded(100, 1700);
     }
     // create an enemy
     Boss* boss = new Boss(this);
@@ -651,8 +652,6 @@ void Tank::spawnBoss() {
 
         // Apply the effect to the healthBar item
         bossTankText->setGraphicsEffect(glowEffect);
-
-
     }
 }
 //Spawns ammo
