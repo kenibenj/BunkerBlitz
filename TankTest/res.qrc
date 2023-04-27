@@ -11,7 +11,7 @@
         <file>engineMovingThree.wav</file>
         <file>explosion.wav</file>
         <file>bossShoot.wav</file>
-        <file>rock.jpg</file>
+        <file>title.JPG</file>
     </qresource>
     <qresource prefix="/images">
         <file>tank1.png</file>
@@ -82,7 +82,8 @@
         <file>redChassisDamagedHalfOne.png</file>
         <file>redChassisNoDamageTwo.png</file>
         <file>redChassisNoDamageOne.png</file>
+        <file>yellowChassisNoDamageTwo.png</file>
+        <file>yellowChassisNoDamageOne.png</file>
         <file>title.JPG</file>
-        <file>rock.jpg</file>
     </qresource>
 </RCC>

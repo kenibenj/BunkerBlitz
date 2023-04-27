@@ -448,8 +448,8 @@ void Tank::frame() {
 
                 // Remove bullet from scene
                 scene()->removeItem(colliding_items[i]);
-                if ( (health + heal) > MAXHEALTH){
-                    int difference = (health + heal) - MAXHEALTH;
+                if ( (health + heal) >= MAXHEALTH){
+                    int difference = MAXHEALTH - health;
                     takeDamage(-difference);
                 }
                 else {
@@ -716,20 +716,15 @@ void Tank::shieldSpawn(){
 }
 
 void Tank::pickupSpawn() {
-    int whatType = QRandomGenerator::global()->bounded(0, 3);
-    switch (whatType) {
-    case 0:
+    int whatType = QRandomGenerator::global()->bounded(0, 10); // Generate a random integer between 0 and 9 (inclusive)
+    if (whatType < 4) { // 40% chance
         ammoSpawn();
-        break;
-    case 1:
+    }
+    else if (whatType < 8) { // 40% chance
         repairSpawn();
-        break;
-    case 2:
+    }
+    else { // 20% chance
         shieldSpawn();
-        break;
-    default:
-        ammoSpawn();
-        break;
     }
 }
 

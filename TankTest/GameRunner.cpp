@@ -82,9 +82,12 @@ GameRunner::GameRunner() {
 
     tank->setPos(scene->width() / 2 - (tank->boundingRect().width() / 2), scene->height() - 150);
     
-    // spawn enemies
+    // spawn initial enemies and pickups
     tank->spawn();
     tank->spawn();
+    tank->pickupSpawn();
+    tank->pickupSpawn();
+    tank->pickupSpawn();
     
     for (int i = 0; i < 10; i++) {
         tank->obstacleSpawn();
