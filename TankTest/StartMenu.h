@@ -6,6 +6,8 @@
 #include <QPaintEvent>
 #include <QPixmap>
 #include <QLabel>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 class StartMenu : public QWidget
 {
 	Q_OBJECT
@@ -18,5 +20,6 @@ public slots:
 	void startButtonClicked();
     void instructionButtonClicked();
 private:
-
+	QAudioOutput* backgroundAudioOutput;
+	QMediaPlayer* backgroundMediaPlayer;
 };

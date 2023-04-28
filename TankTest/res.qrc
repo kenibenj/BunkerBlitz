@@ -12,6 +12,7 @@
         <file>explosion.wav</file>
         <file>bossShoot.wav</file>
         <file>title.JPG</file>
+        <file>tankTheme.wav</file>
     </qresource>
     <qresource prefix="/images">
         <file>tank1.png</file>

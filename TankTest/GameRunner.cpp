@@ -37,7 +37,7 @@ GameRunner::GameRunner() {
     scene->setSceneRect(0, 0, 2400, 1800);
 
     view->setScene(scene);
-    view->setTransform(QTransform().scale(.7, .7));
+    view->setTransform(QTransform().scale(1.4, 1.4));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setBackgroundBrush(QBrush(Qt::black));
@@ -70,7 +70,7 @@ GameRunner::GameRunner() {
     //Play music
     QMediaPlayer music;
     QAudioOutput audioPlayer;
-    audioPlayer.setVolume(.05);
+    audioPlayer.setVolume(.5);
     music.setAudioOutput(&audioPlayer);
     music.setSource(QUrl("qrc:/sounds/backgroundMusic.mp3"));
     music.play();

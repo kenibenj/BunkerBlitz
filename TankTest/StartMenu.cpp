@@ -53,11 +53,21 @@ StartMenu::StartMenu(QWidget* parent) : QWidget{parent}
     connect(instructionsButton, SIGNAL(clicked()), this, SLOT(instructionButtonClicked()));
 
 
+    backgroundMediaPlayer = new QMediaPlayer();
+    backgroundAudioOutput = new QAudioOutput();
+
+    backgroundAudioOutput->setVolume(.3);
+
+    backgroundMediaPlayer->setAudioOutput(backgroundAudioOutput);
+    backgroundMediaPlayer->setSource(QUrl("qrc:/sounds/tankTheme.wav"));
+    backgroundMediaPlayer->play();
+
 }
 
 void StartMenu::startButtonClicked() {
     GameRunner gameRunner;
     hide();
+    backgroundMediaPlayer->stop();
 }
 
 void StartMenu::instructionButtonClicked(){
