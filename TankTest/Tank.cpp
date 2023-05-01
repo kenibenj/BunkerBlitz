@@ -485,7 +485,7 @@ void Tank::frame() {
         }
 
         // Spawns Boss tank when threshold has been met
-        if ((enemiesDestroyed >= 5) && (bossHasSpawned)) {
+        if ((enemiesDestroyed >= 2) && (bossHasSpawned)) {
             disconnect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
             QList<QGraphicsItem*> allItems = scene()->items();
             for (QGraphicsItem* item : allItems) {

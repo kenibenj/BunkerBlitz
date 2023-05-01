@@ -22,7 +22,7 @@ Obstacles::Obstacles(QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem() {
     //setPos(randomNumberX, randomNumberY);
     setZValue(-3);
 
-    setPixmap(QPixmap(":/images/rock.jpg"));
+    setPixmap(QPixmap(":/images/obs.png"));
     setTransformOriginPoint(this->boundingRect().width() / 2, this->boundingRect().height() / 2);
 
 
